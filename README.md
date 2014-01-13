@@ -7,7 +7,6 @@ Pré-requis
 =============
 
  - PHP 5.3.8
- - autoriser set_include_path à PHP (nécessaire à la ligne 52 de SitecRESA/WS/Client.php)
  - extension cURL et JSON
 
 

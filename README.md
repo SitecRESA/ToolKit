@@ -16,6 +16,7 @@ Installation
     curl -sS https://getcomposer.org/installer | php
 ### ajouter sitecresa/toolkit 
 il s'agit d'une dépendance dans votre composer.json
+
     "require": {
         "sitecresa/toolkit":"*"
     }

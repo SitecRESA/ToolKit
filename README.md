@@ -13,7 +13,7 @@ Pré-requis
 Installation
 =============
 ### Installer composer
-curl -sS https://getcomposer.org/installer | php
+    curl -sS https://getcomposer.org/installer | php
 ### ajouter sitecresa/toolkit comme une dépendance dans votre composer.json
     "require": {
         "sitecresa/toolkit":"*"

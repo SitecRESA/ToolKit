@@ -6,7 +6,7 @@ API to implement booking engine in frontend web site (need access grant with api
 Pré-requis
 =============
 
- - PHP 5.3.1
+ - PHP 5.3.8
  - autoriser set_include_path à PHP (nécessaire à la ligne 52 de SitecRESA/WS/Client.php)
  - extension cURL et JSON
 

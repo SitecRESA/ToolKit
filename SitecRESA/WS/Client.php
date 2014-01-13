@@ -32,14 +32,14 @@ class Client {
      * Les configuration permanentes doivent être définies dans le fichier /config.php
      */
     public function __construct($apiConfig) {
-        if(!isset($apiConfig['path']) ||!isset($apiConfig['url'])
+        if(!isset($apiConfig['url'])
                 || !isset($apiConfig['apiKey']) 
                 || !isset($apiConfig['secretKey'])){
             throw new Exception\Api("You have to give an array with path, url, apiKey and secretKey to create a client");
         }
         $this->sApiKey = $apiConfig['apiKey'];
         $this->sSecretKey = $apiConfig['secretKey'];
-        $this->client = new Sitec_Rest_Client("json", $apiConfig['path'], $apiConfig['url']);
+        $this->client = new Sitec_Rest_Client("json", "ws", $apiConfig['url']);
     }
     
     public function setPanier($panier) {

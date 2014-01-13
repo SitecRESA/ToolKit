@@ -1,0 +1,27 @@
+{
+    "name": "sitecresa/toolkit",
+    "description": "Developer toolkit for frontend integration of SitecRESA system. A grant access (apikey) is mandatory",
+    "keywords": ["reservation","travel","agency","hotel","hostel","accommodation"],
+    "homepage": "https://github.com/SitecRESA/ToolKit",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MarcFRICOU",
+            "email": "marc.fricou@sitec.fr",
+            "role":"Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "zendframework/zendframework1": "1.12.*@stable",
+        "php": ">=5.3.8",
+        "lib-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "SitecRESA": "SitecRESA"
+        }
+    }
+}

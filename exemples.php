@@ -2,27 +2,11 @@
 /*****************************/
 /*  instancier un Client WS  */
 /*****************************/
-require_once dirname(__FILE__).'/SitecRESA/WS/Client.php';
-use SitecRESA\Datatype;//pas obligatoire, créer un alias.
-$apiClient = new \SitecRESA\WS\Client();
-$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "21/12/2013", "22/12/2013", 1, 1, NULL, array('Ajaccio'), TRUE,"Nom",40,0);
-Zend_Debug::dump($resultat);
-//$ficheOrganisme = $resultat[0];
-//$prestations = $ficheOrganisme->prestationsDisponibles("04/12/2013", "07/12/2013");
-//$dispoProduit = $prestations[0]->disponibilites("04/12/2013", "07/12/2013",$ficheOrganisme);
-//$oPrestationPanier = new Datatype\PrestationPanier($apiClient,array(
-//    "debut"           => "04/12/2013",
-//    "fin"             => "07/12/2013",
-//    "prestation"      => $prestations[0]->id, 
-//    "idTarif"         => $dispoProduit->plansTarifaires[0]->tarifs[0]->id,
-//    "idPlanTarifaire" => $dispoProduit->plansTarifaires[0]->id,
-//    "quantite"        => 1 //ou la quantité donnée par l'internaute
-//));
-//$oPanier = new Datatype\Panier($apiClient);
-//$oPanier->addPrestationPanier($oPrestationPanier);
-//$oPanier->save();
-//$oPanier->client = Datatype\Client::fetch($apiClient, 4168);
-//$retour = $oPanier->prebook("commentaire",60);
+//if you don't have an autoloader
+//require_once dirname(__FILE__).'/SitecRESA/WS/Client.php';
+//not mandatory, create an alias.
+//use SitecRESA\Datatype;
+//$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "http://resav2.sitec.fr"));
 
 /*****************************/
 /*   gestion d'un portail    */
@@ -191,5 +175,24 @@ Zend_Debug::dump($resultat);
 //        )
 //);
 
+/*****************************/
+/*          prebook          */
+/*****************************/
 
-?>
+//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "21/12/2013", "22/12/2013", 1, 1, NULL, array('Ajaccio'), TRUE,"Nom",40,0);
+//$ficheOrganisme = $resultat[0];
+//$prestations = $ficheOrganisme->prestationsDisponibles("04/12/2013", "07/12/2013");
+//$dispoProduit = $prestations[0]->disponibilites("04/12/2013", "07/12/2013",$ficheOrganisme);
+//$oPrestationPanier = new Datatype\PrestationPanier($apiClient,array(
+//    "debut"           => "04/12/2013",
+//    "fin"             => "07/12/2013",
+//    "prestation"      => $prestations[0]->id, 
+//    "idTarif"         => $dispoProduit->plansTarifaires[0]->tarifs[0]->id,
+//    "idPlanTarifaire" => $dispoProduit->plansTarifaires[0]->id,
+//    "quantite"        => 1 //ou la quantité donnée par l'internaute
+//));
+//$oPanier = new Datatype\Panier($apiClient);
+//$oPanier->addPrestationPanier($oPrestationPanier);
+//$oPanier->save();
+//$oPanier->client = Datatype\Client::fetch($apiClient, 4168);
+//$retour = $oPanier->prebook("commentaire",60);

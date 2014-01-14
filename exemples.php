@@ -5,13 +5,12 @@
 //if you don't have an autoloader
 //require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
-//$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "http://resav2.sitec.fr"));
+//$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "https://resaV2.sitec.fr"));
 
 /*****************************/
 /*   gestion d'un portail    */
 /*****************************/
-//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "04/07/2013", "07/07/2013", 1, 1, NULL, NULL, TRUE);
-
+//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "01/01/2014", "07/01/2014", 1, 1, NULL, NULL, TRUE);
 /*****************************/
 /* fetch et SavableDatatype  */
 /*****************************/

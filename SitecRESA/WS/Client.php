@@ -17,6 +17,8 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
 class Client {
     // the version of the discovery mechanism this class is meant to work with
     const VERSION = '2.1';
+    const PREFIX_PATH = "/ws/";
+    const FORMAT = "json";
 
     private $client = null;
     private $sApiKey = null;
@@ -37,7 +39,7 @@ class Client {
         }
         $this->sApiKey = $apiConfig['apiKey'];
         $this->sSecretKey = $apiConfig['secretKey'];
-        $this->client = new Sitec_Rest_Client("json", "ws", $apiConfig['url']);
+        $this->client = new \Zend_Rest_Client($apiConfig['url']);
     }
     
     public function setPanier($panier) {
@@ -62,19 +64,28 @@ class Client {
 
         $aParams = $arguments[1];
         $sVerbe = $arguments[0];
-        if (array_key_exists('idRessource', $aParams))
+        if (array_key_exists('idRessource', $aParams)){
             $iIdRessource = $aParams['idRessource'];
-
-        if (!array_key_exists('format', $aParams))
-            $aParams['format'] = $this->client->get_format();
+            unset($aParams['idRessource']);
+        }
+        if (!array_key_exists('format', $aParams)){
+            $aParams['format'] = self::FORMAT;
+        }
 
         $aParams['requestHash'] = hash_hmac("sha1", $this->sApiKey . '-' . time(), $this->sSecretKey);
         $aParams['apiKey']      = $this->sApiKey;
         $aParams['timestamp']   = time();
         $aParams['version']     = self::VERSION;
+        $name = self::PREFIX_PATH.$name;
         if($this->panier && $this->panier instanceof \SitecRESA\Datatype\Panier){
             $aParams["identifiantPanier"] = $this->panier->id;
         }
+        
+        $client = \Zend_Rest_Client::getHttpClient();
+        if (count($aParams) > 0) {
+            $client->setHeaders($aParams);
+        }
+        
         switch ($sVerbe) {
             case "post":
                 $response = $this->client->restPost($name, $aParams);

@@ -3,8 +3,7 @@
 /*  instancier un Client WS  */
 /*****************************/
 //if you don't have an autoloader
-//require_once dirname(__FILE__).'/SitecRESA/WS/Client.php';
-//not mandatory, create an alias.
+//require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
 //$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "http://resav2.sitec.fr"));
 

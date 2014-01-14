@@ -2,13 +2,11 @@
 namespace SitecRESA\WS;
 use \Sitec_Rest_Client;
 use \Zend_Json;
-use Symfony\Component\ClassLoader\UniversalClassLoader;
 use SitecRESA\Datatype\DatatypeAbstract;
 
 if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
     date_default_timezone_set('UTC');
 }
-
 /**
  * Objet qui fera la passerelle entre l'API et les services web SitecRESA
  * 
@@ -58,8 +56,6 @@ class Client {
         if (count($arguments) != 2) {
             throw new \SitecRESA\Exception\Api("client method calls expect 2 parameter");
         }
-
-
         if (!is_array($arguments[1])) {
             throw new \SitecRESA\Exception\Api("client arguments parameter should be an array");
         }

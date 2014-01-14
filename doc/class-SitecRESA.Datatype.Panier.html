@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class SitecRESA\Datatype\Panier | SitecRESA-API</title>
+	<title>Class SitecRESA\Datatype\Panier | ToolKit</title>
 
 	<script type="text/javascript" src="resources/combined.js?3235203294"></script>
 	<script type="text/javascript" src="elementlist.js?3498836635"></script>
@@ -119,7 +119,8 @@
 
 	<div class="description">
 	
-<p>Eléments nécessaires à une réservation.</p>
+<p>Panier permettant de faire une réservation et de gérer des prestations et
+plusieurs séjours</p>
 
 	</div>
 
@@ -140,6 +141,8 @@
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by" />
 <b><span>SitecRESA\Datatype\Panier</span></b>			
+			 implements 
+				<a href="class-SitecRESA.Datatype.Fetchable.html"><span>SitecRESA\Datatype\Fetchable</span></a>
 			
 			
 		</dd>
@@ -161,13 +164,51 @@
 				<b>Author:</b>
 				Marc FRICOU &lt;<a
 href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<br />
-		<b>Located at</b> SitecRESA/Datatype/Panier.php<br />
+		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.Panier.html#5-276" title="Go to source code">Datatype/Panier.php</a><br />
 	</div>
 
 
 
 	<table class="summary" id="methods">
 	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#29-32" title="Go to source code">__construct</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>array <var>$array</var> = <span class="php-keyword1">NULL</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiClient</var></dt>
+					<dd><code><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code></code><br>$apiClient</dd>
+					<dt><var>$array</var></dt>
+					<dd><code>array</code><br>$array</dd>
+				</dl></div>
+
+
+
+
+				<h4>Overrides</h4>
+				<div class="list"><code><a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___construct">SitecRESA\Datatype\DatatypeAbstract::__construct()</a></code></div>
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="__set" id="___set">
 
 		<td class="attributes"><code>
@@ -179,7 +220,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#___set">#</a>
-		<code>__set( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#34-39" title="Go to source code">__set</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$value</var></span> )</code>
 
 		<div class="description short">
 			
@@ -199,49 +240,78 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 		</div>
 		</div></td>
 	</tr>
-	<tr data-order="__get" id="___get">
-
-		<td class="attributes"><code>
-			 public 
-			
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#___get">#</a>
-		<code>__get( <span>mixed <var>$name</var></span> )</code>
-
-		<div class="description short">
-			
-		</div>
-
-		<div class="description detailed hidden">
-			
-
-
-
-
-
-
-				<h4>Overrides</h4>
-				<div class="list"><code><a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___get">SitecRESA\Datatype\DatatypeAbstract::__get()</a></code></div>
-
-		</div>
-		</div></td>
-	</tr>
 	<tr data-order="reserver" id="_reserver">
 
 		<td class="attributes"><code>
 			 public 
-			array|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null
+			<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|<code><a href="class-SitecRESA.Datatype.Reservation.html">SitecRESA\Datatype\Reservation</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_reserver">#</a>
-		<code>reserver( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#41-76" title="Go to source code">reserver</a>( <span>string <var>$commentaire</var></span>, <span>string <var>$ccNumber</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$ccType</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$ccName</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$ccMonth</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$ccYear</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$ccCcv</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>réserver la prestation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>réserver la prestation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$commentaire</var></dt>
+					<dd><code>string</code><br>$commentaire commentaire du client</dd>
+					<dt><var>$ccNumber</var></dt>
+					<dd><code>string</code><br>$ccNumber numéro de la carte bleue</dd>
+					<dt><var>$ccType</var></dt>
+					<dd><code>string</code><br>$ccType type de la carte bleue ('Visa','American Express','Mastercard', etc.)</dd>
+					<dt><var>$ccName</var></dt>
+					<dd><code>string</code><br>$ccName nom figurant sur la carte</dd>
+					<dt><var>$ccMonth</var></dt>
+					<dd><code>string</code><br>$ccMonth mois d'expiration de la carte</dd>
+					<dt><var>$ccYear</var></dt>
+					<dd><code>string</code><br>$ccYear année d'expiration de la carte</dd>
+					<dt><var>$ccCcv</var></dt>
+					<dd><code>string</code><br>$ccCcv trois dernier chiffres au dos de la carte.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|<code><a href="class-SitecRESA.Datatype.Reservation.html">SitecRESA\Datatype\Reservation</a></code></code><br>rien si tout s'est déroulé correctement, une <code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>
+Sinon<br />
+				</div>
+
+
+				<h4>Throw</h4>
+				<div class="list">
+						\SitecRESA\Exception\Api si le type de transaction n'est pas reconnu ou si vous
+n'avez pas donner de client au panier.<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="bookParams" id="_bookParams">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_bookParams">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#78-88" title="Go to source code">bookParams</a>( <span>mixed <var>$commentaire</var></span>, <span>mixed <var>$typeTransaction</var> = <code><a href="class-SitecRESA.Datatype.Panier.html#PANIER_RESERVATION_TPE">SitecRESA\Datatype\Panier::<b>PANIER_RESERVATION_TPE</b></a></code></span> )</code>
 
 		<div class="description short">
 			
@@ -252,12 +322,45 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 
 
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prebook" id="_prebook">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|<code><a href="class-SitecRESA.Datatype.Reservation.html">SitecRESA\Datatype\Reservation</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prebook">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#90-109" title="Go to source code">prebook</a>( <span>string <var>$commentaire</var></span>, <span>integer <var>$expiration</var> = <span class="php-num">15</span></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$commentaire</var></dt>
+					<dd><code>string</code><br>$commentaire</dd>
+					<dt><var>$expiration</var></dt>
+					<dd><code>integer</code><br>$expiration en minutes, 15 par défaut</dd>
+				</dl></div>
+
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null</code><br>un taleau d'invalidité à la manière de <code><a href="class-SitecRESA.Datatype.Panier.html#_testReservation">SitecRESA\Datatype\Panier::testReservation()</a></code> si la
-disponibilité est perdue<br />
-un objet <code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code> si il manque des paramètres (CB, Client, etc.)<br />
-NULL si rien d'important est survenu<br />
+					<code><code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|<code><a href="class-SitecRESA.Datatype.Reservation.html">SitecRESA\Datatype\Reservation</a></code></code><br />
 				</div>
 
 				<h4>Throws</h4>
@@ -274,14 +377,14 @@ NULL si rien d'important est survenu<br />
 
 		<td class="attributes"><code>
 			 public 
-			array|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null
+			<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code>save( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#111-154" title="Go to source code">save</a>( )</code>
 
 		<div class="description short">
 			
@@ -294,13 +397,43 @@ NULL si rien d'important est survenu<br />
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>array|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null</code><br>un tableau de<br />
+					<code><code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>|null</code><br>un objet <code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code> si il manque des paramètres (CB, Client, etc.)<br />
+NULL si rien d'important est survenu<br />
 				</div>
 
 				<h4>Throws</h4>
 				<div class="list">
-					<code><code><a href="class-SitecRESA.Exception.Api.html">SitecRESA\Exception\Api</a></code></code><br />
+					<code><code><a href="class-SitecRESA.Exception.Api.html">SitecRESA\Exception\Api</a></code></code><br>si le panier est vide<br />
 				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="synchronise" id="_synchronise">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_synchronise">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#156-161" title="Go to source code">synchronise</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
 
 
 
@@ -318,7 +451,7 @@ NULL si rien d'important est survenu<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code>toArray( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#163-179" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			
@@ -348,43 +481,31 @@ NULL si rien d'important est survenu<br />
 
 		<td class="attributes"><code>
 			 public 
-			boolean|<code><a href="class-SitecRESA.Datatype.ErreurValidation.html">SitecRESA\Datatype\ErreurValidation</a></code>|array
+			boolean
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_testReservation">#</a>
-		<code>testReservation( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#181-193" title="Go to source code">testReservation</a>( )</code>
 
 		<div class="description short">
 			
-<p>Teste la validité du panier à réserver<br />
-une quantité disponible est liée à la fiche prestation tandis qu'une
-prestation panier est aussi liée à un plan tarifaire et un tarif<br />
-il s'agit ici de comparer les quantités additionnées des prestations panier
-qui partage la même fiche prestation à la quantité disponible dans la fiche
-prestation.</p>
+<p>Teste la validité du panier à réserver</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Teste la validité du panier à réserver<br />
-une quantité disponible est liée à la fiche prestation tandis qu'une
-prestation panier est aussi liée à un plan tarifaire et un tarif<br />
-il s'agit ici de comparer les quantités additionnées des prestations panier
-qui partage la même fiche prestation à la quantité disponible dans la fiche
-prestation.</p>
+<p>Teste la validité du panier à réserver</p>
 
 
 
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code>boolean|<code><a href="class-SitecRESA.Datatype.ErreurValidation.html">SitecRESA\Datatype\ErreurValidation</a></code>|array</code><br>TRUE, une erreur sur la disponibilité ou tableau de tableaux associatif avec
-les clés "quantitePanier", "quantiteMax" et "prestationPanier" qui contient la
-prestation panier en erreur<br />
+					<code>boolean</code><br />
 				</div>
 
 
@@ -404,7 +525,7 @@ prestation panier en erreur<br />
 
 		<td class="name"><div>
 		<a class="anchor" href="#_quantiteTotaleFichePrestationInPanier">#</a>
-		<code>quantiteTotaleFichePrestationInPanier( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#195-209" title="Go to source code">quantiteTotaleFichePrestationInPanier</a>( )</code>
 
 		<div class="description short">
 			
@@ -443,7 +564,7 @@ confondues dans la réservation</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_quantiteFichePrestationInPanier">#</a>
-		<code>quantiteFichePrestationInPanier( <span><code><a href="class-SitecRESA.Datatype.FichePrestation.html">SitecRESA\Datatype\FichePrestation</a></code>|integer <var>$fichePrestation</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#210-227" title="Go to source code">quantiteFichePrestationInPanier</a>( <span><code><a href="class-SitecRESA.Datatype.FichePrestation.html">SitecRESA\Datatype\FichePrestation</a></code>|integer <var>$fichePrestation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -487,7 +608,7 @@ présente dans la réservation</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_addPrestationPanier">#</a>
-		<code>addPrestationPanier( <span><code><a href="class-SitecRESA.Datatype.PrestationPanier.html">SitecRESA\Datatype\PrestationPanier</a></code> <var>$prestation</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#229-236" title="Go to source code">addPrestationPanier</a>( <span><code><a href="class-SitecRESA.Datatype.PrestationPanier.html">SitecRESA\Datatype\PrestationPanier</a></code> <var>$prestation</var></span> )</code>
 
 		<div class="description short">
 			
@@ -525,17 +646,17 @@ présente dans la réservation</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_tarifTotal">#</a>
-		<code>tarifTotal( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#238-254" title="Go to source code">tarifTotal</a>( )</code>
 
 		<div class="description short">
 			
-<p>Retourne le tarifs(tarif Brut et tarif Promotionnel) totaux du panier</p>
+<p>Retourne le tarifs (tarif Brut et tarif Promotionnel) totaux du panier</p>
 
 		</div>
 
 		<div class="description detailed hidden">
 			
-<p>Retourne le tarifs(tarif Brut et tarif Promotionnel) totaux du panier</p>
+<p>Retourne le tarifs (tarif Brut et tarif Promotionnel) totaux du panier</p>
 
 
 
@@ -551,13 +672,94 @@ présente dans la réservation</p>
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="fetch" id="_fetch">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-SitecRESA.Datatype.Panier.html">SitecRESA\Datatype\Panier</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_fetch">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#255-263" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>type <var>$id</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$apiClient</var></dt>
+					<dd><code><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code></code><br>$apiClient</dd>
+					<dt><var>$id</var></dt>
+					<dd><code>type</code><br>$id</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-SitecRESA.Datatype.Panier.html">SitecRESA\Datatype\Panier</a></code></code><br />
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-SitecRESA.Datatype.Fetchable.html#_fetch">SitecRESA\Datatype\Fetchable::fetch()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="acompteTotalDemande" id="_acompteTotalDemande">
+
+		<td class="attributes"><code>
+			 public 
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_acompteTotalDemande">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Panier.html#265-275" title="Go to source code">acompteTotalDemande</a>( )</code>
+
+		<div class="description short">
+			
+<p>calcul de l'acompte demandé pour la réservation du panier (purement
+informatif)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>calcul de l'acompte demandé pour la réservation du panier (purement
+informatif)</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>float</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	</table>
 
 	<table class="summary inherited">
 	<caption>Methods inherited from <a href="class-SitecRESA.Datatype.DatatypeAbstract.html#methods">SitecRESA\Datatype\DatatypeAbstract</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___construct">__construct()</a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___get">__get()</a>, 
 			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#_createObjectFromArray">createObjectFromArray()</a>
 		</code></td>
 	</tr>
@@ -569,11 +771,204 @@ présente dans la réservation</p>
 
 
 
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="PANIER_RESERVATION_TPE" id="PANIER_RESERVATION_TPE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#19" title="Go to source code"><b>PANIER_RESERVATION_TPE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">&quot;tpe&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#PANIER_RESERVATION_TPE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="PANIER_RESERVATION_ONLINE" id="PANIER_RESERVATION_ONLINE">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#20" title="Go to source code"><b>PANIER_RESERVATION_ONLINE</b></a>
+		</code></td>
+		<td class="value"><code><span class="php-quote">&quot;online&quot;</span></code></td>
+		<td class="description"><div>
+			<a href="#PANIER_RESERVATION_ONLINE" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="_id" id="$_id">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
 
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#22" title="Go to source code"><var>$_id</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_id" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_idReservation" id="$_idReservation">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#23" title="Go to source code"><var>$_idReservation</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_idReservation" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_client" id="$_client">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#24" title="Go to source code"><var>$_client</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_client" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_prestationsPanier" id="$_prestationsPanier">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#25" title="Go to source code"><var>$_prestationsPanier</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$_prestationsPanier" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_montantTotal" id="$_montantTotal">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#26" title="Go to source code"><var>$_montantTotal</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_montantTotal" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_quantite" id="$_quantite">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#27" title="Go to source code"><var>$_quantite</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_quantite" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-SitecRESA.Datatype.DatatypeAbstract.html#properties">SitecRESA\Datatype\DatatypeAbstract</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_apiClient"><var>$_apiClient</var></a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_datatype"><var>$_datatype</var></a>
+		</code></td>
+	</tr>
+	</table>
 
 
 	<table class="summary" id="magicProperties">
@@ -585,7 +980,8 @@ présente dans la réservation</p>
 		</code></td>
 
 		<td class="name">
-<var>$id</var>		</td>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#10" title="Go to source code"><var>$id</var></a>
+		</td>
 		<td class="description"><div>
 			<a href="#m$id" class="anchor">#</a>
 
@@ -599,219 +995,6 @@ présente dans la réservation</p>
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="dateDebut" id="m$dateDebut">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$dateDebut</var>		</td>
-		<td class="description"><div>
-			<a href="#m$dateDebut" class="anchor">#</a>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="dateFin" id="m$dateFin">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$dateFin</var>		</td>
-		<td class="description"><div>
-			<a href="#m$dateFin" class="anchor">#</a>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="nbrJours" id="m$nbrJours">
-		<td class="attributes"><code>
-			public  
-			integer
-		</code></td>
-
-		<td class="name">
-<var>$nbrJours</var>		</td>
-		<td class="description"><div>
-			<a href="#m$nbrJours" class="anchor">#</a>
-
-			<div class="description short">
-				
-			</div>
-
-			<div class="description detailed hidden">
-				
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccNumber" id="m$ccNumber">
-		<td class="attributes"><code>
-			public  
-			integer
-		</code></td>
-
-		<td class="name">
-<var>$ccNumber</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccNumber" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>Numéro de la carte bleue</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>Numéro de la carte bleue</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccType" id="m$ccType">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$ccType</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccType" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>type de la carte bleue =&gt; "Visa" ou "Mastercard"</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>type de la carte bleue =&gt; "Visa" ou "Mastercard"</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccName" id="m$ccName">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$ccName</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccName" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>nom du propriétaire de la carte bleue</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>nom du propriétaire de la carte bleue</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccMonth" id="m$ccMonth">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$ccMonth</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccMonth" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>mois de l'année d'expiration de la carte bleue</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>mois de l'année d'expiration de la carte bleue</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccYear" id="m$ccYear">
-		<td class="attributes"><code>
-			public  
-			string
-		</code></td>
-
-		<td class="name">
-<var>$ccYear</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccYear" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>année d'expiration de la carte bleue</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>année d'expiration de la carte bleue</p>
-
-
-			</div>
-		</div></td>
-	</tr>
-	<tr data-order="ccCcv" id="m$ccCcv">
-		<td class="attributes"><code>
-			public  
-			integer
-		</code></td>
-
-		<td class="name">
-<var>$ccCcv</var>		</td>
-		<td class="description"><div>
-			<a href="#m$ccCcv" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>code de sécurité de la carte bleue</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>code de sécurité de la carte bleue</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="commentaire" id="m$commentaire">
 		<td class="attributes"><code>
 			public  
@@ -819,7 +1002,8 @@ présente dans la réservation</p>
 		</code></td>
 
 		<td class="name">
-<var>$commentaire</var>		</td>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#12" title="Go to source code"><var>$commentaire</var></a>
+		</td>
 		<td class="description"><div>
 			<a href="#m$commentaire" class="anchor">#</a>
 
@@ -844,7 +1028,8 @@ présente dans la réservation</p>
 		</code></td>
 
 		<td class="name">
-<var>$client</var>		</td>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#13" title="Go to source code"><var>$client</var></a>
+		</td>
 		<td class="description"><div>
 			<a href="#m$client" class="anchor">#</a>
 
@@ -858,31 +1043,6 @@ présente dans la réservation</p>
 			</div>
 		</div></td>
 	</tr>
-	<tr data-order="fichePrestataire" id="m$fichePrestataire">
-		<td class="attributes"><code>
-			public  
-			<code><a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a></code>
-		</code></td>
-
-		<td class="name">
-<var>$fichePrestataire</var>		</td>
-		<td class="description"><div>
-			<a href="#m$fichePrestataire" class="anchor">#</a>
-
-			<div class="description short">
-				
-<p>prestataire pour lequel la réservation est faite</p>
-
-			</div>
-
-			<div class="description detailed hidden">
-				
-<p>prestataire pour lequel la réservation est faite</p>
-
-
-			</div>
-		</div></td>
-	</tr>
 	<tr data-order="prestationsPanier" id="m$prestationsPanier">
 		<td class="attributes"><code>
 			public  
@@ -890,7 +1050,8 @@ présente dans la réservation</p>
 		</code></td>
 
 		<td class="name">
-<var>$prestationsPanier</var>		</td>
+				<a href="source-class-SitecRESA.Datatype.Panier.html#14" title="Go to source code"><var>$prestationsPanier</var></a>
+		</td>
 		<td class="description"><div>
 			<a href="#m$prestationsPanier" class="anchor">#</a>
 
@@ -910,6 +1071,58 @@ addPrestationPanier)</p>
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="montantTotal" id="m$montantTotal">
+		<td class="attributes"><code>
+			public  
+			float
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#15" title="Go to source code"><var>$montantTotal</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$montantTotal" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>total des prestations dans le panier.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>total des prestations dans le panier.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="quantite" id="m$quantite">
+		<td class="attributes"><code>
+			public  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Panier.html#16" title="Go to source code"><var>$quantite</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$quantite" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>quantité totale de prestations dans le panier.</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>quantité totale de prestations dans le panier.</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	</table>
 
 
@@ -917,7 +1130,7 @@ addPrestationPanier)</p>
 </div>
 
 	<div id="footer">
-		SitecRESA-API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		ToolKit API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

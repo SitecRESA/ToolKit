@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class SitecRESA\Datatype\Reservation | SitecRESA-API</title>
+	<title>Class SitecRESA\Datatype\Reservation | ToolKit</title>
 
 	<script type="text/javascript" src="resources/combined.js?3235203294"></script>
 	<script type="text/javascript" src="elementlist.js?3498836635"></script>
@@ -161,7 +161,7 @@
 				<b>Author:</b>
 				Marc FRICOU &lt;<a
 href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<br />
-		<b>Located at</b> SitecRESA/Datatype/Reservation.php<br />
+		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.Reservation.html#5-56" title="Go to source code">Datatype/Reservation.php</a><br />
 	</div>
 
 
@@ -179,7 +179,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetch">#</a>
-		<code>fetch( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>type <var>$id</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Reservation.html#16-23" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>type <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -204,6 +204,50 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="confirmer" id="_confirmer">
+
+		<td class="attributes"><code>
+			 public 
+			|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_confirmer">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.Reservation.html#24-32" title="Go to source code">confirmer</a>( <span>integer <var>$numeroTransaction</var></span> )</code>
+
+		<div class="description short">
+			
+<p>pour enregister le numéro de transaction et envoyer les mails de
+confirmation.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>pour enregister le numéro de transaction et envoyer les mails de
+confirmation.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$numeroTransaction</var></dt>
+					<dd><code>integer</code><br>$numeroTransaction</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>|<code><a href="class-SitecRESA.Datatype.Erreur.html">SitecRESA\Datatype\Erreur</a></code></code><br>une erreur si la réservation est expirée.<br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="save" id="_save">
 
 		<td class="attributes"><code>
@@ -215,7 +259,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_save">#</a>
-		<code>save( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Reservation.html#34-39" title="Go to source code">save</a>( )</code>
 
 		<div class="description short">
 			
@@ -248,7 +292,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_delete">#</a>
-		<code>delete( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Reservation.html#41-46" title="Go to source code">delete</a>( )</code>
 
 		<div class="description short">
 			
@@ -281,7 +325,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 		<td class="name"><div>
 		<a class="anchor" href="#_toArray">#</a>
-		<code>toArray( )</code>
+		<code><a href="source-class-SitecRESA.Datatype.Reservation.html#48-55" title="Go to source code">toArray</a>( )</code>
 
 		<div class="description short">
 			
@@ -338,7 +382,111 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="_id" id="$_id">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
 
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Reservation.html#11" title="Go to source code"><var>$_id</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_id" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_dateReservation" id="$_dateReservation">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Reservation.html#12" title="Go to source code"><var>$_dateReservation</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_dateReservation" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_client" id="$_client">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Reservation.html#13" title="Go to source code"><var>$_client</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_client" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_numeroTransaction" id="$_numeroTransaction">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Reservation.html#14" title="Go to source code"><var>$_numeroTransaction</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_numeroTransaction" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-SitecRESA.Datatype.DatatypeAbstract.html#properties">SitecRESA\Datatype\DatatypeAbstract</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_apiClient"><var>$_apiClient</var></a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_datatype"><var>$_datatype</var></a>
+		</code></td>
+	</tr>
+	</table>
 
 
 
@@ -347,7 +495,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!---->sitec.fr</a>&gt;<b
 </div>
 
 	<div id="footer">
-		SitecRESA-API API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+		ToolKit API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
 	</div>
 </div>
 </div>

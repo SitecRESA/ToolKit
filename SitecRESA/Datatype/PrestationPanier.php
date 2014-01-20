@@ -6,7 +6,7 @@ namespace SitecRESA\Datatype;
  * Fiche prestation choisie pour un séjour
  *
  * @author Marc FRICOU <marc.fricou@sitec.fr>
- * 
+ *
  * @property int $id identifiant WS
  * @property int $typeTarif tarif du plan tarifaire choisi
  * @property int $quantite quantite choisie par le client. Peut changer en fonction des données du panier.
@@ -23,36 +23,36 @@ namespace SitecRESA\Datatype;
  * @property FichePrestataire $prestataire prestataire correspondant
  * @property Panier $panier panier depuis lequel la prestation est à réserver
  * @property PlanTarifaire $planTarifaire plan tarifaire choisi pour réserver
- * 
+ *
  */
 class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_id;
-    
+
     protected $_timestampDebut;//obtenu à travers le ws
     protected $_timestampFin;//obtenu à travers le ws
     protected $_debut;
     protected $_fin;
-    
+
     protected $_quantite;
     protected $_quantiteMax;
-    
+
     protected $_idPlanTarifaire;
     protected $_ancienTarif;
     protected $_tarif;
     protected $_nouveauTarif;
     protected $_typeTarif;
     protected $_acompteDemande;
-    
+
     protected $_tarifPerdu;
     protected $_expired;
-    
+
     protected $_panier;
     protected $_prestation;
     protected $_prestataire;
     protected $_planTarifaire;
     protected $_tarifPlanTarifaire;
     /**
-     * 
+     *
      * @param \SitecRESA\WS\Client $apiClient
      * @param array $array tableau associatif avec pour clé les attributs de l'objet. Prestation peut être uniquement son identifiant
      */
@@ -76,11 +76,11 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             $this->_debut = $debut->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
             $this->_fin = $fin->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
          }
-    
+
     }
-    
+
     /**
-     * 
+     *
      * @param \SitecRESA\WS\Client $apiClient
      * @param type $id
      */
@@ -136,7 +136,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
         }
         return $array;
     }
-    
+
     public function __get($name) {
         $retour = parent::__get($name);
         if(null === $retour && $this->_panier != null && "planTarifaire" == $name && null == $this->_planTarifaire){
@@ -150,18 +150,18 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             }
         return $retour;
     }
-    
-    
+
+
     /**
      * permet de simplement savoir si on peut réserver la prestation à l'aide de son panier.
      * @return boolean
      */
     public function isBookable() {
-        return !$this->expired && !$this->tarifPerdu;
+        return !$this->expired && !$this->tarifPerdu && $this->quantite <= $this->quantiteMax;
     }
-    
+
     /**
-     * 
+     *
      * @return float montant de l'acompte
      */
     public function getAcompteDemande() {

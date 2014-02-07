@@ -1,7 +1,7 @@
-SitecRESA-API
+SitecRESA-ToolKit
 =============
 
-API to implement booking engine in frontend web site (need access grant with apikey)
+APIs to implement booking engine in frontend web site (need access grant with apikey)
 
 Pré-requis
 =============

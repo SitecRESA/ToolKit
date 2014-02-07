@@ -9,14 +9,14 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
 }
 /**
  * Objet qui fera la passerelle entre l'API et les services web SitecRESA
- * 
+ *
  * @author Patrice Brun <patrice.brun@sitec.fr>
- * 
+ *
  * @example exemples.php différents exemples
  */
 class Client {
     // the version of the discovery mechanism this class is meant to work with
-    const VERSION = '2.1';
+    const VERSION = '2.2';
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
 
@@ -26,14 +26,14 @@ class Client {
     private $panier;
 
     /**
-     * objet qui fera la passerelle entre l'API et les services web SitecRESA. 
+     * objet qui fera la passerelle entre l'API et les services web SitecRESA.
      * Il suffit de le construire et de le passer à méthode d'un objet ou d'une Classe héritant de {@see SitecRESA\Datatype\DatatypeAbstract}
      * @param array $config configuration particulière à l'instance.
      * Les configuration permanentes doivent être définies dans le fichier /config.php
      */
     public function __construct($apiConfig) {
         if(!isset($apiConfig['url'])
-                || !isset($apiConfig['apiKey']) 
+                || !isset($apiConfig['apiKey'])
                 || !isset($apiConfig['secretKey'])){
             throw new Exception\Api("You have to give an array with path, url, apiKey and secretKey to create a client");
         }
@@ -41,13 +41,13 @@ class Client {
         $this->sSecretKey = $apiConfig['secretKey'];
         $this->client = new \Zend_Rest_Client($apiConfig['url']);
     }
-    
+
     public function setPanier($panier) {
         $this->panier = $panier;
     }
 
     /**
-     * 
+     *
      * @throws apiException
      * @param string $name
      * @param array  $arguments
@@ -80,12 +80,19 @@ class Client {
         if($this->panier && $this->panier instanceof \SitecRESA\Datatype\Panier){
             $aParams["identifiantPanier"] = $this->panier->id;
         }
-        
+
         $client = \Zend_Rest_Client::getHttpClient();
-        if (count($aParams) > 0) {
+        if  (count($aParams) > 0) {
+            if (!isset($aParams["dateDebut"])) {
+                $aParams["dateDebut"] = null;
+            }
+
+            if (!isset($aParams["dateFin"])) {
+                $aParams["dateFin"] = null;
+            }
             $client->setHeaders($aParams);
         }
-        
+
         switch ($sVerbe) {
             case "post":
                 $response = $this->client->restPost($name, $aParams);
@@ -98,7 +105,7 @@ class Client {
             case "get":
                 $response = $this->client->restGet($name . "/get/" . $iIdRessource, $aParams);
                 break;
-            
+
             case "delete":
                 $response = $this->client->restDelete($name . "/" . $iIdRessource);
                 break;
@@ -114,23 +121,23 @@ class Client {
             return $this->doResponse($response->getBody());//throw new \SitecRESA\Exception\IO($response->getBody(),$response->getStatus() );
         }
 
-        if ($response->getStatus() == 201) {//créé et l'accès est disponible 
+        if ($response->getStatus() == 201) {//créé et l'accès est disponible
             return $response->getHeader("Location");
         }
         if ($response->getStatus() == 204) {//pas de contenu.
             return;
         }
-        
+
         if ($response->getStatus() != 200) {
             throw new \SitecRESA\Exception\Api($response->getBody(), $response->getStatus());
         }
-        
+
         return $this->doResponse($response->getBody());
 
     }
-    
+
      /**
-     * 
+     *
      * @throws Zend_Json_Exception
      * @param  string  $sResponse
      * @return Sitec_Rest_Response
@@ -151,7 +158,7 @@ class Client {
             throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
         }
     }
-    
+
     /**
     * Returns true only if the array is associative.
     * @param array $array

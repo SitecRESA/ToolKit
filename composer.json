@@ -20,9 +20,6 @@
         "ext-json": "*"
     },
     "autoload": {
-        "psr-0": {
-            "Sitec": "lib"
-        },
         "psr-4": {
             "SitecRESA\\": "SitecRESA"
         }

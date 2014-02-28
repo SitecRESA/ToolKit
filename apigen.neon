@@ -1,0 +1,7 @@
+source: SitecRESA
+destination: doc
+# Display progressbars
+progressbar: Yes
+# Use colors
+colors: Yes
+title: SitecRESA-Toolkit

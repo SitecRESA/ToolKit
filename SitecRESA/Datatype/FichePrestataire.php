@@ -181,7 +181,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param Client $apiClient
      * @param int    $id
      *
-     * @return string AAAA-MM-JJ HH:mm:SS
+     * @return string AAAA-MM-JJTHH:mm:SSZ (format ISO-8601)
      */
     static public function lastModified(Client $apiClient, $id)
     {

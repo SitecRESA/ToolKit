@@ -6,11 +6,11 @@ namespace SitecRESA\Datatype;
  * Panier permettant de faire une réservation et de gérer des prestations et plusieurs séjours
  *
  * @author Marc FRICOU <marc.fricou@sitec.fr>
- *  
+ *
  * @property int $id
  * @property int $idReservation, id de la réservation quand elle a été faite.
  * @property string $commentaire commentaire éventuel de l'internaute
- * @property SitecRESA\Datatype\Client $client 
+ * @property SitecRESA\Datatype\Client $client
  * @property array $prestationsPanier liste des prestations à réserver (ajoutez-en à l'aide de addPrestationPanier)
  * @property float $montantTotal total des prestations dans le panier.
  * @property int $quantite quantité totale de prestations dans le panier.
@@ -18,26 +18,26 @@ namespace SitecRESA\Datatype;
 class Panier extends SavableDatatypeAbstract implements Fetchable{
     const PANIER_RESERVATION_TPE = "tpe";
     const PANIER_RESERVATION_ONLINE = "online";
-    
+
     protected $_id;
     protected $_idReservation;
     protected $_client;
     protected $_prestationsPanier = array();
     protected $_montantTotal;
     protected $_quantite;
-    
+
     public function __construct($apiClient, $array = NULL) {
         parent::__construct($apiClient, $array);
         $apiClient->setPanier($this);
     }
-    
+
     public function __set($name, $value) {
         if("prestationsPanier" == $name){
             throw new \SitecRESA\Exception\Api("Vous ne pouvez pas setter Panier::prestationsPanier, utilisez Reservation::addPrestationPanier()");
         }
         parent::__set($name, $value);
     }
-    
+
     /**
      * réserver la prestation
      * @param string $commentaire commentaire du client
@@ -50,9 +50,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * @return \SitecRESA\Datatype\Erreur|\SitecRESA\Datatype\Reservation rien si tout s'est déroulé correctement, une {@see \SitecRESA\Datatype\Erreur} Sinon
      * @throw \SitecRESA\Exception\Api si le type de transaction n'est pas reconnu ou si vous n'avez pas donner de client au panier.
      */
-    public function reserver($commentaire, 
-            $ccNumber = null, 
-            $ccType   = null, 
+    public function reserver($commentaire,
+            $ccNumber = null,
+            $ccType   = null,
             $ccName   = null,
             $ccMonth  = null,
             $ccYear   = null,
@@ -64,7 +64,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $params["ccMonth"]  = $ccMonth;
         $params["ccYear"]   = $ccYear;
         $params["ccCcv"]    = $ccCcv;
-        
+
         $location = $this->_apiClient->resaPanier("post",$params);
         if($location instanceof Erreur) {
             return $location;
@@ -74,7 +74,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $this->_idReservation = $aPart[$indexGet+1];
         return $this->_apiClient->resa("get",array("idRessource" => $this->_idReservation));
     }
-    
+
     protected function bookParams($commentaire,$typeTransaction = self::PANIER_RESERVATION_TPE){
         if(!$this->client instanceof Client){
             throw new \SitecRESA\Exception\Api("Impossible de pré-réserver ou de réserver ce panier, il n'y a pas de client associé.");
@@ -86,10 +86,10 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $params["transaction"]       = $typeTransaction;
         return $params;
     }
-    
+
     /**
-     * 
-     * @param string $commentaire 
+     *
+     * @param string $commentaire
      * @param int    $expiration en minutes, 15 par défaut
      * @return \SitecRESA\Datatype\Erreur|\SitecRESA\Datatype\Reservation
      * @throws \SitecRESA\Exception\Api
@@ -97,7 +97,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     public function prebook($commentaire, $expiration = 15) {
         $params = $this->bookParams($commentaire, self::PANIER_RESERVATION_ONLINE);
         $params["expiration"]  = $expiration;
-        
+
         $location = $this->_apiClient->resaPanier("post",$params);
         if($location instanceof Erreur) {
             return $location;
@@ -107,9 +107,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $this->_idReservation = $aPart[$indexGet+1];
         return $this->_apiClient->resa("get",array("idRessource" => $this->_idReservation));
     }
-    
+
     /**
-     * 
+     *
      * @return Erreur|NULL un objet {@see Erreur} si il manque des paramètres (CB, Client, etc.)<br>
      * NULL si rien d'important est survenu
      * @throws \SitecRESA\Exception\Api si le panier est vide
@@ -118,7 +118,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         if(empty($this->_prestationsPanier)){
             throw new \SitecRESA\Exception\Api("Rien dans le panier !");
         }
-    
+
         if($this->_client instanceof Client && null == $this->_client->id){
             if(($retour = $this->_client->save()) && $retour instanceof Erreur){
                 return $retour;
@@ -138,7 +138,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             $vientDePoster = true;
             $this->synchronise();
         }
-        
+
         //put
         if(($this->_client instanceof Client && $this->_id) || (!$vientDePoster && $this->_id)) {
             //on ne peut enregistrer le client dans le panier qu'en PUT
@@ -152,14 +152,14 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             }
         }
     }
-    
+
     public function synchronise() {
         $oNouveauPanier = self::fetch($this->_apiClient, $this->_id);
         $this->_quantite = $oNouveauPanier->quantite;
         $this->_prestationsPanier = $oNouveauPanier->prestationsPanier;
         $this->_montantTotal = $oNouveauPanier->montantTotal;
     }
-    
+
     public function toArray() {
         $array = array(
             "idRessource"    => $this->_id,
@@ -177,9 +177,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $array["listeProduitsOrganisme"] = \Zend_Json::encode($aListeProduitsOrganisme);
         return $array;
     }
-    
+
     /**
-     * Teste la validité du panier à réserver 
+     * Teste la validité du panier à réserver
      * @return boolean
      */
     public function testReservation() {
@@ -191,20 +191,20 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         }
         return true;
     }
-    
+
     /**
      * Permet de connaître la quantité de toutes les prestations toutes formes confondues dans la réservation
-     * @return int 
+     * @return int
      */
     public function quantiteTotaleFichePrestationInPanier() {
-        
+
         $quantite = 0;
-        
+
         /* @var $oPrestationPanier PrestationPanier */
         foreach ($this->_prestationsPanier as $oPrestationPanier) {
             $quantite += $oPrestationPanier->quantite;
         }
-        
+
         return $quantite;
     }
     /**
@@ -225,18 +225,28 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         }
         return $quantite;
     }
-    
+
     /**
      * permet d'ajouter une prestation à la réservation.
      * @param \SitecRESA\Datatype\PrestationPanier $prestation
      */
     public function addPrestationPanier(PrestationPanier $prestation) {
+        $aPrestaitonExistante = array();
+        $this->_prestationsPanier = array();
         $prestation->panier = $this;
-        $this->_prestationsPanier[] = $prestation;
+        if(!empty($this->_prestationsPanier))
+        {
+            foreach($this->_prestationsPanier as $prestationPanier)
+            {
+                $aPrestaitonExistante[] = $prestationPanier;
+            }
+        }
+        array_push($aPrestaitonExistante,$prestation);
+        $this->_prestationsPanier = $aPrestaitonExistante;
     }
-    
+
     /**
-     * Retourne le tarifs (tarif Brut et tarif Promotionnel) totaux du panier 
+     * Retourne le tarifs (tarif Brut et tarif Promotionnel) totaux du panier
      * @return array
      */
     public function tarifTotal() {
@@ -253,7 +263,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         return array("brut" => $tarifTotal,"promotionnel" => $tarifTotalPromo);
     }
     /**
-     * 
+     *
      * @param \SitecRESA\WS\Client $apiClient
      * @param type $id
      * @return self
@@ -261,7 +271,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->panier("get",array("idRessource"=> $id));
     }
-    
+
     /**
      * calcul de l'acompte demandé pour la réservation du panier (purement informatif)
      * @return float

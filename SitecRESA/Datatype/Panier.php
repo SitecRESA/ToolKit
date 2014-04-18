@@ -231,9 +231,8 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * @param \SitecRESA\Datatype\PrestationPanier $prestation
      */
     public function addPrestationPanier(PrestationPanier $prestation) {
-        $aPrestaitonExistante = array();
-        $this->_prestationsPanier = array();
         $prestation->panier = $this;
+        $aPrestaitonExistante = array();
         if(!empty($this->_prestationsPanier))
         {
             foreach($this->_prestationsPanier as $prestationPanier)
@@ -241,6 +240,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                 $aPrestaitonExistante[] = $prestationPanier;
             }
         }
+        $this->_prestationsPanier = array();
         array_push($aPrestaitonExistante,$prestation);
         $this->_prestationsPanier = $aPrestaitonExistante;
     }

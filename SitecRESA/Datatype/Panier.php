@@ -232,7 +232,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      */
     public function addPrestationPanier(PrestationPanier $prestation) {
         $aPrestaitonExistante = array();
-        $this->_prestationsPanier = array();
+
         $prestation->panier = $this;
         if(!empty($this->_prestationsPanier))
         {
@@ -242,6 +242,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             }
         }
         array_push($aPrestaitonExistante,$prestation);
+        $this->_prestationsPanier = array();
         $this->_prestationsPanier = $aPrestaitonExistante;
     }
 

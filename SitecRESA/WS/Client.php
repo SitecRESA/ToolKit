@@ -80,7 +80,7 @@ class Client {
         $aParams['requestHash'] = hash_hmac("sha1", $this->sApiKey . '-' . time(), $this->sSecretKey);
         $aParams['apiKey']      = $this->sApiKey;
         $aParams['timestamp']   = time();
-        $aParams['version']     = self::VERSION;
+        $aParams['version']     = $this->version;
         $name = self::PREFIX_PATH.$name;
         if($this->panier && $this->panier instanceof \SitecRESA\Datatype\Panier){
             $aParams["identifiantPanier"] = $this->panier->id;

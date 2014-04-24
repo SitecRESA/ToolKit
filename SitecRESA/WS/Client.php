@@ -16,10 +16,12 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
  */
 class Client {
     // the version of the discovery mechanism this class is meant to work with
-    const VERSION = '2.2';
+    
+    const VERSION_EXISTE = '1.0/2.0/2.1/2.2';
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
 
+    private $version = '2.2';
     private $client = null;
     private $sApiKey = null;
     private $sSecretKey = null;
@@ -40,6 +42,9 @@ class Client {
         $this->sApiKey = $apiConfig['apiKey'];
         $this->sSecretKey = $apiConfig['secretKey'];
         $this->client = new \Zend_Rest_Client($apiConfig['url']);
+        if (isset($apiConfig['version'])){
+            $this->switchVersion($apiConfig['version']);
+        }
     }
 
     public function setPanier($panier) {
@@ -175,5 +180,21 @@ class Client {
           }
         }
         return false;
+    }
+    
+    /**
+    * @todo remplacer la constante VERSION_EXISTE par un appel WS
+    * Returns true if the version change has been made.
+    * @param String $version 
+    * @return bool True if the version change has been made.
+    */
+    public function switchVersion($version) {
+        $aVersion = explode("/", self::VERSION_EXISTE);
+        if (in_array($version,$aVersion)){
+            $this->version = $version;
+            return true;
+        }else{
+            return false;
+        }
     }
 }

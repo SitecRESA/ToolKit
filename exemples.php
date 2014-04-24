@@ -6,6 +6,7 @@
 //require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
 //$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "https://resaV2.sitec.fr"));
+//$apiClient->switchVersion('2.1');
 
 /*****************************/
 /*   gestion d'un portail    */

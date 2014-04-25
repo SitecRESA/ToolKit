@@ -112,10 +112,12 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
 
     /**
      * supprimer le prestation du panier.
+     * @param \SitecRESA\Datatype\Panier $oPanier
      */
-    public function delete() {
+    public function delete($oPanier) {
         $this->_apiClient->produitpanier("delete",$this->toArray());
         $this->panier->synchronise();
+        $oPanier->synchronise();
     }
 
     public function toArray() {

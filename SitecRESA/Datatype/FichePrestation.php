@@ -61,7 +61,7 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
      *
      * @return string AAAA-MM-JJTHH:mm:SSz (format ISO-8601)
      */
-    static public function lastModified(Client $apiClient, $id)
+    static public function lastModified(\SitecRESA\WS\Client $apiClient, $id)
     {
         $fiche = $apiClient->tourproductlastmodified("get",array("idRessource" => $id));
         return $fiche->lastModified;

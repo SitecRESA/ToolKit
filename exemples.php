@@ -46,8 +46,8 @@
 //$oPrestationPanier = new Datatype\PrestationPanier($apiClient, array(
 //        "debut"           => "01/08/2013",
 //        "fin"             => "04/08/2013",
-//        "prestation"      => FICHE_PRESTATION_ID, 
-//        "idTarif"         => DISPONIBILITE_PRODUIT_TARIF_ID, 
+//        "prestation"      => FICHE_PRESTATION_ID,
+//        "idTarif"         => DISPONIBILITE_PRODUIT_TARIF_ID,
 //        "idPlanTarifaire" => DISPONIBILITE_PRODUIT_PLANTARIFARE_ID,
 //        "quantite"        => 1 //ou la quantité donnée par l'internaute
 //    )
@@ -59,8 +59,8 @@
 //$oPrestationPanier = new Datatype\PrestationPanier($apiClient, array(
 //        "debut"           => "01/08/2013",
 //        "fin"             => "04/08/2013",
-//        "prestation"      => FICHE_PRESTATION_ID, 
-//        "idTarif"         => DISPONIBILITE_PRODUIT_TARIF_ID, 
+//        "prestation"      => FICHE_PRESTATION_ID,
+//        "idTarif"         => DISPONIBILITE_PRODUIT_TARIF_ID,
 //        "idPlanTarifaire" => DISPONIBILITE_PRODUIT_PLANTARIFARE_ID,
 //        "quantite"        => 1 //ou la quantité donnée par l'internaute
 //    )
@@ -112,7 +112,7 @@
 /*     réserver le panier    */
 /*****************************/
 ////vous devez tout d'abord fournir un client
-//$oClient = new Datatype\Client($apiClient, "FRICOU","Marc","marc.fricou@sitec.fr","marc.fricou@sitec.fr");
+//$oClient = new Datatype\Client($apiClient, "CAYZAC","Damien","damien.cayzac@sitec.fr","damien.cayzac@sitec.fr");
 //$oClient->adresse = new Datatype\Adresse($apiClient, array("adresseLigne1" => "ZI Vazzio","adresseLigne2" => "","commune" => "Ajaccio","codePostal" => "20090"));
 //$oClient->telephone = "0495236824";
 //$retour = $oClient->save();
@@ -126,11 +126,11 @@
 //jeu de données de carte bleue d'exemple passant les contrôles.
 //$ccCcv = 111;
 //$ccMonth = 03;
-//$ccName = "Marc FRICOU";
+//$ccName = "Damien CAYZAC";
 //$ccNumber = 4972030196799111;
 //$ccType = "Visa";
 //$ccYear = 2023;
-//$oReservation = $oPanier->reserver("Ceci est un commentaire client", Datatype\Panier::PANIER_RESERVATION_TPE, $ccNumber, $ccType, $ccName, $ccMonth, $ccYear, $ccCcv);
+//$oReservation = $oPanier->reserver("Ceci est un commentaire client", $ccNumber, $ccType, $ccName, $ccMonth, $ccYear, $ccCcv);
 //if($oReservation instanceof Datatype\Erreur){
 ////    traitement particulier de l'erreur rencontrée
 //}
@@ -148,17 +148,17 @@
 
 //$oPrestationPanier = new Datatype\PrestationPanier($client, array("prestation" => $resu[0]->id, "idTarif" => $oDispo->plansTarifaires[0]->tarifs[0]->id, "idPlanTarifaire" => $oDispo->plansTarifaires[0]->id,"quantite" => 10));
 //	#DATE DE SEJOUR
-//	
+//
 //	$date_debut = "06/06/2013";
 //	$date_fin = "07/06/2013";
-//	
+//
 //	#si le formulaire de resa est valider
 //        #creation de mon client
-//        $oClient = new Datatype\Client($client, "FRICOU","Marc","marc.fricou@sitec.fr");
+//        $oClient = new Datatype\Client($client, "CAYZAC","Damien","damien.cayzac@sitec.fr");
 //        $oClient->telephone = "0672206497";
 //        $oClient->save();
-//        #creation de mon panier pour tester mes hebergements reserver 
-//        $oPanier = new Datatype\Panier($client, 
+//        #creation de mon panier pour tester mes hebergements reserver
+//        $oPanier = new Datatype\Panier($client,
 //        array(
 //            "dateDebut"        => $date_debut,
 //            "dateFin"          => $date_fin,
@@ -185,7 +185,7 @@
 //$oPrestationPanier = new Datatype\PrestationPanier($apiClient,array(
 //    "debut"           => "04/12/2013",
 //    "fin"             => "07/12/2013",
-//    "prestation"      => $prestations[0]->id, 
+//    "prestation"      => $prestations[0]->id,
 //    "idTarif"         => $dispoProduit->plansTarifaires[0]->tarifs[0]->id,
 //    "idPlanTarifaire" => $dispoProduit->plansTarifaires[0]->id,
 //    "quantite"        => 1 //ou la quantité donnée par l'internaute

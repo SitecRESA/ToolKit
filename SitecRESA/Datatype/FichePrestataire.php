@@ -13,6 +13,7 @@ use SitecRESA\WS\Client;
  * @property-read string $raisonSociale nom commercial du prestataire
  * @property-read string $siteWeb url (avec HTTP) d'accès au site web du prestataire.
  * @property-read string $valueNbEtoile Traduction française du classement du prestaire (s'il existe)
+ * @property-read string $nbEtoile nombre d'étoile composé comme suit STR_nbr
  * @property-read string $description Texte français de description du prestaire
  * @property-read float $taxeSejour Taxe de séjour demandée par nuit et par personne
  * @property-read \SitecRESA\Datatype\Photo $photo 1ere photo du prestataire
@@ -22,6 +23,14 @@ use SitecRESA\WS\Client;
  * @property-read array $galleriePhoto liste de toutes les photos (SitecRESA_Photo) du prestataire (dont $this->photo) (nécessite un accès WS supplémentaire.)
  * @property-read array $equipements liste de tous les équipements (SitecRESA_Equipement) du prestataire. (nécessite un accès WS supplémentaire.)
  * @property-read array $fichesPrestation liste des prestations du prestataire (les chambres d'un hôtel, par exemple). (nécessite un accès WS supplémentaire.)
+ * @property-read string $checkIn Heure à partir de laquelle le client peut prendre sa prestation
+ * @property-read string $checkOut Heure limite pour quitter la prestation pour le client
+ * @property-read string $fraisObligatoires tous les frais obligatoires qui seront à la charge du client
+ * @property-read string $servicesOptionnels tous les services optionnels qui seront éventuellement à la charge du client
+ * @property-read string $animaux permet de savoir si le prestataire autorise le animaux ou non avec éventuellemnt un tarif
+ * @property-read string $periodeOuverture Ouvert à l'année ou bien du ... au ...
+ * @property-read array $modePaiement Tous les modes de paiement acceptés par le prestataire
+ * @property-read string $_lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
  */
 class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NBETOILE = "NbEtoile";
@@ -43,6 +52,15 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_equipements;
     protected $_fichesPrestation;
     protected $_positionGPS;
+    protected $_checkIn;
+    protected $_checkOut;
+    protected $_fraisObligatoires;
+    protected $_servicesOptionnels;
+    protected $_animaux;
+    protected $_periodeOuverture;
+    protected $_modePaiement;
+    protected $_lastModified;
+
     /**
      * @var AccesResolver
      */

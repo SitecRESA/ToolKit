@@ -6,8 +6,8 @@
 
 	<title>Class SitecRESA\Datatype\FichePrestataire | SitecRESA-Toolkit</title>
 
-	<script type="text/javascript" src="resources/combined.js?877386528"></script>
-	<script type="text/javascript" src="elementlist.js?4145973821"></script>
+	<script type="text/javascript" src="resources/combined.js?1049052095"></script>
+	<script type="text/javascript" src="elementlist.js?1369381731"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
 
 </head>
@@ -60,6 +60,8 @@
 				<li><a href="class-SitecRESA.Datatype.Panier.html">Panier</a></li>
 				<li><a href="class-SitecRESA.Datatype.Pension.html">Pension</a></li>
 				<li><a href="class-SitecRESA.Datatype.PeriodeCalendar.html">PeriodeCalendar</a></li>
+				<li><a href="class-SitecRESA.Datatype.Periodes.html">Periodes</a></li>
+				<li><a href="class-SitecRESA.Datatype.PeriodeTarifaires.html">PeriodeTarifaires</a></li>
 				<li><a href="class-SitecRESA.Datatype.Photo.html">Photo</a></li>
 				<li><a href="class-SitecRESA.Datatype.PlanTarifaire.html">PlanTarifaire</a></li>
 				<li><a href="class-SitecRESA.Datatype.PositionGPS.html">PositionGPS</a></li>
@@ -157,7 +159,7 @@
 				<b>Author:</b>
 				Marc FRICOU &lt;<a
 href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<br>
-		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.FichePrestataire.html#7-191" title="Go to source code">Datatype/FichePrestataire.php</a><br>
+		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.FichePrestataire.html#7-209" title="Go to source code">Datatype/FichePrestataire.php</a><br>
 	</div>
 
 
@@ -175,7 +177,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#___construct">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#60-63" title="Go to source code">__construct</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>array <var>$array</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#78-81" title="Go to source code">__construct</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>array <var>$array</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -213,7 +215,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prixPlancher">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#65-77" title="Go to source code">prixPlancher</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#83-95" title="Go to source code">prixPlancher</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span> )</code>
 
 		<div class="description short">
 			
@@ -259,7 +261,7 @@ séjour donnée</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_calendrierDispo">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#79-92" title="Go to source code">calendrierDispo</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#97-110" title="Go to source code">calendrierDispo</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span> )</code>
 
 		<div class="description short">
 			
@@ -305,7 +307,7 @@ séjour donnée</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_prestationsDisponibles">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#94-111" title="Go to source code">prestationsDisponibles</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span>, <span>boolean <var>$avecTarif</var> = <span class="php-keyword1">FALSE</span></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#112-129" title="Go to source code">prestationsDisponibles</a>( <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span>, <span>boolean <var>$avecTarif</var> = <span class="php-keyword1">FALSE</span></span> )</code>
 
 		<div class="description short">
 			
@@ -351,7 +353,7 @@ séjour donnée</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listePrestataires">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#113-122" title="Go to source code">listePrestataires</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#131-140" title="Go to source code">listePrestataires</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span> )</code>
 
 		<div class="description short">
 			
@@ -395,7 +397,7 @@ contrat.</p>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_listePrestatairesDisponibles">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#124-167" title="Go to source code">listePrestatairesDisponibles</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span>, <span>integer <var>$nbChambre</var> = <span class="php-num">1</span></span>, <span>integer <var>$nbPersonne</var> = <span class="php-num">2</span></span>, <span>array <var>$aRepartition</var> = <span class="php-keyword1">NULL</span></span>, <span>array|string <var>$regionVille</var> = <code><a href="class-SitecRESA.Datatype.FichePrestataire.html#REGIONVILLE_WILDCARD">SitecRESA\Datatype\FichePrestataire::<b>REGIONVILLE_WILDCARD</b></a></code></span>, <span>boolean <var>$avecTarif</var> = <span class="php-keyword1">TRUE</span></span>, <span>string <var>$orderBy</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$count</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$offset</var> = <span class="php-keyword1">NULL</span></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#142-185" title="Go to source code">listePrestatairesDisponibles</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>string <var>$dateArrivee</var></span>, <span>string <var>$dateDepart</var></span>, <span>integer <var>$nbChambre</var> = <span class="php-num">1</span></span>, <span>integer <var>$nbPersonne</var> = <span class="php-num">2</span></span>, <span>array <var>$aRepartition</var> = <span class="php-keyword1">NULL</span></span>, <span>array|string <var>$regionVille</var> = <code><a href="class-SitecRESA.Datatype.FichePrestataire.html#REGIONVILLE_WILDCARD">SitecRESA\Datatype\FichePrestataire::<b>REGIONVILLE_WILDCARD</b></a></code></span>, <span>boolean <var>$avecTarif</var> = <span class="php-keyword1">TRUE</span></span>, <span>string <var>$orderBy</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$count</var> = <span class="php-keyword1">NULL</span></span>, <span>integer <var>$offset</var> = <span class="php-keyword1">NULL</span></span> )</code>
 
 		<div class="description short">
 			
@@ -459,7 +461,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetch">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#169-176" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#187-194" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -501,7 +503,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lastModified">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#178-190" title="Go to source code">lastModified</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestataire.html#196-208" title="Go to source code">lastModified</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -558,7 +560,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="attributes"><code>string</code></td>
 		<td class="name"><code>
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#27" title="Go to source code"><b>ORDRE_NBETOILE</b></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#36" title="Go to source code"><b>ORDRE_NBETOILE</b></a>
 		</code></td>
 		<td class="value"><code><span class="php-quote">&quot;NbEtoile&quot;</span></code></td>
 		<td class="description"><div>
@@ -578,7 +580,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="attributes"><code>string</code></td>
 		<td class="name"><code>
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#28" title="Go to source code"><b>ORDRE_COMMUNE</b></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#37" title="Go to source code"><b>ORDRE_COMMUNE</b></a>
 		</code></td>
 		<td class="value"><code><span class="php-quote">&quot;Commune&quot;</span></code></td>
 		<td class="description"><div>
@@ -598,7 +600,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="attributes"><code>string</code></td>
 		<td class="name"><code>
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#29" title="Go to source code"><b>ORDRE_NOM</b></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#38" title="Go to source code"><b>ORDRE_NOM</b></a>
 		</code></td>
 		<td class="value"><code><span class="php-quote">&quot;Nom&quot;</span></code></td>
 		<td class="description"><div>
@@ -618,7 +620,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 
 		<td class="attributes"><code>string</code></td>
 		<td class="name"><code>
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#30" title="Go to source code"><b>REGIONVILLE_WILDCARD</b></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#39" title="Go to source code"><b>REGIONVILLE_WILDCARD</b></a>
 		</code></td>
 		<td class="value"><code><span class="php-quote">&quot;*&quot;</span></code></td>
 		<td class="description"><div>
@@ -648,7 +650,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#32" title="Go to source code"><var>$_id</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#41" title="Go to source code"><var>$_id</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -671,7 +673,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#33" title="Go to source code"><var>$_raisonSociale</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#42" title="Go to source code"><var>$_raisonSociale</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -694,7 +696,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#34" title="Go to source code"><var>$_siteWeb</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#43" title="Go to source code"><var>$_siteWeb</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -717,7 +719,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#35" title="Go to source code"><var>$_nbEtoile</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#44" title="Go to source code"><var>$_nbEtoile</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -740,7 +742,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#36" title="Go to source code"><var>$_valueNbEtoile</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#45" title="Go to source code"><var>$_valueNbEtoile</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -763,7 +765,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#37" title="Go to source code"><var>$_description</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#46" title="Go to source code"><var>$_description</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -786,7 +788,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#38" title="Go to source code"><var>$_photo</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#47" title="Go to source code"><var>$_photo</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -809,7 +811,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#39" title="Go to source code"><var>$_adresse</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#48" title="Go to source code"><var>$_adresse</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -832,7 +834,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#40" title="Go to source code"><var>$_taxeSejour</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#49" title="Go to source code"><var>$_taxeSejour</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -855,7 +857,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#41" title="Go to source code"><var>$_cgv</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#50" title="Go to source code"><var>$_cgv</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -878,7 +880,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#42" title="Go to source code"><var>$_galleriePhoto</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#51" title="Go to source code"><var>$_galleriePhoto</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -901,7 +903,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#43" title="Go to source code"><var>$_equipements</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#52" title="Go to source code"><var>$_equipements</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -924,7 +926,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#44" title="Go to source code"><var>$_fichesPrestation</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#53" title="Go to source code"><var>$_fichesPrestation</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -947,11 +949,195 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#45" title="Go to source code"><var>$_positionGPS</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#54" title="Go to source code"><var>$_positionGPS</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$_positionGPS" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_checkIn" id="$_checkIn">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#55" title="Go to source code"><var>$_checkIn</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_checkIn" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_checkOut" id="$_checkOut">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#56" title="Go to source code"><var>$_checkOut</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_checkOut" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_fraisObligatoires" id="$_fraisObligatoires">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#57" title="Go to source code"><var>$_fraisObligatoires</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_fraisObligatoires" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_servicesOptionnels" id="$_servicesOptionnels">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#58" title="Go to source code"><var>$_servicesOptionnels</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_servicesOptionnels" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_animaux" id="$_animaux">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#59" title="Go to source code"><var>$_animaux</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_animaux" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_periodeOuverture" id="$_periodeOuverture">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#60" title="Go to source code"><var>$_periodeOuverture</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_periodeOuverture" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_modePaiement" id="$_modePaiement">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#61" title="Go to source code"><var>$_modePaiement</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_modePaiement" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_lastModified" id="$_lastModified">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#62" title="Go to source code"><var>$_lastModified</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_lastModified" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -970,7 +1156,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#46-49" title="Go to source code"><var>$_accesCalendrier</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#64-67" title="Go to source code"><var>$_accesCalendrier</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -993,7 +1179,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#50-53" title="Go to source code"><var>$_accesPrixPlancher</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#68-71" title="Go to source code"><var>$_accesPrixPlancher</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1016,7 +1202,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#55-58" title="Go to source code"><var>$_accesPrestation</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#73-76" title="Go to source code"><var>$_accesPrestation</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -1151,6 +1337,32 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="nbEtoile" id="m$nbEtoile">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#16" title="Go to source code"><var>$nbEtoile</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$nbEtoile" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>nombre d'étoile composé comme suit STR_nbr</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>nombre d'étoile composé comme suit STR_nbr</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="description" id="m$description">
 		<td class="attributes"><code>
 			public  read-only
@@ -1158,7 +1370,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#16" title="Go to source code"><var>$description</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#17" title="Go to source code"><var>$description</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$description" class="anchor">#</a>
@@ -1184,7 +1396,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#17" title="Go to source code"><var>$taxeSejour</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#18" title="Go to source code"><var>$taxeSejour</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$taxeSejour" class="anchor">#</a>
@@ -1210,7 +1422,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#18" title="Go to source code"><var>$photo</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#19" title="Go to source code"><var>$photo</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$photo" class="anchor">#</a>
@@ -1236,7 +1448,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#19" title="Go to source code"><var>$adresse</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#20" title="Go to source code"><var>$adresse</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$adresse" class="anchor">#</a>
@@ -1262,7 +1474,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#20" title="Go to source code"><var>$position</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#21" title="Go to source code"><var>$position</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$position" class="anchor">#</a>
@@ -1288,7 +1500,7 @@ tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut</dd>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#21" title="Go to source code"><var>$cgv</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#22" title="Go to source code"><var>$cgv</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$cgv" class="anchor">#</a>
@@ -1316,7 +1528,7 @@ supplémentaire.)</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#22" title="Go to source code"><var>$galleriePhoto</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#23" title="Go to source code"><var>$galleriePhoto</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$galleriePhoto" class="anchor">#</a>
@@ -1344,7 +1556,7 @@ $this-&gt;photo) (nécessite un accès WS supplémentaire.)</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#23" title="Go to source code"><var>$equipements</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#24" title="Go to source code"><var>$equipements</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$equipements" class="anchor">#</a>
@@ -1372,7 +1584,7 @@ $this-&gt;photo) (nécessite un accès WS supplémentaire.)</p>
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#24" title="Go to source code"><var>$fichesPrestation</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#25" title="Go to source code"><var>$fichesPrestation</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$fichesPrestation" class="anchor">#</a>
@@ -1388,6 +1600,220 @@ $this-&gt;photo) (nécessite un accès WS supplémentaire.)</p>
 				
 <p>liste des prestations du prestataire (les chambres d'un hôtel, par exemple).
 (nécessite un accès WS supplémentaire.)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="checkIn" id="m$checkIn">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#26" title="Go to source code"><var>$checkIn</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$checkIn" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Heure à partir de laquelle le client peut prendre sa prestation</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Heure à partir de laquelle le client peut prendre sa prestation</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="checkOut" id="m$checkOut">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#27" title="Go to source code"><var>$checkOut</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$checkOut" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Heure limite pour quitter la prestation pour le client</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Heure limite pour quitter la prestation pour le client</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="fraisObligatoires" id="m$fraisObligatoires">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#28" title="Go to source code"><var>$fraisObligatoires</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$fraisObligatoires" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>tous les frais obligatoires qui seront à la charge du client</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>tous les frais obligatoires qui seront à la charge du client</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="servicesOptionnels" id="m$servicesOptionnels">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#29" title="Go to source code"><var>$servicesOptionnels</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$servicesOptionnels" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>tous les services optionnels qui seront éventuellement à la charge du
+client</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>tous les services optionnels qui seront éventuellement à la charge du
+client</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="animaux" id="m$animaux">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#30" title="Go to source code"><var>$animaux</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$animaux" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>permet de savoir si le prestataire autorise le animaux ou non avec
+éventuellemnt un tarif</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>permet de savoir si le prestataire autorise le animaux ou non avec
+éventuellemnt un tarif</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="periodeOuverture" id="m$periodeOuverture">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#31" title="Go to source code"><var>$periodeOuverture</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$periodeOuverture" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Ouvert à l'année ou bien du ... au ...</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Ouvert à l'année ou bien du ... au ...</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="modePaiement" id="m$modePaiement">
+		<td class="attributes"><code>
+			public  read-only
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#32" title="Go to source code"><var>$modePaiement</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$modePaiement" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Tous les modes de paiement acceptés par le prestataire</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Tous les modes de paiement acceptés par le prestataire</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_lastModified" id="m$_lastModified">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestataire.html#33" title="Go to source code"><var>$_lastModified</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$_lastModified" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>retourne le timestamp de la dernière modification. Permet par exemple de
+gérer du cache</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>retourne le timestamp de la dernière modification. Permet par exemple de
+gérer du cache</p>
 
 
 			</div>

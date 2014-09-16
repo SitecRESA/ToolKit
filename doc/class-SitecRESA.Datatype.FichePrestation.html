@@ -6,8 +6,8 @@
 
 	<title>Class SitecRESA\Datatype\FichePrestation | SitecRESA-Toolkit</title>
 
-	<script type="text/javascript" src="resources/combined.js?877386528"></script>
-	<script type="text/javascript" src="elementlist.js?4145973821"></script>
+	<script type="text/javascript" src="resources/combined.js?1049052095"></script>
+	<script type="text/javascript" src="elementlist.js?1369381731"></script>
 	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
 
 </head>
@@ -60,6 +60,8 @@
 				<li><a href="class-SitecRESA.Datatype.Panier.html">Panier</a></li>
 				<li><a href="class-SitecRESA.Datatype.Pension.html">Pension</a></li>
 				<li><a href="class-SitecRESA.Datatype.PeriodeCalendar.html">PeriodeCalendar</a></li>
+				<li><a href="class-SitecRESA.Datatype.Periodes.html">Periodes</a></li>
+				<li><a href="class-SitecRESA.Datatype.PeriodeTarifaires.html">PeriodeTarifaires</a></li>
 				<li><a href="class-SitecRESA.Datatype.Photo.html">Photo</a></li>
 				<li><a href="class-SitecRESA.Datatype.PlanTarifaire.html">PlanTarifaire</a></li>
 				<li><a href="class-SitecRESA.Datatype.PositionGPS.html">PositionGPS</a></li>
@@ -157,7 +159,7 @@
 				<b>Author:</b>
 				Marc FRICOU &lt;<a
 href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<br>
-		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.FichePrestation.html#5-69" title="Go to source code">Datatype/FichePrestation.php</a><br>
+		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.FichePrestation.html#5-90" title="Go to source code">Datatype/FichePrestation.php</a><br>
 	</div>
 
 
@@ -175,7 +177,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_disponibilites">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#34-44" title="Go to source code">disponibilites</a>( <span>string <var>$dateDebut</var></span>, <span>string <var>$dateFin</var></span>, <span><code><a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a></code> <var>$fichePrestataire</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#42-52" title="Go to source code">disponibilites</a>( <span>string <var>$dateDebut</var></span>, <span>string <var>$dateFin</var></span>, <span><code><a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a></code> <var>$fichePrestataire</var></span> )</code>
 
 		<div class="description short">
 			
@@ -210,6 +212,52 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="periodeTarifaires" id="_periodeTarifaires">
+
+		<td class="attributes"><code>
+			 public 
+			PlansTarifaire
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_periodeTarifaires">#</a>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#54-65" title="Go to source code">periodeTarifaires</a>( <span>string <var>$dateDebut</var></span>, <span>string <var>$dateFin</var></span>, <span><code><a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a></code> <var>$fichePrestataire</var></span> )</code>
+
+		<div class="description short">
+			
+<p>permet d'obtenir les périodes tarifs et les tarifs de la prestation</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>permet d'obtenir les périodes tarifs et les tarifs de la prestation</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dateDebut</var></dt>
+					<dd><code>string</code><br>$dateDebut format JJ/MM/AAAA</dd>
+					<dt><var>$dateFin</var></dt>
+					<dd><code>string</code><br>$dateFin format JJ/MM/AAAA</dd>
+					<dt><var>$fichePrestataire</var></dt>
+					<dd><code><code><a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a></code></code><br>$fichePrestataire</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>PlansTarifaire</code><br>objet PlansTarifaire<br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="fetch" id="_fetch">
 
 		<td class="attributes"><code>
@@ -221,7 +269,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_fetch">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#46-54" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#67-75" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -263,7 +311,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 		<td class="name"><div>
 		<a class="anchor" href="#_lastModified">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#56-68" title="Go to source code">lastModified</a>( <span><code><a href="class-SitecRESA.Datatype.Client.html">SitecRESA\Datatype\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
+		<code><a href="source-class-SitecRESA.Datatype.FichePrestation.html#77-89" title="Go to source code">lastModified</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
 
 		<div class="description short">
 			
@@ -328,7 +376,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#21" title="Go to source code"><var>$_id</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#23" title="Go to source code"><var>$_id</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -351,7 +399,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#22" title="Go to source code"><var>$_libelle</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#24" title="Go to source code"><var>$_libelle</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -374,7 +422,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#23" title="Go to source code"><var>$_description</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#25" title="Go to source code"><var>$_description</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -397,7 +445,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#24" title="Go to source code"><var>$_adulteMin</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#26" title="Go to source code"><var>$_adulteMin</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -420,7 +468,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#25" title="Go to source code"><var>$_adulteMax</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#27" title="Go to source code"><var>$_adulteMax</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -443,7 +491,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#26" title="Go to source code"><var>$_photo</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#28" title="Go to source code"><var>$_photo</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -466,7 +514,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#27" title="Go to source code"><var>$_galleriePhoto</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#29" title="Go to source code"><var>$_galleriePhoto</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
@@ -489,11 +537,34 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#28-31" title="Go to source code"><var>$_dispoProduit</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#30-33" title="Go to source code"><var>$_dispoProduit</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$_dispoProduit" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_periodesTarifaires" id="$_periodesTarifaires">
+		<td class="attributes"><code>
+			protected  
+			<code><a href="class-SitecRESA.Datatype.AccesResolver.html">SitecRESA\Datatype\AccesResolver</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#34-37" title="Go to source code"><var>$_periodesTarifaires</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_periodesTarifaires" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -512,11 +583,34 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#32" title="Go to source code"><var>$_equipementscategorieproduit</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#38" title="Go to source code"><var>$_equipementscategorieproduit</var></a>
 		</td>
 		<td class="value"><code></code></td>
 		<td class="description"><div>
 			<a href="#$_equipementscategorieproduit" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_lastModified" id="$_lastModified">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#40" title="Go to source code"><var>$_lastModified</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_lastModified" class="anchor">#</a>
 
 			<div class="description short">
 				
@@ -699,6 +793,32 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 			</div>
 		</div></td>
 	</tr>
+	<tr data-order="plansTarifaireProduit" id="m$plansTarifaireProduit">
+		<td class="attributes"><code>
+			public  read-only
+			<code><a href="class-SitecRESA.Datatype.AccesResolverList.html">SitecRESA\Datatype\AccesResolverList</a></code>
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#16" title="Go to source code"><var>$plansTarifaireProduit</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$plansTarifaireProduit" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>les periodes tarifaires</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>les periodes tarifaires</p>
+
+
+			</div>
+		</div></td>
+	</tr>
 	<tr data-order="galleriePhoto" id="m$galleriePhoto">
 		<td class="attributes"><code>
 			public  read-only
@@ -706,7 +826,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#16" title="Go to source code"><var>$galleriePhoto</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#17" title="Go to source code"><var>$galleriePhoto</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$galleriePhoto" class="anchor">#</a>
@@ -732,7 +852,7 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 		</code></td>
 
 		<td class="name">
-				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#17" title="Go to source code"><var>$equipementscategorieproduit</var></a>
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#18" title="Go to source code"><var>$equipementscategorieproduit</var></a>
 		</td>
 		<td class="description"><div>
 			<a href="#m$equipementscategorieproduit" class="anchor">#</a>
@@ -746,6 +866,34 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 			<div class="description detailed hidden">
 				
 <p>tableau d'équipement (SitecRESA\Datatype\Equipement). (Accès WS)</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="_lastModified" id="m$_lastModified">
+		<td class="attributes"><code>
+			public  read-only
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.FichePrestation.html#19" title="Go to source code"><var>$_lastModified</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$_lastModified" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>retourne le timestamp de la dernière modification. Permet par exemple de
+gérer du cache</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>retourne le timestamp de la dernière modification. Permet par exemple de
+gérer du cache</p>
 
 
 			</div>

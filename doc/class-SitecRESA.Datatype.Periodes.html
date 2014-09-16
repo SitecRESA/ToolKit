@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="generator" content="ApiGen 2.8.0">
 
-	<title>Interface SitecRESA\Datatype\Fetchable | SitecRESA-Toolkit</title>
+	<title>Class SitecRESA\Datatype\Periodes | SitecRESA-Toolkit</title>
 
 	<script type="text/javascript" src="resources/combined.js?1049052095"></script>
 	<script type="text/javascript" src="elementlist.js?1369381731"></script>
@@ -60,7 +60,7 @@
 				<li><a href="class-SitecRESA.Datatype.Panier.html">Panier</a></li>
 				<li><a href="class-SitecRESA.Datatype.Pension.html">Pension</a></li>
 				<li><a href="class-SitecRESA.Datatype.PeriodeCalendar.html">PeriodeCalendar</a></li>
-				<li><a href="class-SitecRESA.Datatype.Periodes.html">Periodes</a></li>
+				<li class="active"><a href="class-SitecRESA.Datatype.Periodes.html">Periodes</a></li>
 				<li><a href="class-SitecRESA.Datatype.PeriodeTarifaires.html">PeriodeTarifaires</a></li>
 				<li><a href="class-SitecRESA.Datatype.Photo.html">Photo</a></li>
 				<li><a href="class-SitecRESA.Datatype.PlanTarifaire.html">PlanTarifaire</a></li>
@@ -75,7 +75,7 @@
 
 			<h3>Interfaces</h3>
 			<ul>
-				<li class="active"><a href="class-SitecRESA.Datatype.Fetchable.html">Fetchable</a></li>
+				<li><a href="class-SitecRESA.Datatype.Fetchable.html">Fetchable</a></li>
 			</ul>
 
 
@@ -117,27 +117,33 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Interface Fetchable</h1>
+	<h1>Class Periodes</h1>
 
 
 	<div class="description">
 	
-<p>interface pour les datatype accessibles par un fetch depuis leur ID</p>
+<p>Les périodes et les tarifs pour une prestation</p>
 
 	</div>
 
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html"><span>SitecRESA\Datatype\DatatypeAbstract</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>SitecRESA\Datatype\Periodes</span></b>			
+			
+			
+		</dd>
+	</dl>
 
 
 
 
-	<div>
-		<h4>Direct known implementers</h4>
-			<a href="class-SitecRESA.Datatype.Client.html">SitecRESA\Datatype\Client</a>, 
-			<a href="class-SitecRESA.Datatype.FichePrestataire.html">SitecRESA\Datatype\FichePrestataire</a>, 
-			<a href="class-SitecRESA.Datatype.FichePrestation.html">SitecRESA\Datatype\FichePrestation</a>, 
-			<a href="class-SitecRESA.Datatype.Panier.html">SitecRESA\Datatype\Panier</a>, 
-			<a href="class-SitecRESA.Datatype.PrestationPanier.html">SitecRESA\Datatype\PrestationPanier</a>
-	</div>
 
 
 
@@ -149,58 +155,22 @@
 		
 
 				<b>Author:</b>
-				Marc FRICOU &lt;<a
-href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<br>
-		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.Fetchable.html#5-18" title="Go to source code">Datatype/Fetchable.php</a><br>
+				Damien CAYZAC &lt;<a
+href="mailto:damien.cayzac&#64;sitec.fr">damien.cayzac&#64;<!-- -->sitec.fr</a>&gt;<br>
+		<b>Located at</b> <a href="source-class-SitecRESA.Datatype.Periodes.html#5-14" title="Go to source code">Datatype/Periodes.php</a><br>
 	</div>
 
 
 
-	<table class="summary" id="methods">
-	<caption>Methods summary</caption>
-	<tr data-order="fetch" id="_fetch">
 
-		<td class="attributes"><code>
-			 public static
-			<code><a href="class-SitecRESA.Datatype.DatatypeAbstract.html">SitecRESA\Datatype\DatatypeAbstract</a></code>
-			
-			</code>
-		</td>
-
-		<td class="name"><div>
-		<a class="anchor" href="#_fetch">#</a>
-		<code><a href="source-class-SitecRESA.Datatype.Fetchable.html#11-17" title="Go to source code">fetch</a>( <span><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code> <var>$apiClient</var></span>, <span>integer <var>$id</var></span> )</code>
-
-		<div class="description short">
-			
-<p>récupère l'entité à partir de son ID WS</p>
-
-		</div>
-
-		<div class="description detailed hidden">
-			
-<p>récupère l'entité à partir de son ID WS</p>
-
-
-
-				<h4>Parameters</h4>
-				<div class="list"><dl>
-					<dt><var>$apiClient</var></dt>
-					<dd><code><code><a href="class-SitecRESA.WS.Client.html">SitecRESA\WS\Client</a></code></code><br>$apiClient client auparavant instancié</dd>
-					<dt><var>$id</var></dt>
-					<dd><code>integer</code><br>$id</dd>
-				</dl></div>
-
-				<h4>Returns</h4>
-				<div class="list">
-					<code><code><a href="class-SitecRESA.Datatype.DatatypeAbstract.html">SitecRESA\Datatype\DatatypeAbstract</a></code></code><br>
-				</div>
-
-
-
-
-		</div>
-		</div></td>
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-SitecRESA.Datatype.DatatypeAbstract.html#methods">SitecRESA\Datatype\DatatypeAbstract</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___construct">__construct()</a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#___get">__get()</a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#_createObjectFromArray">createObjectFromArray()</a>
+		</code></td>
 	</tr>
 	</table>
 
@@ -214,10 +184,73 @@ href="mailto:marc.fricou&#64;sitec.fr">marc.fricou&#64;<!-- -->sitec.fr</a>&gt;<
 
 
 
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="_periodesTarifaires" id="$_periodesTarifaires">
+		<td class="attributes"><code>
+			protected  
+			mixed
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Periodes.html#13" title="Go to source code"><var>$_periodesTarifaires</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$_periodesTarifaires" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Properties inherited from <a href="class-SitecRESA.Datatype.DatatypeAbstract.html#properties">SitecRESA\Datatype\DatatypeAbstract</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_apiClient"><var>$_apiClient</var></a>, 
+			<a href="class-SitecRESA.Datatype.DatatypeAbstract.html#$_datatype"><var>$_datatype</var></a>
+		</code></td>
+	</tr>
+	</table>
 
 
+	<table class="summary" id="magicProperties">
+	<caption>Magic properties summary</caption>
+	<tr data-order="periodesTarifaires" id="m$periodesTarifaires">
+		<td class="attributes"><code>
+			public  read-only
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-SitecRESA.Datatype.Periodes.html#10" title="Go to source code"><var>$periodesTarifaires</var></a>
+		</td>
+		<td class="description"><div>
+			<a href="#m$periodesTarifaires" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>liste des periodes avec les tarifs associés d'une prestation</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>liste des periodes avec les tarifs associés d'une prestation</p>
 
 
+			</div>
+		</div></td>
+	</tr>
+	</table>
 
 
 

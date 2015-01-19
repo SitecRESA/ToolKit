@@ -3,6 +3,7 @@
 
 namespace SitecRESA\Datatype;
 use SitecRESA\WS\Client;
+use SitecRESA\WS\ApiClient;
 
 /**
  * Fiche descriptive d'un hôtel ou de tout autre prestataire SitecRESA.
@@ -50,7 +51,6 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_cgv;
     protected $_galleriePhoto;
     protected $_equipements;
-    protected $_fichesPrestation;
     protected $_positionGPS;
     protected $_checkIn;
     protected $_checkOut;
@@ -73,12 +73,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     /**
      * @var AccesResolver
      */
-    protected $_accesPrestation;
-
-    public function __construct($apiClient, $array = NULL) {
-        parent::__construct($apiClient, $array);
-        $this->_accesPrestations = $this->_fichesPrestation;
-    }
+    protected $_accesPrestations;
 
     /**
      * prix plancher des prestations proposées (disponibles) pour une recherche de séjour donnée
@@ -142,6 +137,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     /**
      *
      * Permet d'obtenir la liste des prestataires disponibles aux dates fournies
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
      *
      * @param Client        $apiClient
      * @param string        $dateArrivee format JJ/MM/AAAA
@@ -205,6 +201,53 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     {
         $fiche = $apiClient->propertylastmodified("get",array("idRessource" => $id));
         return $fiche->lastModified;
+    }
+
+    /**
+     * Permet d'obtenir les informations de \SitecRESA\Datatype\FichePrestataire
+     * et \SitecRESA\Datatype\PrixPlancher si le 3ième paramètre est utilisé
+     *
+     * @param ApiClient $apiClient
+     * @param $resolverList
+     * @param array $aDataType => array('prixPlancher' => array('dateDebut' => '20/03/2015' ,'dateFin' => '22/03/2015');
+     * @exemple \SitecRESA\Datatype\FichePrestataire::resolve($apiClient, $resolverList, $aDataType)
+     * @return array
+     * @throws \SitecRESA\Exception\IO
+     */
+    static public function resolve(ApiClient $apiClient, $resolverList, $aDataType = array())
+    {
+        $a = $resolverList->accesResolvers;
+
+        if(isset($aDataType['prixPlancher'])){
+            $aDataType = $aDataType['prixPlancher'];
+            $aDataType['prixPlancher'] = 1;
+        }
+
+        foreach($a as $resolver)
+        {
+            $request = $apiClient->createRequest('GET', $apiClient::PREFIX_PATH . '/' . $resolver->methode . '/' . $resolver->verbe . '/' . $resolver->idRessource . '/format/json', $aDataType);
+
+            $req[] = $request;
+
+            //On envoie les requetes par 10
+            if (sizeof($req) == 10) {
+                $aRes = $apiClient->send($req);
+                foreach ($aRes as $res) {
+                    $response[] = $apiClient->doResponse($res->getBody());
+                }
+                $req = array();
+//                break;
+            }
+        }
+        //On envoie le reste des requetes
+        if(sizeof($req)){
+            $aRes = $apiClient->send($req);
+
+            foreach ($aRes as $res) {
+                $response[] = $apiClient->doResponse($res->getBody());
+            }
+        }
+        return $response;
     }
 }
 

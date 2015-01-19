@@ -17,7 +17,9 @@
         "zendframework/zendframework1": "1.12.*@stable",
         "php": ">=5.3.8",
         "lib-curl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "3.8.1",
+        "doctrine/common": "2.4.2"
     },
     "autoload": {
         "psr-4": {

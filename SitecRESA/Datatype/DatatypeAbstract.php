@@ -15,7 +15,7 @@ abstract class DatatypeAbstract {
      * @var SitecRESA\WS\Client
      */
     protected $_apiClient;
-    
+
     /**
      *
      * @var string
@@ -23,31 +23,31 @@ abstract class DatatypeAbstract {
     protected $_datatype;
 
     /**
-     * 
+     *
      * @param SitecRESA\WS\Client $apiClient
      * @param array $array
      */
-    public function __construct(\SitecRESA\WS\Client $apiClient, $array = null) {
+    public function __construct($apiClient, $array = null) {
         $this->_apiClient = $apiClient;
         if (is_array($array)) {
           // Initialize the model with the array's contents.
           $this->mapTypes($array);
         }
     }
-    
+
     public function __get($name) {
         $attribut = "_".$name;
-        
+
         //pas une propriété de $this
         if(!property_exists($this, $attribut)){
             throw new Api("la propriété $name n'existe pas pour ".get_class($this));
         }
-        
+
         //attribut simple
         if(!$this->$attribut instanceof AccesResolver){
             return $this->$attribut;
         }
-        
+
         //accès WS nécessaire
         $valeurAttribut = $this->$attribut->resolve();
         $this->$attribut = $valeurAttribut;
@@ -56,7 +56,7 @@ abstract class DatatypeAbstract {
 
    /**
     * Initialize this object's properties from an array.
-    * 
+    *
     * @param array Used to seed this object's properties.
     * @return void
     */
@@ -79,7 +79,7 @@ abstract class DatatypeAbstract {
             }
         }
     }
-    
+
    /**
     * Returns true only if the array is associative.
     * @param array $array

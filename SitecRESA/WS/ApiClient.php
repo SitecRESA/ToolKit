@@ -41,16 +41,18 @@ class ApiClient {
         }
         $this->sApiKey = $apiConfig['apiKey'];
         $this->sSecretKey = $apiConfig['secretKey'];
-        $apiClient = new \Guzzle\Http\Client($apiConfig['url']);
+        $apiClient = new \Guzzle\Http\Client($apiConfig['url'], array(
+            'request.params' => array(
+                'cache.override_ttl' => 3600,
+            )
+        ));
 
         $canCache = new \Guzzle\Plugin\Cache\CallbackCanCacheStrategy(
             function ($request) {
                 $dateDebut = $request->getQuery()->get('dateDebut');
                 $fin = $request->getQuery()->get('dateDebut');
-                if ((!isset($dateDebut) && !isset($fin))
-//                    || preg_match("%cgvorganisme/get%",$request->getUrl())
-//                    || preg_match("%equipementsorganisme/get%",$request->getUrl())
-                ) {
+                if ((!isset($dateDebut) && !isset($fin)))
+                {
                     return true;
                 }
 
@@ -63,7 +65,7 @@ class ApiClient {
         $cachePlugin = new \Guzzle\Plugin\Cache\CachePlugin(array(
             'storage' => new \Guzzle\Plugin\Cache\DefaultCacheStorage(
                 new \Guzzle\Cache\DoctrineCacheAdapter(
-                    new \Doctrine\Common\Cache\FilesystemCache('/data/http/users/marc/marc/public/ToolKit/SitecRESA/cache')
+                    new \Doctrine\Common\Cache\FilesystemCache($apiConfig['cache'])
                 )
             ),
             'can_cache' => $canCache
@@ -72,9 +74,6 @@ class ApiClient {
         $apiClient->addSubscriber($cachePlugin);
 
         $this->client = $apiClient;
-//        if (isset($apiConfig['version'])){
-//            $this->switchVersion($apiConfig['version']);
-//        }
     }
 
     public function setPanier($panier) {
@@ -215,21 +214,11 @@ class ApiClient {
     }
 
     /**
-    * @todo remplacer la constante VERSION_EXISTE par un appel WS
-    * Returns true if the version change has been made.
-    * @param String $version
-    * @return bool True if the version change has been made.
-    */
-    public function switchVersion($version) {
-        $aVersion = explode("/", self::VERSION_EXISTE);
-        if (in_array($version,$aVersion)){
-            $this->version = $version;
-            return true;
-        }else{
-            return false;
-        }
-    }
-
+     * @param $verbe
+     * @param $url
+     * @param array $aQuery
+     * @return \Guzzle\Http\Message\RequestInterface
+     */
     public function createRequest($verbe,$url,$aQuery = array()){
         $aParams = array();
         $aParams['requestHash'] = hash_hmac("sha1", $this->sApiKey . '-' . time(), $this->sSecretKey);
@@ -246,6 +235,10 @@ class ApiClient {
         }
         return $request;
     }
+
+    /**
+     * @param $request
+     */
     public function send($request){
         return $this->client->send($request);
     }

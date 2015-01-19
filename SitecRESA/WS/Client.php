@@ -16,7 +16,7 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
  */
 class Client {
     // the version of the discovery mechanism this class is meant to work with
-    
+
     const VERSION_EXISTE = '1.0/2.0/2.1/2.2';
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
@@ -35,8 +35,8 @@ class Client {
      */
     public function __construct($apiConfig) {
         if(!isset($apiConfig['url'])
-                || !isset($apiConfig['apiKey'])
-                || !isset($apiConfig['secretKey'])){
+            || !isset($apiConfig['apiKey'])
+            || !isset($apiConfig['secretKey'])){
             throw new Exception\Api("You have to give an array with path, url, apiKey and secretKey to create a client");
         }
         $this->sApiKey = $apiConfig['apiKey'];
@@ -56,7 +56,7 @@ class Client {
      * @throws apiException
      * @param string $name
      * @param array  $arguments
-     * @return SitecRESA\DatatypeAbstract objet représentant les données du web service.
+     * @return DatatypeAbstract objet représentant les données du web service.
      */
     public function __call($name, $arguments) {
         $iIdRessource = "index";
@@ -141,14 +141,15 @@ class Client {
 
     }
 
-     /**
+    /**
      *
      * @throws Zend_Json_Exception
      * @param  string  $sResponse
      * @return Sitec_Rest_Response
      */
-    private function doResponse($sResponse) {
+    public function doResponse($sResponse) {
         try{
+//            $result = $sResponse;
             $result = Zend_Json::decode($sResponse);
             if($this->isAssociativeArray($result)){
                 return DatatypeAbstract::createObjectFromArray($this, $result);
@@ -165,29 +166,29 @@ class Client {
     }
 
     /**
-    * Returns true only if the array is associative.
-    * @param array $array
-    * @return bool True if the array is associative.
-    */
+     * Returns true only if the array is associative.
+     * @param array $array
+     * @return bool True if the array is associative.
+     */
     private function isAssociativeArray($array) {
         if (!is_array($array)) {
-          return false;
+            return false;
         }
         $keys = array_keys($array);
         foreach($keys as $key) {
-          if (is_string($key)) {
-            return true;
-          }
+            if (is_string($key)) {
+                return true;
+            }
         }
         return false;
     }
-    
+
     /**
-    * @todo remplacer la constante VERSION_EXISTE par un appel WS
-    * Returns true if the version change has been made.
-    * @param String $version 
-    * @return bool True if the version change has been made.
-    */
+     * @todo remplacer la constante VERSION_EXISTE par un appel WS
+     * Returns true if the version change has been made.
+     * @param String $version
+     * @return bool True if the version change has been made.
+     */
     public function switchVersion($version) {
         $aVersion = explode("/", self::VERSION_EXISTE);
         if (in_array($version,$aVersion)){

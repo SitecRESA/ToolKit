@@ -51,6 +51,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_cgv;
     protected $_galleriePhoto;
     protected $_equipements;
+    protected $_fichesPrestation;
     protected $_positionGPS;
     protected $_checkIn;
     protected $_checkOut;
@@ -74,6 +75,11 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @var AccesResolver
      */
     protected $_accesPrestations;
+
+    public function __construct($apiClient, $array = NULL) {
+        parent::__construct($apiClient, $array);
+        $this->_accesPrestations = $this->_fichesPrestation;
+    }
 
     /**
      * prix plancher des prestations proposées (disponibles) pour une recherche de séjour donnée

@@ -50,8 +50,8 @@ class ApiClient {
         $canCache = new \Guzzle\Plugin\Cache\CallbackCanCacheStrategy(
             function ($request) {
                 $dateDebut = $request->getQuery()->get('dateDebut');
-                $fin = $request->getQuery()->get('dateDebut');
-                if ((!isset($dateDebut) && !isset($fin)))
+                $fin = $request->getQuery()->get('dateFin');
+                if ((!isset($dateDebut) && !isset($fin) && preg_match("%organisme\/get%",$request->getUrl())))
                 {
                     return true;
                 }
@@ -59,8 +59,6 @@ class ApiClient {
                 return false;
             }
         );
-
-//        $revalidation = new \Guzzle\Plugin\Cache\DenyRevalidation();
 
         $cachePlugin = new \Guzzle\Plugin\Cache\CachePlugin(array(
             'storage' => new \Guzzle\Plugin\Cache\DefaultCacheStorage(

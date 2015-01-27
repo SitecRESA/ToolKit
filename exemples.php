@@ -5,33 +5,53 @@
 //if you don't have an autoloader
 //require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
-//$apiClient = new \SitecRESA\WS\Client(array("apiKey" => "API_KEY", "secretKey" => "SECRET_KEY", "url" => "https://resaV2.sitec.fr"));
-//$apiClient->switchVersion('2.1');
 
+//$apiClient = new \SitecRESA\WS\Client(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr"));
+//$apiClient->switchVersion('2.1');
 /*****************************/
 /*   gestion d'un portail    */
 /*****************************/
-//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "01/01/2014", "07/01/2014", 1, 1, NULL, NULL, TRUE);
+//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "08/03/2015", "10/03/2015", 1, 1, NULL, NULL, TRUE);
+/***********************************************************************************/
+/* Pour obtenir les informations des prestataires disponibles avec le prix plancher*/
+/***********************************************************************************/
+//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr",'cache' => '/data/http/users/marc/marc/public/ToolKit/SitecRESA/Cache'));
+//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/06/2015", "16/06/2015", 1, 1, NULL, NULL, TRUE,NULL,NULL,NULL,$aIdFiche);
+//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/03/2015", "16/03/2015", 1, 1, NULL, NULL, TRUE);
+//$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat,array('prixPlancher' => array("dateDebut"=>"15/03/2015","dateFin"=>"16/03/2015"),));
+//foreach($aFichePresta as $res){
+//    echo $res->id.'<br/>';
+//    echo $res->prixPlancher->prixPlancher.'<br/>';
+//}
+
+/*************************************************/
+/* Pour obtenir tous vos prestataires sans dispo et sans prix*/
+/************************************************/
+//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2-recette.sitec.fr",'cache' => '/data/http/users/marc/marc/public/ToolKit/SitecRESA/Cache'));
+//$resultat = Datatype\FichePrestataire::listePrestataires($apiClient);
+//Pour mettre en cache
+//$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat);
+//foreach($aFichePresta as $res){
+//    echo $res->id.'<br/>';
+//}
+//
 /*****************************/
 /* fetch et SavableDatatype  */
 /*****************************/
 ////les Datatypes qui hérite de SavableDatatypeAbstract peuvent être instanciés à partir de l'identifiant récupéré auparavant
 ////c'est le cas notament du panier.
 //$oPanier = Datatype\Panier::fetch($apiClient, "39f33d2b312373c3fd828f6b5959c8b3");  /* @var $oPanier Datatype\Panier */
-
 /*****************************/
 /*  prestationsDisponibles   */
 /*****************************/
 //FichePrestataire possède une méthode prestationsDisponibles qui permet de récupérer les prestations dispo suivant des critères
 //Datatype\FichePrestataire::fetch($apiClient, ID)->prestationsDisponibles(DEBUT, FIN);
-
 /*****************************/
 /*     disponibilités        */
 /*****************************/
 ////Pour connaître la quantité et les tarifs disponible d'une prestation, il faut encore passer par une autre étape : disponibilités
 //$iterable = Datatype\FichePrestataire::fetch($apiClient, ID)->prestationsDisponibles(DEBUT, FIN);
 //$iterable[0]->disponibilites(...);
-
 /*****************************/
 /*     Creer un panier       */
 /*****************************/
@@ -80,20 +100,17 @@
 ////l'internaute peut être guidé sur les quantités possibles à l'aide de la variable d'instance "quantiteMax" de PrestationPanier
 ////n'oubliez pas de sauvegarder
 //$oPrestation->save()
-
 /*****************************/
 /* supprimer des prestations */
 /*****************************/
 ////prestation panier est pour le moment le seul datatype qu'il est possible de supprimer
 //$oPrestation->delete();
-
 /*****************************/
 /*     gestion du panier     */
 /*****************************/
 ////Le panier met automatiquement à jour son tableau de prestationPanier :
 ////   - ajouter deux prestationsPanier identiques (dates, tarifs, prestation, etc.) ne fera qu'augmenter la quantité réservée.
 ////   - VOUS DEVEZ SYSTEMATIQUEMENT UTILISER CE TABLEAU POUR CONSTRUIRE L'INTERFACE DE VOTRE PANIER
-
 /*****************************/
 /*   gestion des invalidité  */
 /*****************************/
@@ -105,9 +122,6 @@
 ////   - il peut simplement ne plus être disponible.
 ////   - la quantité dans le panier peut être supérieure à l'offre.
 ////Dans les deux derniers cas, il ne sera pas possible de réserver et faire appel à reserver() renverra un objet Erreur.
-
-
-
 /*****************************/
 /*     réserver le panier    */
 /*****************************/
@@ -120,7 +134,6 @@
 ////    traitement particulier de l'erreur rencontrée
 //}
 //$oPanier->client = $oClient;
-
 //// il existe ensuite deux manières de réserver : par TPE, vous devez alors fournir une carte bleue au système
 //TPE
 //jeu de données de carte bleue d'exemple passant les contrôles.
@@ -135,7 +148,6 @@
 ////    traitement particulier de l'erreur rencontrée
 //}
 ////Cette méthode vous enverra un objet Erreur si vous tentez de réserver un panier invalide ou si la carte bleue possède une invalidité.
-
 ////il est possible aussi de réserver "online" à l'aide d'un module bancaire (Paybox, Payline, O-Zone, etc.)
 //$oReservation = $oPanier->reserver("Ceci est un commentaire client", Datatype\Panier::PANIER_RESERVATION_ONLINE);//pas de paramètres de carte bleue
 ////vous pouvez rediriger vers le module de paiement. Vous devez vous arranger pour concerver l'id de la réservation.
@@ -145,7 +157,6 @@
 //$oReservation->save();
 //Si le paiement n'a pas fonctionné, annuler la réservation
 //$oReservation->delete();
-
 //$oPrestationPanier = new Datatype\PrestationPanier($client, array("prestation" => $resu[0]->id, "idTarif" => $oDispo->plansTarifaires[0]->tarifs[0]->id, "idPlanTarifaire" => $oDispo->plansTarifaires[0]->id,"quantite" => 10));
 //	#DATE DE SEJOUR
 //
@@ -173,11 +184,9 @@
 //            "fichePrestataire" => $fichePrestataire,
 //        )
 //);
-
 /*****************************/
 /*          prebook          */
 /*****************************/
-
 //$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "21/12/2013", "22/12/2013", 1, 1, NULL, array('Ajaccio'), TRUE,"Nom",40,0);
 //$ficheOrganisme = $resultat[0];
 //$prestations = $ficheOrganisme->prestationsDisponibles("04/12/2013", "07/12/2013");

@@ -5,7 +5,6 @@
 //if you don't have an autoloader
 //require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
-
 //$apiClient = new \SitecRESA\WS\Client(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr"));
 //$apiClient->switchVersion('2.1');
 /*****************************/
@@ -15,19 +14,18 @@
 /***********************************************************************************/
 /* Pour obtenir les informations des prestataires disponibles avec le prix plancher*/
 /***********************************************************************************/
-//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr",'cache' => '/data/http/users/marc/marc/public/ToolKit/SitecRESA/Cache'));
+//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr",'cache' => $dirCache));
 //$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/06/2015", "16/06/2015", 1, 1, NULL, NULL, TRUE,NULL,NULL,NULL,$aIdFiche);
 //$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/03/2015", "16/03/2015", 1, 1, NULL, NULL, TRUE);
-//$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat,array('prixPlancher' => array("dateDebut"=>"15/03/2015","dateFin"=>"16/03/2015"),));
+//$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat,array('prixPlancher' => array("dateDebut"=>"15/03/2015","dateFin"=>"16/03/2015")));
 //foreach($aFichePresta as $res){
 //    echo $res->id.'<br/>';
 //    echo $res->prixPlancher->prixPlancher.'<br/>';
 //}
-
 /*************************************************/
 /* Pour obtenir tous vos prestataires sans dispo et sans prix*/
 /************************************************/
-//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2-recette.sitec.fr",'cache' => '/data/http/users/marc/marc/public/ToolKit/SitecRESA/Cache'));
+//$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2-recette.sitec.fr",'cache' => $dirCache));
 //$resultat = Datatype\FichePrestataire::listePrestataires($apiClient);
 //Pour mettre en cache
 //$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat);

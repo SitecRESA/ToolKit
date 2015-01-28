@@ -139,6 +139,27 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     static function listePrestataires($apiClient) {
         return $apiClient->listeorganismes("get",array());
     }
+    /**
+     * permet d'obtenir une liste de FichePrestataire à partir d'un tableau id FichePrestataire.
+     *
+     * @param Client $apiClient
+     *
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function listePrestatairesAggregateur($apiClient, $aIdFichePrestataire = array()) {
+        if(sizeof($aIdFichePrestataire) > 0){
+            $a = '{';
+            foreach($aIdFichePrestataire as $key=>$idFiche){
+                $a .= '"'.$key.'":"'.$idFiche.'",';
+            }
+            $a = substr($a,0,-1);
+            $a .= '}';
+        }
+        $params = array(
+            "idOrganisme" => $a
+        );
+        return $apiClient->listeorganismes("get",$params);
+    }
 
     /**
      *
@@ -176,6 +197,64 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset
+        );
+
+        if(!$orderBy){
+            global $apiConfig;
+            $params["orderBy"] = $apiConfig["triDefault"];
+        }
+
+        return $apiClient->dispoorganismes("get", $params);
+    }
+
+    /**
+     *
+     * Permet d'obtenir la liste des prestataires disponibles pour un aggregateur à l'aide dune liste d'id FichePrestataire
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
+     *
+     * @param Client        $apiClient
+     * @param string        $dateArrivee format JJ/MM/AAAA
+     * @param string        $dateDepart format JJ/MM/AAAA
+     * @param int           $nbChambre nombre de chambre, si la répartition n'est pas nécessaire
+     * @param int           $nbPersonne nombre de personnes totale, si la répartition n'est pas nécessaire.
+     * @param array         $aIdFichePrestataire tableau contenant l'id des hotels qui doivent être aggrégé
+     * @param array         $aRepartition tableau d'entiers. Chaque entier correspond au nombre de personne pour une chambre
+     * @param array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param boolean       $avecTarif permet de préciser si les hôtels doivent être réservable (avec un tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut
+     * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
+     * @param int           $count pour faire une pagination
+     * @param int           $offset pour faire une pagination
+     *
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function prestatairesDisponiblesAggregateur($apiClient, $dateArrivee, $dateDepart,
+                                                 $nbChambre = 1, $nbPersonne = 2, $aIdFichePrestataire = array(),
+                                                 $aRepartition = NULL,
+                                                 $regionVille = self::REGIONVILLE_WILDCARD,
+                                                 $avecTarif = TRUE,
+                                                 $orderBy = NULL, $count = NULL, $offset = NULL) {
+
+        if(sizeof($aIdFichePrestataire) > 0){
+            $a = '{';
+                    foreach($aIdFichePrestataire as $key=>$idFiche){
+                $a .= '"'.$key.'":"'.$idFiche.'",';
+            }
+            $a = substr($a,0,-1);
+            $a .= '}';
+        }
+
+        $params = array(
+            "dateDebut"   => $dateArrivee,
+            "dateFin"     => $dateDepart,
+            "nbChambre"   => $nbChambre,
+            "nbPersonne"  => $nbPersonne,
+            "repartition" => \Zend_Json::encode($aRepartition),
+            "regionVille" => \Zend_Json::encode($regionVille),
+            "avecTarif"   => $avecTarif,
+            "orderBy"     => $orderBy,
+            "count"       => $count,
+            "offset"      => $offset,
+            "idOrganisme" => $a
         );
 
         if(!$orderBy){

@@ -13,7 +13,7 @@ namespace SitecRESA\Datatype;
  * @property-read int $adulteMin nombre minimal d'adulte
  * @property-read int $adulteMax nombre maxi d'adulte
  * @property-read \SitecRESA\Datatype\Photo $photo première photo
- * @property-read \SitecRESA\Datatype\AccesResolverList $plansTarifaireProduit les periodes tarifaires
+ * @property-read \SitecRESA\Datatype\AccesResolverList $periodesTarifaires les periodes tarifaires
  * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
  * @property-read \SitecRESA\Datatype\AccesResolverList $equipementscategorieproduit tableau d'équipement (SitecRESA\Datatype\Equipement). (Accès WS)
  * @property-read string $_lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
@@ -57,7 +57,7 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
      * @param string $dateDebut format JJ/MM/AAAA
      * @param string $dateFin format JJ/MM/AAAA
      * @param \SitecRESA\Datatype\FichePrestataire $fichePrestataire
-     * @return PlansTarifaire objet PlansTarifaire
+     * @return PeriodeTarifaires objet PeriodeTarifaires
      */
     public function periodeTarifaires($dateDebut, $dateFin, FichePrestataire $fichePrestataire) {
         $test = $this->_periodesTarifaires;

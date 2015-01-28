@@ -16,12 +16,15 @@
 /***********************************************************************************/
 //$apiClient2 = new \SitecRESA\WS\ApiClient(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr",'cache' => $dirCache));
 //$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/06/2015", "16/06/2015", 1, 1, NULL, NULL, TRUE,NULL,NULL,NULL,$aIdFiche);
-//$resultat = Datatype\FichePrestataire::listePrestatairesDisponibles($apiClient, "15/03/2015", "16/03/2015", 1, 1, NULL, NULL, TRUE);
 //$aFichePresta = Datatype\FichePrestataire::resolve($apiClient2,$resultat,array('prixPlancher' => array("dateDebut"=>"15/03/2015","dateFin"=>"16/03/2015")));
 //foreach($aFichePresta as $res){
 //    echo $res->id.'<br/>';
 //    echo $res->prixPlancher->prixPlancher.'<br/>';
 //}
+/**************************/
+/* Pour un aggregateur   */
+//$aIdFiche = tableau de id FichePrestataire
+//$resultat = Datatype\FichePrestataire::prestatairesDisponiblesAggregateur($apiClient, "15/02/2015", "16/02/2015", 1, 1, $aIdFiche, NULL, NULL, TRUE);
 /*************************************************/
 /* Pour obtenir tous vos prestataires sans dispo et sans prix*/
 /************************************************/
@@ -33,6 +36,10 @@
 //    echo $res->id.'<br/>';
 //}
 //
+/**************************/
+/* Pour un aggregateur   */
+//$aIdFiche = tableau de id FichePrestataire
+//$resultat = Datatype\FichePrestataire::listePrestatairesAggregateur($apiClient,$aIdFiche);
 /*****************************/
 /* fetch et SavableDatatype  */
 /*****************************/

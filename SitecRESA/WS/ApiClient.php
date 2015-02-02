@@ -176,15 +176,15 @@ class ApiClient {
      * @return Sitec_Rest_Response
      */
     public function doResponse($sResponse) {
+        $apiClient = new \SitecRESA\WS\Client(array("apiKey" => $this->sApiKey, "secretKey" => $this->sSecretKey, "url" => $this->client->getBaseUrl()));
         try{
-//            $result = $sResponse;
             $result = Zend_Json::decode($sResponse);
             if($this->isAssociativeArray($result)){
-                return DatatypeAbstract::createObjectFromArray($this, $result);
+                return DatatypeAbstract::createObjectFromArray($apiClient, $result);
             }  else {
                 $aoResults = array();
                 foreach ($result as $resultPiece){
-                    $aoResults[] = DatatypeAbstract::createObjectFromArray($this, $resultPiece);
+                    $aoResults[] = DatatypeAbstract::createObjectFromArray($apiClient, $resultPiece);
                 }
                 return $aoResults;
             }

@@ -21,7 +21,7 @@ class Client {
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
 
-    private $version = '2.2';
+    private $version = '2.3';
     private $client = null;
     private $sApiKey = null;
     private $sSecretKey = null;

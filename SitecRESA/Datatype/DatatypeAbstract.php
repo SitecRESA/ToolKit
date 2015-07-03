@@ -54,7 +54,21 @@ abstract class DatatypeAbstract {
         return $this->$attribut;
     }
 
-   /**
+
+    public function __isset($name)
+    {
+        $attribut = "_".$name;
+        if (isset($attribut)){
+            return true;
+        }
+
+        return false;
+    }
+
+
+
+
+    /**
     * Initialize this object's properties from an array.
     *
     * @param array Used to seed this object's properties.

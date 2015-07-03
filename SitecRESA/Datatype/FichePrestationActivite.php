@@ -37,7 +37,7 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     /**
      * @var \SitecRESA\Datatype\AccesResolver
      */
-    private $_dispoProduit;
+    protected $_dispoProduit;
 
 
     /**

@@ -17,6 +17,8 @@ namespace SitecRESA\Datatype;
  * @property-read string $documentsObligatoires documents obligatoires
  * @property-read \SitecRESA\Datatype\PositionGPS $lieuActivite coordonnées GPS du lieux de l'activité
  * @property-read array $encadrants liste des encadrants
+ * @property-read string $dureeActivite durée au format fr en jour,heure et minute
+ * @property-read int $duree en minite
  * @property-read \SitecRESA\Datatype\Photo $photo première photo
  * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
  *
@@ -32,6 +34,8 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     protected $_documentsObligatoires;
     protected $_lieuActivite;
     protected $_encadrants;
+    protected $_dureeActivite;
+    protected $_duree;
     protected $_photo;
     protected $_galleriePhoto;
     /**

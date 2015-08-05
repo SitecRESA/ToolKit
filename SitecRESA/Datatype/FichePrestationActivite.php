@@ -41,19 +41,17 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     /**
      * @var \SitecRESA\Datatype\AccesResolver
      */
-    protected $_dispoProduit;
-
-
+    protected $_dispoSessions;
     /**
      * permet d'obtenir les disponibilités de la prestation
      *
      * @param string $dateDebut format JJ/MM/AAAA
      * @param string $dateFin format JJ/MM/AAAA
      * @param \SitecRESA\Datatype\FichePrestataire $fichePrestataire
-     * @return DisponibiliteProduit objet DisponibiliteProduit
+     * @return \SitecRESA\Datatype\AccesResolverList
      */
     public function disponibilites($dateDebut, $dateFin, FichePrestataire $fichePrestataire) {
-        return $this->_dispoProduit->resolve(array("dateDebut" => $dateDebut,"dateFin" => $dateFin,"organisme" => $fichePrestataire->id));
+        return $this->_dispoSessions->resolve(array("dateDebut" => $dateDebut,"dateFin" => $dateFin,"organisme" => $fichePrestataire->id));
     }
 
     /**

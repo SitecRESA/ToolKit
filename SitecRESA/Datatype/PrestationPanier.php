@@ -142,7 +142,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     public function __get($name) {
         $retour = parent::__get($name);
         if(null === $retour && $this->_panier != null && "planTarifaire" == $name && null == $this->_planTarifaire){
-            $oDispoProduit = $this->prestation->disponibilites($this->_panier->dateDebut, $this->_panier->dateFin, $this->_panier->fichePrestataire);
+            $oDispoProduit = $this->prestation->disponibilites($this->_debut, $this->_fin, $this->_prestataire);
                 foreach ($oDispoProduit->plansTarifaires as /* @var $oPlanTarifaire PlanTarifaire */ $oPlanTarifaire) {
                     if($oPlanTarifaire->id == $this->_idPlanTarifaire){
                         $this->_planTarifaire = $oPlanTarifaire;

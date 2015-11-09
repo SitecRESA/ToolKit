@@ -24,7 +24,11 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
     protected $_libelle;
     protected $_description;
     protected $_adulteMin;
+    protected $_enfantMin;
+    protected $_bebeMin;
     protected $_adulteMax;
+    protected $_enfantMax;
+    protected $_bebeMax;
     protected $_photo;
     protected $_galleriePhoto;
     /**
@@ -35,6 +39,11 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
      * @var \SitecRESA\Datatype\AccesResolver
      */
     protected $_periodesTarifaires;
+
+    /**
+     * @var \SitecRESA\Datatype\AccesResolver
+     */
+    protected $_calendrierDispo;
     protected $_equipementscategorieproduit;
 
     protected $_lastModified;
@@ -62,6 +71,23 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
     public function periodeTarifaires($dateDebut, $dateFin, FichePrestataire $fichePrestataire) {
         $test = $this->_periodesTarifaires;
         return $test->resolve(array("dateDebut" => $dateDebut,"dateFin" => $dateFin,"idOrganisme" => $fichePrestataire->id));
+    }
+
+    /**
+     * Permet d’obtenir les disponibilités sur plusieurs semaines du prestataires
+     * pour un produit donnée
+     *
+     * @param string $dateArrivee
+     * @param string $dateDepart
+     * @param int idProduit
+     *
+     * @return array
+     */
+    public function calendrierDispoProduit($dateArrivee,$dateDepart,$idFichePrestataire) {
+        return $this->_calendrierDispo->resolve(array(
+            'dateFin' => $dateDepart,
+            'dateDebut' => $dateArrivee,
+            'idOrganisme' => $idFichePrestataire));
     }
 
     /**

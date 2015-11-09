@@ -12,7 +12,7 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     protected $_dateReservation;
     protected $_client;
     protected $_numeroTransaction;
-    
+
     /**
      * 
      * @param \SitecRESA\WS\Client $apiClient

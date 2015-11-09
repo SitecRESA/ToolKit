@@ -142,7 +142,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     public function __get($name) {
         $retour = parent::__get($name);
         if(null === $retour && $this->_panier != null && "planTarifaire" == $name && null == $this->_planTarifaire){
-            $oDispoProduit = $this->prestation->disponibilites($this->_panier->dateDebut, $this->_panier->dateFin, $this->_panier->fichePrestataire);
+            $oDispoProduit = $this->prestation->disponibilites($this->_debut, $this->_fin, $this->_prestataire->resolve());
                 foreach ($oDispoProduit->plansTarifaires as /* @var $oPlanTarifaire PlanTarifaire */ $oPlanTarifaire) {
                     if($oPlanTarifaire->id == $this->_idPlanTarifaire){
                         $this->_planTarifaire = $oPlanTarifaire;
@@ -166,12 +166,12 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
      *
      * @return float montant de l'acompte
      */
-    public function getAcompteDemande() {
-        return $this->_apiClient->garantieRetenue("get",array(
-            "idRessource" => $this->_idPlanTarifaire,
-            "idTypeTarif" => $this->_typeTarif,
-            "dateDebut"   => $this->_debut,
-            "dateFin"     => $this->_fin,
-            "quantite"    => $this->_quantite))->montantGarantie;
-    }
+//    public function getAcompteDemande() {
+//        return $this->_apiClient->garantieRetenue("get",array(
+//            "idRessource" => $this->_idPlanTarifaire,
+//            "idTypeTarif" => $this->_typeTarif,
+//            "dateDebut"   => $this->_debut,
+//            "dateFin"     => $this->_fin,
+//            "quantite"    => $this->_quantite))->montantGarantie;
+//    }
 }

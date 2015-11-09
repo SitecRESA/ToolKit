@@ -136,9 +136,16 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function listePrestataires($apiClient) {
-        return $apiClient->listeorganismes("get",array());
+    static function listePrestataires($apiClient,$withInfo = false) {
+        if(!$withInfo)
+        {
+            return $apiClient->listeorganismes("get",array());
+        }else{
+            return $apiClient->listeorganismeswithinfo("get",array());
+        }
     }
+
+
     /**
      * permet d'obtenir une liste de FichePrestataire à partir d'un tableau id FichePrestataire.
      *
@@ -180,11 +187,11 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function listePrestatairesDisponibles($apiClient, $dateArrivee, $dateDepart,
-            $nbChambre = 1, $nbPersonne = 2, $aRepartition = NULL,
+    static function listePrestatairesDisponibles($apiClient, $dateArrivee = null, $dateDepart = null,
+            $nbChambre = null, $nbPersonne = null, $aRepartition = NULL,
             $regionVille = self::REGIONVILLE_WILDCARD,
             $avecTarif = TRUE,
-            $orderBy = NULL, $count = NULL, $offset = NULL) {
+            $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
         $params = array(
             "dateDebut"   => $dateArrivee,
@@ -196,12 +203,16 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "avecTarif"   => $avecTarif,
             "orderBy"     => $orderBy,
             "count"       => $count,
-            "offset"      => $offset
+            "offset"      => $offset,
+            "sort"        => $sort
         );
 
         if(!$orderBy){
             global $apiConfig;
             $params["orderBy"] = $apiConfig["triDefault"];
+        }
+        if(!$sort){
+            $params["sort"] = "ASC";
         }
 
         return $apiClient->dispoorganismes("get", $params);
@@ -227,12 +238,12 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function prestatairesDisponiblesAggregateur($apiClient, $dateArrivee, $dateDepart,
-                                                 $nbChambre = 1, $nbPersonne = 2, $aIdFichePrestataire = array(),
+    static function prestatairesDisponiblesAggregateur($apiClient, $dateArrivee = null, $dateDepart = null,
+                                                 $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
                                                  $aRepartition = NULL,
                                                  $regionVille = self::REGIONVILLE_WILDCARD,
                                                  $avecTarif = TRUE,
-                                                 $orderBy = NULL, $count = NULL, $offset = NULL) {
+                                                 $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
         if(sizeof($aIdFichePrestataire) > 0){
             $a = '{';
@@ -254,12 +265,16 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset,
+            "sort"        => $sort,
             "idOrganisme" => $a
         );
 
         if(!$orderBy){
             global $apiConfig;
             $params["orderBy"] = $apiConfig["triDefault"];
+        }
+        if(!$sort){
+            $params["sort"] = "ASC";
         }
 
         return $apiClient->dispoorganismes("get", $params);

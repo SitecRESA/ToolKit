@@ -51,7 +51,11 @@ class ApiClient {
             function ($request) {
                 $dateDebut = $request->getQuery()->get('dateDebut');
                 $fin = $request->getQuery()->get('dateFin');
-                if ((!isset($dateDebut) && !isset($fin) && preg_match("%organisme\/get%",$request->getUrl())))
+                if ((!isset($dateDebut) && !isset($fin) && preg_match("%organisme\/get%",$request->getUrl()))
+                    || (!isset($dateDebut) && !isset($fin) && preg_match("%produit\/get%",$request->getUrl()))
+                    || (!isset($dateDebut) && !isset($fin) && preg_match("%conditionretenue\/get%",$request->getUrl()))
+                    || (!isset($dateDebut) && !isset($fin) && preg_match("%equipementscategorieproduit\/get%",$request->getUrl()))
+                )
                 {
                     return true;
                 }

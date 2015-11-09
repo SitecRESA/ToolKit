@@ -12,5 +12,8 @@ namespace SitecRESA\Datatype;
 class GarantieReservation extends DatatypeAbstract{
     protected $_idGarantieReservation;
     protected $_texteRegle;
+    protected $_condition;
+    protected $_valeur;
+    protected $_unite;
 }
 

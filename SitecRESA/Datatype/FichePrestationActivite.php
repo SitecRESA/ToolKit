@@ -1,5 +1,11 @@
 <?php
+<<<<<<< HEAD
+
 namespace SitecRESA\Datatype;
+
+=======
+namespace SitecRESA\Datatype;
+>>>>>>> refs/remotes/origin/master
 /**
  * prestation fournie par le prestataire d'activités
  *
@@ -15,8 +21,11 @@ namespace SitecRESA\Datatype;
  * @property-read string $documentsObligatoires documents obligatoires
  * @property-read \SitecRESA\Datatype\PositionGPS $lieuActivite coordonnées GPS du lieux de l'activité
  * @property-read array $encadrants liste des encadrants
+<<<<<<< HEAD
+=======
  * @property-read string $dureeActivite durée au format fr en jour,heure et minute
  * @property-read int $duree en minite
+>>>>>>> refs/remotes/origin/master
  * @property-read \SitecRESA\Datatype\Photo $photo première photo
  * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
  *
@@ -32,8 +41,11 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     protected $_documentsObligatoires;
     protected $_lieuActivite;
     protected $_encadrants;
+<<<<<<< HEAD
+=======
     protected $_dureeActivite;
     protected $_duree;
+>>>>>>> refs/remotes/origin/master
     protected $_photo;
     protected $_galleriePhoto;
     /**
@@ -51,6 +63,10 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     public function disponibilites($dateDebut, $dateFin, FichePrestataire $fichePrestataire) {
         return $this->_dispoSessions->resolve(array("dateDebut" => $dateDebut,"dateFin" => $dateFin,"organisme" => $fichePrestataire->id));
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> refs/remotes/origin/master
     /**
      *
      * @param \SitecRESA\WS\Client $apiClient
@@ -60,4 +76,10 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
     static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->produit("get",array("idRessource" => $id));
     }
+<<<<<<< HEAD
+
 }
+
+=======
+}
+>>>>>>> refs/remotes/origin/master

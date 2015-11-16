@@ -1,2 +1,0 @@
-
-s:542:"a:1:{i:0;a:5:{i:0;a:5:{s:11:"requesthash";s:40:"f4099c3b8ed48d81d842b4df74cdef5a7183630e";s:6:"apikey";s:10:"1234567890";s:9:"timestamp";s:10:"1421420585";s:7:"version";s:3:"2.3";s:3:"via";s:21:"1.1 GuzzleCache/3.8.1";}i:1;a:5:{s:4:"date";s:29:"Fri, 16 Jan 2015 15:03:04 GMT";s:6:"server";s:26:"Apache/2.2.21 (Linux/SUSE)";s:12:"x-powered-by";s:9:"PHP/5.3.8";s:14:"content-length";s:4:"2612";s:12:"content-type";s:16:"application/json";}i:2;i:200;i:3;s:64:"784f6ea39bce81b87dd744a1ba39494514c37ba9a87a9a003538895cdbf3cf76";i:4;i:1421424185;}}";

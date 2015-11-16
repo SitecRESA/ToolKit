@@ -23,7 +23,12 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     protected $_idReservation;
     protected $_client;
     protected $_prestationsPanier = array();
+    protected $_paiements = array();
     protected $_montantTotal;
+    protected $_ancienMontantTotal;
+    protected $_nouveauMontantTotal;
+    protected $_tarifsPerdu;
+//    protected $__problemesValidite;
     protected $_quantite;
 
     public function __construct($apiClient, $array = NULL) {
@@ -98,6 +103,19 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $params = $this->bookParams($commentaire, self::PANIER_RESERVATION_ONLINE);
         $params["expiration"]  = $expiration;
 
+        if(sizeof($this->_paiements) >= 2){
+            /** @var Paiement $paiement */
+            $i=0;
+            foreach($this->_paiements as $paiement){
+                if($i != 0) {
+                    $aPaiement[$i][]['montant'] = $paiement->montant;
+                    $aPaiement[$i][]['dateApplication'] = $paiement->dateApplication;
+                }
+                $i++;
+            }
+            $params['multiPaiement'] = \Zend_Json::encode($aPaiement);
+        }
+
         $location = $this->_apiClient->resaPanier("post",$params);
         if($location instanceof Erreur) {
             return $location;
@@ -105,7 +123,66 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $aPart = explode("/", $location);
         $indexGet = array_search("get", $aPart);
         $this->_idReservation = $aPart[$indexGet+1];
+
         return $this->_apiClient->resa("get",array("idRessource" => $this->_idReservation));
+    }
+
+    /**
+     * Uniquement si le revendeur facture et que sa politique de garantie est de type avantSejour et que les regles sont basés sur du pourcentage
+     * @return tableau de DataType\Paiement
+     */
+    public function multiPaiement(){
+
+        $montantPanier = $this->montantTotal;
+        $montant = 0;
+        $montantPreleve = 0;
+        /** @var PrestationPanier $prestationPanier */
+        foreach($this->prestationsPanier as $prestationPanier){
+            $i=1;
+            $dateValidePrecedent = null;
+            $garantiePrecedente = null;
+//            $oGarantie = $prestationPanier->planTarifaire->garantieDemandee;
+            foreach($prestationPanier->planTarifaire->garantieDemandee as $oGarantie){
+                $debutSejour = new \Zend_Date($prestationPanier->debut);
+                $now = new \Zend_Date();
+                $now->set(00, \Zend_Date::HOUR);
+                $now->set(00, \Zend_Date::MINUTE);
+                $now->set(00, \Zend_Date::SECOND);
+                if($oGarantie->condition == -1){
+                    $condition = 0;
+                }else{
+                    $condition = $oGarantie->condition;
+                }
+                $dateValide = $debutSejour->subDayOfYear($condition);
+
+                if($dateValide >= $now){
+
+                    if($i == 1){
+                        $dateValidePrecedent = $dateValide;
+                        $garantiePrecedente = $oGarantie;
+                        $dateValide = $now;
+
+                    }elseif($i == sizeof($prestationPanier->planTarifaire->garantieDemandee))
+                        {
+                        $dateValide = $debutSejour->subDayOfYear($garantiePrecedente->condition);
+                        }
+                        else{
+                            $dateValide = $dateValidePrecedent;
+                            $dateValidePrecedent = $dateValide;
+                            $garantiePrecedente = $oGarantie;
+                        }
+
+                    $i++;
+                    if($oGarantie->unite == "%"){
+                        $montant = ($montantPanier * $oGarantie->valeur / 100) - $montantPreleve;
+                        $montantPreleve += $montant;
+                    }
+                    $paiement = new Paiement($montant,$dateValide);
+                    $this->addPaiement($paiement);
+                }
+            }
+        }
+        return $this->_paiements;
     }
 
     /**
@@ -243,6 +320,25 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         $this->_prestationsPanier = array();
         array_push($aPrestaitonExistante,$prestation);
         $this->_prestationsPanier = $aPrestaitonExistante;
+    }
+
+    /**
+     * permet d'ajouter une prestation à la réservation.
+     * @param \SitecRESA\Datatype\PrestationPanier $prestation
+     */
+    public function addPaiement(Paiement $paiement) {
+        $paiement->panier = $this;
+        $aPaiementExistant = array();
+        if(!empty($this->_paiements))
+        {
+            foreach($this->_paiements as $paiementPanier)
+            {
+                $aPaiementExistant[] = $paiementPanier;
+            }
+        }
+        $this->_paiements = array();
+        array_push($aPaiementExistant,$paiement);
+        $this->_paiements = $aPaiementExistant;
     }
 
     /**

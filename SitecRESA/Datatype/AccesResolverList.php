@@ -84,9 +84,5 @@ class AccesResolverList extends \SitecRESA\Datatype\DatatypeAbstract implements 
             $this->_accesResolvers = $accesResolvers;
         }
     }
-    
-    public function toArray() {
-        return $this->_accesResolvers;
-    }
 }
 

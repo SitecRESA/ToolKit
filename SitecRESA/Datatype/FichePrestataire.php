@@ -14,6 +14,7 @@ use SitecRESA\WS\ApiClient;
  * @property-read string $raisonSociale nom commercial du prestataire
  * @property-read string $siteWeb url (avec HTTP) d'accès au site web du prestataire.
  * @property-read string $valueNbEtoile Traduction française du classement du prestaire (s'il existe)
+ * @property-read string $nbEtoileChiffre nombre d'étoile composé comme suit 0|1|2|3|4|5
  * @property-read string $nbEtoile nombre d'étoile composé comme suit STR_nbr
  * @property-read string $description Texte français de description du prestaire
  * @property-read float $taxeSejour Taxe de séjour demandée par nuit et par personne
@@ -43,6 +44,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_raisonSociale;
     protected $_siteWeb;
     protected $_nbEtoile;
+    protected $_nbEtoileChiffre;
     protected $_valueNbEtoile;
     protected $_description;
     protected $_photo;

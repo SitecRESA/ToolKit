@@ -22,6 +22,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     protected $_id;
     protected $_idReservation;
     protected $_client;
+    protected $_nbrJours;
     protected $_prestationsPanier = array();
     protected $_paiements = array();
     protected $_montantTotal;
@@ -41,6 +42,31 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             throw new \SitecRESA\Exception\Api("Vous ne pouvez pas setter Panier::prestationsPanier, utilisez Reservation::addPrestationPanier()");
         }
         parent::__set($name, $value);
+    }
+
+    public function __get($name) {
+        if("nbrJours" == $name && null == $this->_nbrJours){
+            $nbJours = 0;
+            if(!empty($this->_prestationsPanier)) {
+                /** @var PrestationPanier $prestationPanier */
+                foreach ($this->_prestationsPanier as $prestationPanier){
+                    $aDateArrivee = explode("/", $prestationPanier->debut);
+                    $sDateArrivee = $aDateArrivee['2'] . "-" . $aDateArrivee['1'] . "-" . $aDateArrivee['0'];
+                    $aDateDepart = explode("/", $prestationPanier->fin);
+                    $sDateDepart = $aDateDepart['2'] . "-" . $aDateDepart['1'] . "-" . $aDateDepart['0'];
+                    $oInterval = date_diff(new \DateTime($sDateArrivee), new \DateTime($sDateDepart));
+                    $nbJours += $oInterval->format('%a');
+                }
+
+                $this->_nbrJours = $nbJours;
+                return $nbJours;
+            }else{
+                throw new \SitecRESA\Exception\Api("Vous n'avez aucune prestationPanier");
+            }
+        }else{
+            return parent::__get($name);
+        }
+
     }
 
     /**

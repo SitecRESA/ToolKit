@@ -76,7 +76,6 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             $this->_debut = $debut->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
             $this->_fin = $fin->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
          }
-
     }
 
     /**
@@ -96,7 +95,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
         if(!$this->_id){
             if(!$this->panier instanceof Panier){
                 throw new Api("Impossible de sauvegarder une nouvelle prestationPanier sans préciser à quel panier il est attaché.");
-        }
+            }
             $location = $this->panier->save();
             if($location instanceof Erreur){
                 return $location;
@@ -161,7 +160,6 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
                     }
                 }
             }
-
         }
         return $retour;
     }

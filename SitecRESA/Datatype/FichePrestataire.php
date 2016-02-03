@@ -32,6 +32,7 @@ use SitecRESA\WS\ApiClient;
  * @property-read string $animaux permet de savoir si le prestataire autorise le animaux ou non avec éventuellemnt un tarif
  * @property-read string $periodeOuverture Ouvert à l'année ou bien du ... au ...
  * @property-read array $modePaiement Tous les modes de paiement acceptés par le prestataire
+ * @property-read \SitecRESA\Datatype\Avis $avis Tous les avis de la fiche
  * @property-read string $_lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
  */
 class FichePrestataire extends DatatypeAbstract implements Fetchable{
@@ -63,6 +64,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_periodeOuverture;
     protected $_modePaiement;
     protected $_lastModified;
+    protected $_avis;
 
     /**
      * @var AccesResolver
@@ -280,6 +282,17 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
         }
 
         return $apiClient->dispoorganismes("get", $params);
+    }
+
+    /**
+     * permet d'obtenir les avis.
+     *
+     * @param Client $apiClient
+     *
+     * @return ObjectList
+     */
+    public function getAggregateFilteredReviews($apiClient,$aParam = array()) {
+        return $apiClient->listeavis("get",$aParam);
     }
 
     /**

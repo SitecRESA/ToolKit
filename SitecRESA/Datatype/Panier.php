@@ -200,7 +200,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
 
                     $i++;
                     if($oGarantie->unite == "%"){
-                        $montant = ($montantPanier * $oGarantie->valeur / 100) - $montantPreleve;
+                        $montant = ($prestationPanier->tarif * $oGarantie->valeur / 100) - $montantPreleve;
                         $montantPreleve += $montant;
                     }
                     $paiement = new Paiement($montant,$dateValide);

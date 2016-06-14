@@ -146,11 +146,18 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         if($location instanceof Erreur) {
             return $location;
         }
-        $aPart = explode("/", $location);
-        $indexGet = array_search("get", $aPart);
-        $this->_idReservation = $aPart[$indexGet+1];
+        if($location instanceof AccesResolverList){
+            foreach($location as $res) {
+                $aReservation[] = $res;
+            }
+            return $aReservation;
+        }else {
+            $aPart = explode("/", $location);
+            $indexGet = array_search("get", $aPart);
+            $this->_idReservation = $aPart[$indexGet + 1];
 
-        return $this->_apiClient->resa("get",array("idRessource" => $this->_idReservation));
+            return $this->_apiClient->resa("get", array("idRessource" => $this->_idReservation));
+        }
     }
 
     /**

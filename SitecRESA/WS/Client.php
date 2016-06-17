@@ -17,11 +17,11 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
 class Client {
     // the version of the discovery mechanism this class is meant to work with
 
-    const VERSION_EXISTE = '1.0/2.0/2.1/2.2';
+    const VERSION_EXISTE = '1.0/2.0/2.1/2.2/2.3';
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
 
-    private $version = '2.3';
+    private $version = '2.4';
     private $client = null;
     private $sApiKey = null;
     private $sSecretKey = null;

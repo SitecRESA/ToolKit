@@ -10,14 +10,18 @@ namespace SitecRESA\Datatype;
 /**
  * @author Patrice BRUN <patrice.brun@sitec.fr>
  *
- * @property FichePrestation $produit prestation correspondante
+ * @property string           $produit libellé de lma fichePrestation
  * @property FichePrestataire $ficheOrganisme prestataire correspondant
+ * @property string           $session libelle de la session
+ * @property int              $jourSession jour de la semaine [0..6]
  */
 
 class ProduitEtape extends SavableDatatypeAbstract implements Fetchable{
 
     protected $_produit;
     protected $_ficheOrganisme;
+    protected $_session;
+    protected $_jourSession;
 
     /**
      *

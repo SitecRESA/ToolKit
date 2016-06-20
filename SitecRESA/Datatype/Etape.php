@@ -13,10 +13,9 @@ namespace SitecRESA\Datatype;
  * @property int    $id identifiant unique
  * @property string $libelle nom
  * @property string $description description
- * @property float  $prix prix
- * @property int    $jourArrivee jour d'arrivée 0|1|2|3|4|5|6
- * @property string $themes
- * @property array  $etapes liste des étapes
+ * @property int    $nbDeNuits nombre de nuits
+ * @property int    $ordre position de l'étape dans le package
+ * @property array  $contenusEtape liste les composants d'une étape
 
  */
 
@@ -25,10 +24,9 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_id;
     protected $_libelle;
     protected $_description;
-    protected $_prix;
-    protected $_jourArrivee;
-    protected $_themes;
-    protected $_etapes;
+    protected $_nbDeNuits;
+    protected $_ordre;
+    protected $_contenuEtape ;
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient
@@ -36,7 +34,7 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
      * @return self
      */
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
-        return $apiClient->package("get",array("idRessource"=> $id));
+        return $apiClient->contenustape("get",array("idRessource"=> $id));
     }
 
     public function save() {

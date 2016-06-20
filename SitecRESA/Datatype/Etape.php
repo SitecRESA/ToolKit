@@ -19,7 +19,7 @@ namespace SitecRESA\Datatype;
 
  */
 
-class Package extends SavableDatatypeAbstract implements Fetchable{
+class Etape extends SavableDatatypeAbstract implements Fetchable{
 
     protected $_id;
     protected $_libelle;

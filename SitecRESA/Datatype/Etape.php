@@ -10,12 +10,14 @@ namespace SitecRESA\Datatype;
 /**
  * @author Patrice BRUN <patrice.brun@sitec.fr>
  *
- * @property int    $id identifiant unique
- * @property string $libelle nom
- * @property string $description description
- * @property int    $nbDeNuits nombre de nuits
- * @property int    $ordre position de l'étape dans le package
- * @property array  $contenusEtape liste les composants d'une étape
+ * @property int         $id identifiant unique
+ * @property string      $libelle nom
+ * @property string      $description description
+ * @property int         $nbDeNuits nombre de nuits
+ * @property int         $ordre position de l'étape dans le package
+ * @property array       $contenusEtape liste les composants d'une étape
+ * @property string      $ville ville de l'étape
+ * @property PositionGPS $positionGPS de la ville de l'étape
 
  */
 
@@ -27,6 +29,9 @@ class Etape extends SavableDatatypeAbstract implements Fetchable{
     protected $_nbDeNuits;
     protected $_ordre;
     protected $_contenusEtape ;
+    protected $_ville;
+    protected $_positionGPS;
+
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

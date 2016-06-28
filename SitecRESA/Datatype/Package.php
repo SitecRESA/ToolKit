@@ -15,7 +15,7 @@ namespace SitecRESA\Datatype;
  * @property string $description description
  * @property float  $prix prix
  * @property int    $jourArrivee jour d'arrivée 0|1|2|3|4|5|6
- * @property string $themes
+ * @property string $theme
  * @property array  $etapes liste des étapes
 
  */
@@ -27,7 +27,7 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_description;
     protected $_prix;
     protected $_jourArrivee;
-    protected $_themes;
+    protected $_theme;
     protected $_etapes;
     /**
      *

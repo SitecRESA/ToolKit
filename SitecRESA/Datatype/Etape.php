@@ -18,6 +18,8 @@ namespace SitecRESA\Datatype;
  * @property array       $contenusEtape liste les composants d'une étape
  * @property string      $ville ville de l'étape
  * @property PositionGPS $positionGPS de la ville de l'étape
+ * @property int         $jourDebut  indice de la semaine [0...6]
+ * @property int         $jourFin  indice de la semaine [0...6]
 
  */
 
@@ -31,6 +33,8 @@ class Etape extends SavableDatatypeAbstract implements Fetchable{
     protected $_contenusEtape ;
     protected $_ville;
     protected $_positionGPS;
+    protected $_jourDebut;
+    protected $_jourFin;
 
     /**
      *

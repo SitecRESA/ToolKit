@@ -17,7 +17,10 @@ namespace SitecRESA\Datatype;
  * @property int    $jourArrivee jour d'arrivée 0|1|2|3|4|5|6
  * @property string $theme
  * @property array  $etapes liste des étapes
-
+ * @property int    $nbNuits nombre de nuits
+ * @property int    $nbJours nombre de jours
+ * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
+ * @property-read \SitecRESA\Datatype\Photo $photo première photo
  */
 
 class Package extends SavableDatatypeAbstract implements Fetchable{
@@ -29,6 +32,10 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_jourArrivee;
     protected $_theme;
     protected $_etapes;
+    protected $_nbNuits;
+    protected $_nbJours;
+    protected $_galleriePhoto;
+    protected $_photo;
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

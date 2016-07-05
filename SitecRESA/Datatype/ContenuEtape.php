@@ -14,26 +14,16 @@ namespace SitecRESA\Datatype;
  * @property string $libelle nom
  * @property string $description description
  * @property int    $ordre position de l'étape dans le package
- * @property array  $produitsEtape les produits d'une étape
+ * @property array  $fichesPrestataireEtape array de fichePrestataire d'une étape
  * @property int    $jourSession indice de la semaine [0..6]
 
  */
 
-class ContenuEtape extends SavableDatatypeAbstract {
-
+class ContenuEtape extends DatatypeAbstract {
     protected $_id;
     protected $_libelle;
     protected $_description;
     protected $_ordre;
-    protected $_produitsEtape;
+    protected $_fichesPrestataireEtape;
     protected $_jourSession;
-
-    public function save() {
-
-    }
-
-    public function toArray() {
-
-    }
-
 }

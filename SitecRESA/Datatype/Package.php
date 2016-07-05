@@ -21,6 +21,7 @@ namespace SitecRESA\Datatype;
  * @property int    $nbJours nombre de jours
  * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
  * @property-read \SitecRESA\Datatype\Photo $photo première photo
+ * @property-read array $categorie liste des catégories associées à ce package
  */
 
 class Package extends SavableDatatypeAbstract implements Fetchable{
@@ -36,6 +37,7 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_nbJours;
     protected $_galleriePhoto;
     protected $_photo;
+    protected $_categorie;
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

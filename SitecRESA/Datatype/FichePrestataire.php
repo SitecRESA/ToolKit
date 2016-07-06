@@ -41,6 +41,7 @@ use SitecRESA\WS\ApiClient;
  * @property-read string $nbrAvis retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur votre canal de vente
  * @property-read string $nbrAvisPartages retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur les canaux de vente que vous souhaitez aggréger
  * @property string $dateSejour
+ * @property-read array $type activite | hebergement
  */
 class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NBETOILE = "NbEtoile";
@@ -83,7 +84,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @var string
      */
     protected $_dateSejour;
-
+    protected $_type;
 
     /**
      * @var AccesResolver

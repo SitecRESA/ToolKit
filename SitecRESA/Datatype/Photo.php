@@ -7,7 +7,8 @@ namespace SitecRESA\Datatype;
  *
  * @author Marc FRICOU <marc.fricou@sitec.fr>
  * 
- * @property-read string $url url vers le resize 600x600 px;
+ * @property-read string $url url vers le resize;
+ * @property-read string $urlLarge url 600x600 px
  * @property-read string $urlOver url vers le over 300x300 px
  * @property-read string $thumbnails url vers le thumbnail 150x150 px
  * @property-read string $urlVignette url vers la Vignette 140x140 px
@@ -16,9 +17,11 @@ namespace SitecRESA\Datatype;
  */
 class Photo extends DatatypeAbstract {
     protected $_url;
+    protected $_urlLarge;
     protected $_urlOver;
     protected $_thumbnails;
     protected $_urlVignette;
+
     protected $_urlMiniature;
     protected $_description;
 }

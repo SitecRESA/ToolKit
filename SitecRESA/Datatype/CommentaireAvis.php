@@ -17,7 +17,7 @@ namespace SitecRESA\Datatype;
  * @property Sitec_Avis     $avis
  */
 
-class CommentaireAvis {
+class CommentaireAvis extends DatatypeAbstract{
 
     // <editor-fold defaultstate="collapsed" desc="variables d'instance">
     /**

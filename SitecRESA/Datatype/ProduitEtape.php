@@ -13,12 +13,14 @@ namespace SitecRESA\Datatype;
  * @property string           $produit libellé de lma fichePrestation
  * @property FichePrestation  $fichePrestation prestation correspondante
  * @property string           $duree durée format fr
+ * @property int              $id jour de la semaine [0..6]
  * @property int              $jourSession jour de la semaine [0..6]
  * @property string           $heureDebut heure de debut
  */
 
-class ProduitEtape extends SavableDatatypeAbstract implements Fetchable{
+class ProduitEtape extends DatatypeAbstract implements Fetchable{
 
+    protected $_id;
     protected $_produit;
     protected $_fichePrestation;
     protected $_duree;
@@ -34,13 +36,4 @@ class ProduitEtape extends SavableDatatypeAbstract implements Fetchable{
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->produitetape("get",array("idRessource"=> $id));
     }
-
-    public function save() {
-
-    }
-
-    public function toArray() {
-
-    }
-
 }

@@ -1,21 +1,32 @@
 <?php
 namespace SitecRESA\Datatype;
-use SitecRESA\WS\Client;
-use SitecRESA\WS\ApiClient;
+
+/**
+ * @author Damien CAYZAC <damien.cayzac@sitec.fr>
+ *
+ * @property string           $produit libellÃ© de lma fichePrestation
+ * @property ObjectList       $produitsEtape
+ * @property bool             $dispo le produit est disponible ou non
+ */
 
 class FichePrestataireEtape extends FichePrestataire {
     protected $_produitsEtape;
+    protected $_dispo;
 
     /**
-     * Permet d’obtenir les produits etapes d'un contenu etape
+     * Permet d'obtenir les produits etapes d'un contenu etape
      *
+     * @param int idEtape
      * @param int idContenuEtape
+     * @param string d/m/Y
      *
      * @return array
      */
-    public function getProduitsEtape($idContenuEtape) {
+    public function getProduitsEtape($idEtape,$idContenuEtape, $date = null) {
         return $this->_produitsEtape->resolve(array(
-            'idContenuEtape' => $idContenuEtape)
+            'idEtape' => $idEtape,
+            'idContenuEtape' => $idContenuEtape,
+            'dateDebut' => $date)
         );
     }
 }

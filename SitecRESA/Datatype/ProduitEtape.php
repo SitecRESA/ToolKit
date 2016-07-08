@@ -12,10 +12,12 @@ namespace SitecRESA\Datatype;
  *
  * @property string           $produit libellé de lma fichePrestation
  * @property FichePrestation  $fichePrestation prestation correspondante
+ * @property PlanTarifaire    $planTarifaire
  * @property string           $duree durée format fr
  * @property int              $id jour de la semaine [0..6]
  * @property int              $jourSession jour de la semaine [0..6]
  * @property string           $heureDebut heure de debut
+ * @property bool             $dispo le produit est disponible ou non
  */
 
 class ProduitEtape extends DatatypeAbstract implements Fetchable{
@@ -23,9 +25,12 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     protected $_id;
     protected $_produit;
     protected $_fichePrestation;
+    protected $_planTarifaire;
     protected $_duree;
     protected $_jourSession;
     protected $_heureDebut;
+    protected $_categorie;
+    protected $_dispo;
 
     /**
      *

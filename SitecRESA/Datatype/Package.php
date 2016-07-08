@@ -22,6 +22,8 @@ namespace SitecRESA\Datatype;
  * @property-read \SitecRESA\Datatype\AccesResolverList $galleriePhoto tableau de photos (SitecRESA\Datatype\Photo). (Accès WS)
  * @property-read \SitecRESA\Datatype\Photo $photo première photo
  * @property-read array $categorie liste des catégories associées à ce package
+ * @property-read array $garantieDemandee liste des règles conditionnant les montants qui peuvent être prélevé à la réservation.
+ * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
  */
 
 class Package extends SavableDatatypeAbstract implements Fetchable{
@@ -38,6 +40,8 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_galleriePhoto;
     protected $_photo;
     protected $_categorie;
+    protected $_garantieDemandee;
+    protected $_conditionAnnulation;
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

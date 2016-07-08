@@ -2,8 +2,7 @@
 
 
 namespace SitecRESA\Datatype;
-use SitecRESA\WS\Client;
-use SitecRESA\WS\ApiClient;
+
 
 /**
  * Fiche descriptive d'un hôtel ou de tout autre prestataire SitecRESA.
@@ -326,7 +325,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param int    $id
      * @return FichePrestataire
      */
-    static function fetch(Client $apiClient, $id) {
+    static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->organisme("get",array("idRessource" => $id));
     }
 
@@ -338,7 +337,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return string AAAA-MM-JJTHH:mm:SSZ (format ISO-8601)
      */
-    static public function lastModified(Client $apiClient, $id)
+    static public function lastModified(\SitecRESA\WS\Client $apiClient, $id)
     {
         $fiche = $apiClient->propertylastmodified("get",array("idRessource" => $id));
         return $fiche->lastModified;
@@ -355,7 +354,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return array
      * @throws \SitecRESA\Exception\IO
      */
-    static public function resolve(ApiClient $apiClient, $resolverList, $aDataType = array())
+    static public function resolve(\SitecRESA\WS\ApiClient $apiClient, $resolverList, $aDataType = array())
     {
         $a = $resolverList->accesResolvers;
 

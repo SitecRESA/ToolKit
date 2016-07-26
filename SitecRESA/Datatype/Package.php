@@ -43,6 +43,7 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
     protected $_garantieDemandee;
     protected $_conditionAnnulation;
     protected $_dateArrivee;
+    protected $_dateDepart;
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

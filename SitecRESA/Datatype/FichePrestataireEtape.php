@@ -5,12 +5,10 @@ namespace SitecRESA\Datatype;
  * @author Damien CAYZAC <damien.cayzac@sitec.fr>
  *
  * @property string           $produit libellé de lma fichePrestation
- * @property ObjectList       $produitsEtape
  * @property bool             $dispo le produit est disponible ou non
  */
 
 class FichePrestataireEtape extends FichePrestataire {
-    protected $_produitsEtape;
     protected $_dispo;
 
     /**
@@ -20,10 +18,11 @@ class FichePrestataireEtape extends FichePrestataire {
      * @param int idContenuEtape
      * @param string d/m/Y
      *
-     * @return array
+     * @return ObjectList
      */
     public function getProduitsEtape($idEtape,$idContenuEtape, $date = null) {
-        return $this->_produitsEtape->resolve(array(
+        return $this->_apiClient->produitsetape("get",array(
+            'idRessource' => $this->id,
             'idEtape' => $idEtape,
             'idContenuEtape' => $idContenuEtape,
             'dateDebut' => $date)

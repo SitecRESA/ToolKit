@@ -24,7 +24,7 @@ namespace SitecRESA\Datatype;
  * @property string      $dateDepart  format d/m/Y si une recherche de dispo sur le package est effectuée
  */
 
-class Etape extends SavableDatatypeAbstract implements Fetchable{
+class Etape extends DatatypeAbstract implements Fetchable{
 
     protected $_id;
     protected $_libelle;
@@ -48,13 +48,4 @@ class Etape extends SavableDatatypeAbstract implements Fetchable{
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->contenustape("get",array("idRessource"=> $id));
     }
-
-    public function save() {
-
-    }
-
-    public function toArray() {
-
-    }
-
 }

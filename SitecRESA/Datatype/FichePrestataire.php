@@ -218,7 +218,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     static function listePrestatairesDisponibles($apiClient, $dateArrivee = null, $dateDepart = null,
             $nbChambre = null, $nbPersonne = null, $aRepartition = NULL,
             $regionVille = self::REGIONVILLE_WILDCARD,
-            $avecTarif = TRUE,
+            $avecTarif = "true",
             $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
         $params = array(

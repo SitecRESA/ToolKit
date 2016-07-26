@@ -24,6 +24,8 @@ namespace SitecRESA\Datatype;
  * @property-read array $categorie liste des catégories associées à ce package
  * @property-read array $garantieDemandee liste des règles conditionnant les montants qui peuvent être prélevé à la réservation.
  * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
+ * @property-read string $dateArrivee date d'arrivée (début)
+ * @property-read string $dateDepart  date de départ (fin)
  */
 
 class Package extends SavableDatatypeAbstract implements Fetchable{

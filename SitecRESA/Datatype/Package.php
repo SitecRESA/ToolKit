@@ -26,7 +26,7 @@ namespace SitecRESA\Datatype;
  * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
  */
 
-class Package extends SavableDatatypeAbstract implements Fetchable{
+class Package extends DatatypeAbstract implements Fetchable{
 
     protected $_id;
     protected $_libelle;
@@ -54,12 +54,13 @@ class Package extends SavableDatatypeAbstract implements Fetchable{
         return $apiClient->package("get",array("idRessource"=> $id));
     }
 
-    public function save() {
-
-    }
-
-    public function toArray() {
-
+    /**
+     *
+     * @param  string $date date de recherche de dispo d/m/Y
+     * @return self
+     */
+    public function disponibilite($date) {
+        return $this->_apiClient->package("get",array("idRessource"=> $this->_id,"dateDebut"=>$date));
     }
 
 }

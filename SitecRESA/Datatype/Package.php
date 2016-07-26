@@ -46,6 +46,7 @@ class Package extends DatatypeAbstract implements Fetchable{
     protected $_conditionAnnulation;
     protected $_dateArrivee;
     protected $_dateDepart;
+
     /**
      *
      * @param  \SitecRESA\WS\Client $apiClient

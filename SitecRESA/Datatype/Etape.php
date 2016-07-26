@@ -20,7 +20,8 @@ namespace SitecRESA\Datatype;
  * @property PositionGPS $positionGPS de la ville de l'étape
  * @property int         $jourDebut  indice de la semaine [0...6]
  * @property int         $jourFin  indice de la semaine [0...6]
-
+ * @property string      $dateArrivee  format d/m/Y si une recherche de dispo sur le package est effectuée
+ * @property string      $dateDepart  format d/m/Y si une recherche de dispo sur le package est effectuée
  */
 
 class Etape extends SavableDatatypeAbstract implements Fetchable{
@@ -35,6 +36,8 @@ class Etape extends SavableDatatypeAbstract implements Fetchable{
     protected $_positionGPS;
     protected $_jourDebut;
     protected $_jourFin;
+    protected $_dateArrivee;
+    protected $_dateDepart;
 
     /**
      *

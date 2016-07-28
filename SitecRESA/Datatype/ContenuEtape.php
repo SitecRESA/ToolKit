@@ -15,6 +15,7 @@ namespace SitecRESA\Datatype;
  * @property int    $ordre position de l'étape dans le package
  * @property array  $fichesPrestataireEtape array de fichePrestataire d'une étape
  * @property int    $jourSession indice de la semaine [0..6]
+ * @property int    $alternative le nombre d'alternative (hébergement ou produit activité) possible pour un contenu etape
 
  */
 

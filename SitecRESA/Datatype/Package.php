@@ -26,6 +26,8 @@ namespace SitecRESA\Datatype;
  * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
  * @property-read string $dateArrivee date d'arrivée (début)
  * @property-read string $dateDepart  date de départ (fin)
+ * @property-read int $nbAdulte  nombre d'adulte total suite à une recherche de dispo
+ * @property-read int $nbEnfnat  nombre d'enfant total suite à une recherche de dispo
  */
 
 class Package extends DatatypeAbstract implements Fetchable{
@@ -46,6 +48,8 @@ class Package extends DatatypeAbstract implements Fetchable{
     protected $_conditionAnnulation;
     protected $_dateArrivee;
     protected $_dateDepart;
+    protected $_nbAdulte;
+    protected $_nbEnfant;
 
     /**
      *
@@ -60,10 +64,12 @@ class Package extends DatatypeAbstract implements Fetchable{
     /**
      *
      * @param  string $date date de recherche de dispo d/m/Y
+     * @param  array $aAdulte tableau d'adulte par chambre
+     * @param  array $aEnfant tableau d'enfant par chambre
      * @return self
      */
-    public function disponibilite($date) {
-        return $this->_apiClient->package("get",array("idRessource"=> $this->_id,"dateDebut"=>$date));
+    public function disponibilite($date,$aAdulte,$aEnfant) {
+        return $this->_apiClient->package("get",array("idRessource"=> $this->_id,"dateDebut"=>$date,"adulte"=>$aAdulte,"enfant"=>$aEnfant));
     }
 
 }

@@ -16,6 +16,7 @@ namespace SitecRESA\Datatype;
  * @property string           $duree durée format fr
  * @property int              $id jour de la semaine [0..6]
  * @property int              $jourSession jour de la semaine [0..6]
+ * @property int              $quantiteDispo si recherche dispo alors nombre de produit disponible
  * @property string           $heureDebut heure de debut
  * @property bool             $dispo le produit est disponible ou non
  * @property string           $dateArrivee  format d/m/Y si une recherche de dispo sur le package est effectuée
@@ -37,6 +38,7 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     protected $_dateArrivee;
     protected $_dateDepart;
     protected $_prixTotal;
+    protected $_quantiteDispo;
 
     /**
      *

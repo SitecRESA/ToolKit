@@ -63,13 +63,15 @@ class Package extends DatatypeAbstract implements Fetchable{
 
     /**
      *
+     * @param  \SitecRESA\WS\Client $apiClient
+     * @param  int $idPackage
      * @param  string $date date de recherche de dispo d/m/Y
      * @param  array $aAdulte tableau d'adulte par chambre
      * @param  array $aEnfant tableau d'enfant par chambre
      * @return self
      */
-    public function disponibilite($date,$aAdulte,$aEnfant) {
-        return $this->_apiClient->package("get",array("idRessource"=> $this->_id,"dateDebut"=>$date,"adulte"=>$aAdulte,"enfant"=>$aEnfant));
+    public static function disponibilite(\SitecRESA\WS\Client $apiClient,$idPackage,$date,$aAdulte,$aEnfant) {
+        return $apiClient->package("get",array("idRessource"=> $idPackage,"dateDebut"=>$date,"adulte"=>$aAdulte,"enfant"=>$aEnfant));
     }
 
 }

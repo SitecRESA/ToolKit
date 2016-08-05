@@ -46,6 +46,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NBETOILE = "NbEtoile";
     const ORDRE_COMMUNE  = "Commune";
     const ORDRE_NOM      = "Nom";
+    const ORDRE_DISTANCE = "Distance";
     const REGIONVILLE_WILDCARD = "*";
 
     protected $_id;
@@ -215,11 +216,19 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function listePrestatairesDisponibles($apiClient, $dateArrivee = null, $dateDepart = null,
-            $nbChambre = null, $nbPersonne = null, $aRepartition = NULL,
+    static function listePrestatairesDisponibles(
+            $apiClient, 
+            $dateArrivee = null, 
+            $dateDepart = null,
+            $nbChambre = null, 
+            $nbPersonne = null, 
+            $aRepartition = NULL,
             $regionVille = self::REGIONVILLE_WILDCARD,
             $avecTarif = "true",
-            $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+            $orderBy = NULL, 
+            $count = NULL, 
+            $offset = NULL, 
+            $sort = NULL) {
 
         $params = array(
             "dateDebut"   => $dateArrivee,

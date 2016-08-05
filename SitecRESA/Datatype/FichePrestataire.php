@@ -259,7 +259,9 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param array         $aIdFichePrestataire tableau contenant l'id des hotels qui doivent être aggrégé
      * @param array         $aRepartition tableau d'entiers. Chaque entier correspond au nombre de personne pour une chambre
      * @param array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param string        $latlongdist latitude et logitude au format WGS84 séparé par le signe '-'
      * @param boolean       $avecTarif permet de préciser si les hôtels doivent être réservable (avec un tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut
+     * @param boolean       $promotion si TRUE retourne uniquement les prestataires en promo ; TRUE par défaut
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
@@ -270,7 +272,9 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                  $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
                                                  $aRepartition = NULL,
                                                  $regionVille = self::REGIONVILLE_WILDCARD,
+                                                 $latlongdist =NULL,
                                                  $avecTarif = TRUE,
+                                                 $promotion = FALSE,
                                                  $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
         if(sizeof($aIdFichePrestataire) > 0){

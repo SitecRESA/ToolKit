@@ -217,17 +217,17 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return \SitecRESA\Datatype\AccesResolverList
      */
     static function listePrestatairesDisponibles(
-            $apiClient, 
-            $dateArrivee = null, 
+            $apiClient,
+            $dateArrivee = null,
             $dateDepart = null,
-            $nbChambre = null, 
-            $nbPersonne = null, 
+            $nbChambre = null,
+            $nbPersonne = null,
             $aRepartition = NULL,
             $regionVille = self::REGIONVILLE_WILDCARD,
             $avecTarif = "true",
-            $orderBy = NULL, 
-            $count = NULL, 
-            $offset = NULL, 
+            $orderBy = NULL,
+            $count = NULL,
+            $offset = NULL,
             $sort = NULL) {
 
         $params = array(
@@ -302,12 +302,14 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "nbPersonne"  => $nbPersonne,
             "repartition" => \Zend_Json::encode($aRepartition),
             "regionVille" => \Zend_Json::encode($regionVille),
+            "latlongdist" => \Zend_Json::encode($latlongdist),
             "avecTarif"   => $avecTarif,
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset,
             "sort"        => $sort,
-            "idOrganisme" => $a
+            "idOrganisme" => $a,
+            "promotion"   => $promotion
         );
 
         if(!$orderBy){

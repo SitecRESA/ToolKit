@@ -37,6 +37,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NBETOILE = "NbEtoile";
     const ORDRE_COMMUNE  = "Commune";
     const ORDRE_NOM      = "Nom";
+    const ORDRE_DISTANCE = "Distance"
     const REGIONVILLE_WILDCARD = "*";
 
     protected $_id;

@@ -127,4 +127,15 @@ abstract class DatatypeAbstract {
             throw new Api("impossible de créer une entité à partir d'un tableau qui n'a pas de clé 'datatype'");
         }
     }
+
+    /**
+     * permet d'obtenir une liste de FichePrestataire avec lesquels vous avez un contrat.
+     *
+     * @param Client $apiClient
+     *
+     * @return \SitecRESA\Datatype\ObjectList
+     */
+    static function listeVillesDisponibles($apiClient) {
+        return $apiClient->listevillesdisponibles("get",array());
+    }
 }

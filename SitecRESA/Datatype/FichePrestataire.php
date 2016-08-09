@@ -175,18 +175,6 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     }
 
     /**
-     * permet d'obtenir une liste de FichePrestataire avec lesquels vous avez un contrat.
-     *
-     * @param Client $apiClient
-     *
-     * @return \SitecRESA\Datatype\ObjectList
-     */
-    static function listeVillesDisponibles($apiClient) {
-        return $apiClient->listevillesdisponibles("get",array());
-    }
-
-
-    /**
      * permet d'obtenir une liste de FichePrestataire à partir d'un tableau id FichePrestataire.
      *
      * @param Client $apiClient

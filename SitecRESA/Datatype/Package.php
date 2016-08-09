@@ -71,7 +71,7 @@ class Package extends DatatypeAbstract implements Fetchable{
      * @return self
      */
     public static function disponibilite(\SitecRESA\WS\Client $apiClient,$idPackage,$date,$aAdulte,$aEnfant) {
-        return $apiClient->package("get",array("idRessource"=> $idPackage,"dateDebut"=>$date,"adulte"=>$aAdulte,"enfant"=>$aEnfant));
+        return $apiClient->package("get",array("idRessource"=> $idPackage,"dateDebut"=>$date,"adulte"=>json_encode($aAdulte),"enfant"=>json_encode($aEnfant)));
     }
 
 }

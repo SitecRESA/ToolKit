@@ -380,6 +380,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                        $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
         $i = 0;
+        $aRepartition = array();
         foreach($aAdulte as $key=>$adulte){
             $aRepartition[$i][] = $adulte;
             $aRepartition[$i][] = $aEnfant[$key];

@@ -352,13 +352,12 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
 
     /**
      *
-     * Permet d'obtenir la liste des prestataires disponibles pour un aggregateur à l'aide dune liste d'id FichePrestataire
+     * Permet d'obtenir la liste des prestataires disponibles aux dates fournies
      * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
      *
      * @param Client        $apiClient
      * @param string        $dateArrivee format JJ/MM/AAAA
      * @param string        $dateDepart format JJ/MM/AAAA
-     * @param array         $aIdFichePrestataire tableau contenant l'id des hotels qui doivent être aggrégé
      * @param array         $aAdulte tableau des adultes (pur la répartition des chambres)
      * @param array         $aEnfan tableau des enfants (pur la répartition des chambres)
      * @param array|string  $regionVille liste des villes surlesquelles filtrer.
@@ -371,8 +370,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function prestatairesDisponiblesAggregateurAvecRepartition($apiClient, $dateArrivee = null, $dateDepart = null,
-                                                       $aIdFichePrestataire = array(),
+    static function prestatairesDisponiblesAvecRepartition($apiClient, $dateArrivee = null, $dateDepart = null,
                                                        $aAdulte = array(),
                                                        $aEnfant = array(),
                                                        $regionVille = self::REGIONVILLE_WILDCARD,
@@ -380,16 +378,6 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                        $avecTarif = TRUE,
                                                        $promotion = FALSE,
                                                        $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
-
-        $a = null;
-        if(sizeof($aIdFichePrestataire) > 0){
-            $a = '{';
-            foreach($aIdFichePrestataire as $key=>$idFiche){
-                $a .= '"'.$key.'":"'.$idFiche.'",';
-            }
-            $a = substr($a,0,-1);
-            $a .= '}';
-        }
 
         $i = 0;
         foreach($aAdulte as $key=>$adulte){
@@ -409,7 +397,6 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "count"       => $count,
             "offset"      => $offset,
             "sort"        => $sort,
-            "idOrganisme" => $a,
             "promotion"   => $promotion
         );
 

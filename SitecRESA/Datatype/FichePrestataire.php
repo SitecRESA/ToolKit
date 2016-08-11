@@ -40,6 +40,7 @@ namespace SitecRESA\Datatype;
  * @property-read string $nbrAvis retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur votre canal de vente
  * @property-read string $nbrAvisPartages retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur les canaux de vente que vous souhaitez aggréger
  * @property string $dateSejour
+ * @property array           $repartition
  * @property-read array $type activite | hebergement
  */
 class FichePrestataire extends DatatypeAbstract implements Fetchable{
@@ -79,6 +80,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_accommodationRecommendedPartagee;
     protected $_nbrAvis;
     protected $_nbrAvisPartages;
+    protected $_repartition;
     /**
      * Date de fin du séjour
      * @var string
@@ -154,6 +156,26 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                 'dateFin' => $dateDepart,
                 'dateDebut' => $dateArrivee,
                 'avecTarif' => $avecTarif
+            )
+        );
+    }
+
+    /**
+     * obtenir uniquement les prestations dispo
+     *
+     * @param string  $dateArrivee
+     * @param string  $dateDepart
+     * @param boolean $avecTarif
+     *
+     * @return array liste de FichePrestation
+     */
+    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $repartition = array()) {
+        return $this->_repartition->resolve(
+            array(
+                'dateFin' => $dateDepart,
+                'dateDebut' => $dateArrivee,
+                'avecTarif' => TRUE,
+                'repartition' => json_encode($repartition)
             )
         );
     }

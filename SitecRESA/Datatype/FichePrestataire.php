@@ -169,13 +169,19 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return array liste de FichePrestation
      */
-    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $repartition = array()) {
+    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant) {
+        $i = 0;
+        foreach($aAdulte as $key=>$adulte){
+            $aRepartition[$i][] = $adulte;
+            $aRepartition[$i][] = $aEnfant[$key];
+            $i++;
+        }
         return $this->_repartition->resolve(
             array(
                 'dateFin' => $dateDepart,
                 'dateDebut' => $dateArrivee,
-                'avecTarif' => TRUE,
-                'repartition' => json_encode($repartition)
+                'avecTarif' => 1,
+                'repartition' => json_encode($aRepartition)
             )
         );
     }
@@ -321,6 +327,80 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "dateFin"     => $dateDepart,
             "nbChambre"   => $nbChambre,
             "nbPersonne"  => $nbPersonne,
+            "repartition" => \Zend_Json::encode($aRepartition),
+            "regionVille" => \Zend_Json::encode($regionVille),
+            "latlongdist" => \Zend_Json::encode($latlongdist),
+            "avecTarif"   => $avecTarif,
+            "orderBy"     => $orderBy,
+            "count"       => $count,
+            "offset"      => $offset,
+            "sort"        => $sort,
+            "idOrganisme" => $a,
+            "promotion"   => $promotion
+        );
+
+        if(!$orderBy){
+            global $apiConfig;
+            $params["orderBy"] = $apiConfig["triDefault"];
+        }
+        if(!$sort){
+            $params["sort"] = "ASC";
+        }
+
+        return $apiClient->dispoorganismes("get", $params);
+    }
+
+    /**
+     *
+     * Permet d'obtenir la liste des prestataires disponibles pour un aggregateur à l'aide dune liste d'id FichePrestataire
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
+     *
+     * @param Client        $apiClient
+     * @param string        $dateArrivee format JJ/MM/AAAA
+     * @param string        $dateDepart format JJ/MM/AAAA
+     * @param array         $aIdFichePrestataire tableau contenant l'id des hotels qui doivent être aggrégé
+     * @param array         $aAdulte tableau des adultes (pur la répartition des chambres)
+     * @param array         $aEnfan tableau des enfants (pur la répartition des chambres)
+     * @param array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param string        $latlongdist latitude et logitude au format WGS84 séparé par le signe '-'
+     * @param boolean       $avecTarif permet de préciser si les hôtels doivent être réservable (avec un tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut
+     * @param boolean       $promotion si TRUE retourne uniquement les prestataires en promo ; TRUE par défaut
+     * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
+     * @param int           $count pour faire une pagination
+     * @param int           $offset pour faire une pagination
+     *
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function prestatairesDisponiblesAggregateurAvecRepartition($apiClient, $dateArrivee = null, $dateDepart = null,
+                                                       $aIdFichePrestataire = array(),
+                                                       $aAdulte = array(),
+                                                       $aEnfant = array(),
+                                                       $regionVille = self::REGIONVILLE_WILDCARD,
+                                                       $latlongdist =NULL,
+                                                       $avecTarif = TRUE,
+                                                       $promotion = FALSE,
+                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+
+        $a = null;
+        if(sizeof($aIdFichePrestataire) > 0){
+            $a = '{';
+            foreach($aIdFichePrestataire as $key=>$idFiche){
+                $a .= '"'.$key.'":"'.$idFiche.'",';
+            }
+            $a = substr($a,0,-1);
+            $a .= '}';
+        }
+
+        $i = 0;
+        foreach($aAdulte as $key=>$adulte){
+            $aRepartition[$i][] = $adulte;
+            $aRepartition[$i][] = $aEnfant[$key];
+            $i++;
+        }
+
+        $params = array(
+            "dateDebut"   => $dateArrivee,
+            "dateFin"     => $dateDepart,
             "repartition" => \Zend_Json::encode($aRepartition),
             "regionVille" => \Zend_Json::encode($regionVille),
             "latlongdist" => \Zend_Json::encode($latlongdist),

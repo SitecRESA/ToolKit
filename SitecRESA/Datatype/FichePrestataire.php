@@ -150,7 +150,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return array liste de FichePrestation
      */
-    public function prestationsDisponibles ($dateArrivee,$dateDepart, $avecTarif = FALSE) {
+    public function prestationsDisponibles ($dateArrivee,$dateDepart, $avecTarif = 0) {
         return $this->_accesPrestations->resolve(
             array(
                 'dateFin' => $dateDepart,
@@ -251,7 +251,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             $nbPersonne = null,
             $aRepartition = NULL,
             $regionVille = self::REGIONVILLE_WILDCARD,
-            $avecTarif = "true",
+            $avecTarif = 1,
             $orderBy = NULL,
             $count = NULL,
             $offset = NULL,
@@ -309,7 +309,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                  $aRepartition = NULL,
                                                  $regionVille = self::REGIONVILLE_WILDCARD,
                                                  $latlongdist =NULL,
-                                                 $avecTarif = TRUE,
+                                                 $avecTarif = 1,
                                                  $promotion = FALSE,
                                                  $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 
@@ -375,7 +375,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                        $aEnfant = array(),
                                                        $regionVille = self::REGIONVILLE_WILDCARD,
                                                        $latlongdist =NULL,
-                                                       $avecTarif = TRUE,
+                                                       $avecTarif = 1,
                                                        $promotion = FALSE,
                                                        $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
 

@@ -39,6 +39,7 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     protected $_dateDepart;
     protected $_prixTotal;
     protected $_quantiteDispo;
+    protected $_sessions;
 
     /**
      *

@@ -224,6 +224,35 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
         return $apiClient->listeorganismes("get",$params);
     }
 
+ /**
+     * Permet d'obtenir la liste des prestataires d'activité disponibles pour une ville donnée aux dates fournies
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
+     * @param  Client        $apiClient
+     * @param  string        $dateArrivee format JJ/MM/AAAA
+     * @param  string        $dateDepart format JJ/MM/AAAA
+     * @param  array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param  string        $theme liste des id de thèmes au format JSON
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function listePrestatairesActivitesDisponibles($apiClient, $dateArrivee , $dateDepart=null,
+                                                          $regionVille = self::REGIONVILLE_WILDCARD,$theme=null)
+    {
+        if(null == $dateDepart){
+            $dateDepart = $dateArrivee;
+        }
+        if($theme=='["0"]'){
+            $theme = null;
+        }
+        $params = array(
+            "dateDebut"   => $dateArrivee,
+            "dateFin"     => $dateDepart,
+            "regionVille" => \Zend_Json::encode($regionVille),
+            "themes"      => $theme
+        );
+
+        return $apiClient->dispoorganismesactivites("get", $params);
+    }
+    
     /**
      *
      * Permet d'obtenir la liste des prestataires disponibles aux dates fournies

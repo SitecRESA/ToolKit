@@ -22,6 +22,8 @@ namespace SitecRESA\Datatype;
  * @property string           $dateArrivee  format d/m/Y si une recherche de dispo sur le package est effectuée
  * @property string           $dateDepart  format d/m/Y si une recherche de dispo sur le package est effectuée
  * @property decimal          $prixToal corespond au prix du planTarifiare x nombre de nuit de l'étape si hébergement ou au prix si activité si une recherche de dispo sur le package est effectuée
+ * @property Session          $sessions si le produitEtape est une activite et qu'on a effectué une recherche de dispo alors on récupère un tableau
+ * @property bool             $selected si produitEtape est un hébergement et qu'une recherche de dispo a été effectuée alors selected = 1 pour le produit qui a été choisi pour calculer le prix du package
  */
 
 class ProduitEtape extends DatatypeAbstract implements Fetchable{
@@ -40,6 +42,7 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     protected $_prixTotal;
     protected $_quantiteDispo;
     protected $_sessions;
+    protected $_selected = 0;
 
     /**
      *

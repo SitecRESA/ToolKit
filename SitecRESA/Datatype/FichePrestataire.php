@@ -49,6 +49,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NOM      = "Nom";
     const ORDRE_DISTANCE = "Distance";
     const REGIONVILLE_WILDCARD = "*";
+    const CLASSEMENT_WILDCARD = "*";
 
     protected $_id;
     protected $_raisonSociale;
@@ -269,6 +270,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri ASC | DESC
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
@@ -284,7 +287,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             $orderBy = NULL,
             $count = NULL,
             $offset = NULL,
-            $sort = NULL) {
+            $sort = NULL,
+            $classement = self::CLASSEMENT_WILDCARD ) {
 
         $params = array(
             "dateDebut"   => $dateArrivee,
@@ -297,7 +301,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset,
-            "sort"        => $sort
+            "sort"        => $sort,
+            "classement" => \Zend_Json::encode($classement)
         );
 
         if(!$orderBy){
@@ -330,6 +335,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri ASC | DESC
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
@@ -340,7 +347,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                  $latlongdist =NULL,
                                                  $avecTarif = 1,
                                                  $promotion = FALSE,
-                                                 $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+                                                 $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL,$classement = self::CLASSEMENT_WILDCARD) {
 
         if(sizeof($aIdFichePrestataire) > 0){
             $a = '{';
@@ -365,7 +372,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "offset"      => $offset,
             "sort"        => $sort,
             "idOrganisme" => $a,
-            "promotion"   => $promotion
+            "promotion"   => $promotion,
+            "classement" => \Zend_Json::encode($classement)
         );
 
         if(!$orderBy){
@@ -396,6 +404,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
@@ -406,7 +416,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                                                        $latlongdist =NULL,
                                                        $avecTarif = 1,
                                                        $promotion = FALSE,
-                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL, $classement = self::CLASSEMENT_WILDCARD) {
 
         $i = 0;
         $aRepartition = array();
@@ -427,7 +437,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "count"       => $count,
             "offset"      => $offset,
             "sort"        => $sort,
-            "promotion"   => $promotion
+            "promotion"   => $promotion,
+            "classement" => \Zend_Json::encode($classement)
         );
 
         if(!$orderBy){

@@ -22,7 +22,6 @@ namespace SitecRESA\Datatype;
  * @property string           $dateArrivee  format d/m/Y si une recherche de dispo sur le package est effectuée
  * @property string           $dateDepart  format d/m/Y si une recherche de dispo sur le package est effectuée
  * @property decimal          $prixToal corespond au prix du planTarifiare x nombre de nuit de l'étape si hébergement ou au prix si activité si une recherche de dispo sur le package est effectuée
- * @property Session          $sessions si le produitEtape est une activite et qu'on a effectué une recherche de dispo alors on récupère un tableau
  * @property bool             $selected si produitEtape est un hébergement et qu'une recherche de dispo a été effectuée alors selected = 1 pour le produit qui a été choisi pour calculer le prix du package
  */
 
@@ -41,7 +40,6 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     protected $_dateDepart;
     protected $_prixTotal;
     protected $_quantiteDispo;
-    protected $_sessions;
     protected $_selected = 0;
 
     /**
@@ -52,31 +50,5 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
      */
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->produitetape("get",array("idRessource"=> $id));
-    }
-
-    /**
-     * obtenir uniquement les prestations dispo
-     *
-     * @param string  $dateArrivee
-     * @param string  $dateDepart
-     * @param boolean $avecTarif
-     *
-     * @return array liste de Sesssion
-     */
-    public function sessionsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant) {
-        $i = 0;
-        foreach($aAdulte as $key=>$adulte){
-            $aRepartition[$i][] = $adulte;
-            $aRepartition[$i][] = $aEnfant[$key];
-            $i++;
-        }
-        return $this->_sessions->resolve(
-            array(
-                'dateFin' => $dateDepart,
-                'dateDebut' => $dateArrivee,
-                'avecTarif' => 1,
-                'repartition' => json_encode($aRepartition)
-            )
-        );
     }
 }

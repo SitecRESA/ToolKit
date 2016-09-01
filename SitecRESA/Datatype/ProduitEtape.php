@@ -53,4 +53,30 @@ class ProduitEtape extends DatatypeAbstract implements Fetchable{
     public static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->produitetape("get",array("idRessource"=> $id));
     }
+
+    /**
+     * obtenir uniquement les prestations dispo
+     *
+     * @param string  $dateArrivee
+     * @param string  $dateDepart
+     * @param boolean $avecTarif
+     *
+     * @return array liste de Sesssion
+     */
+    public function sessionsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant) {
+        $i = 0;
+        foreach($aAdulte as $key=>$adulte){
+            $aRepartition[$i][] = $adulte;
+            $aRepartition[$i][] = $aEnfant[$key];
+            $i++;
+        }
+        return $this->_sessions->resolve(
+            array(
+                'dateFin' => $dateDepart,
+                'dateDebut' => $dateArrivee,
+                'avecTarif' => 1,
+                'repartition' => json_encode($aRepartition)
+            )
+        );
+    }
 }

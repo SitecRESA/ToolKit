@@ -167,10 +167,13 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param string  $dateArrivee
      * @param string  $dateDepart
      * @param boolean $avecTarif
+     * @param array $aAdulte
+     * @param array $aEnfant
+     * @param string $themes format json pour récupérer les activités en fonction d'un ou plusieurs themes
      *
      * @return array liste de FichePrestation
      */
-    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant) {
+    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant, $themes = null) {
         $i = 0;
         foreach($aAdulte as $key=>$adulte){
             $aRepartition[$i][] = $adulte;
@@ -182,7 +185,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
                 'dateFin' => $dateDepart,
                 'dateDebut' => $dateArrivee,
                 'avecTarif' => 1,
-                'repartition' => json_encode($aRepartition)
+                'repartition' => json_encode($aRepartition),
+                'themes' => $themes
             )
         );
     }

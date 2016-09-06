@@ -6,7 +6,8 @@ namespace SitecRESA\Datatype;
  * Objet indiquant les disponibilités d'un produit.
  *
  * @author Marc FRICOU <marc.fricou@sitec.fr>
- * 
+ *
+ * @property int $id
  * @property-read int $quantiteDispo quantité disponible
  * @property-read int $debut date debut de l'activité avec l'heure
  * @property-read array $fin date fin de l'activité avec l'heure
@@ -16,8 +17,10 @@ namespace SitecRESA\Datatype;
  * @property-read string $activiteLongue
  * @property-read string $illimite
  * @property-read string $prixTotal
+ * @property-read int $idFichePrestation id de la fichePrestation concernée par la session
  */
 class Session extends DatatypeAbstract{
+    protected $_id;
     protected $_quantiteDispo;
     protected $_debut;
     protected $_fin;
@@ -27,5 +30,6 @@ class Session extends DatatypeAbstract{
     protected $_activiteLongue;
     protected $_illimite;
     protected $_prixTotal;
+    protected $_idFichePrestation;
 }
 

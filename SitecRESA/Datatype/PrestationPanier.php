@@ -23,6 +23,7 @@ namespace SitecRESA\Datatype;
  * @property FichePrestataire $prestataire prestataire correspondant
  * @property Panier $panier panier depuis lequel la prestation est à réserver
  * @property PlanTarifaire $planTarifaire plan tarifaire choisi pour réserver
+ * @property int $idEtape etape d'un package
  *
  */
 class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
@@ -51,6 +52,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_prestataire;
     protected $_planTarifaire;
     protected $_tarifPlanTarifaire;
+    protected $_idEtape = null;
     /**
      *
      * @param \SitecRESA\WS\Client $apiClient
@@ -127,6 +129,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             "quantite"        => $this->_quantite,
             "dateDebut"       => $this->_debut,
             "dateFin"         => $this->_fin,
+            "idEtape"         => $this->_idEtape
         );
         if($this->_prestation instanceof AccesResolver){
             $array["idProduit"] = $this->_prestation->idRessource;

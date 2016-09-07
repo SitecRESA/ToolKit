@@ -14,6 +14,7 @@ namespace SitecRESA\Datatype;
  * @property array $prestationsPanier liste des prestations à réserver (ajoutez-en à l'aide de addPrestationPanier)
  * @property float $montantTotal total des prestations dans le panier.
  * @property int $quantite quantité totale de prestations dans le panier.
+ * @property int $idPackage id du package qui a servi à construire le panier.
  */
 class Panier extends SavableDatatypeAbstract implements Fetchable{
     const PANIER_RESERVATION_TPE = "tpe";
@@ -31,6 +32,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     protected $_tarifsPerdu;
 //    protected $__problemesValidite;
     protected $_quantite;
+    protected $_idPackage;
 
     public function __construct($apiClient, $array = NULL) {
         parent::__construct($apiClient, $array);

@@ -14,7 +14,7 @@ namespace SitecRESA\Datatype;
  * @property FichePrestation  $fichePrestation prestation correspondante
  * @property PlanTarifaire    $planTarifaire
  * @property string           $duree durée format fr
- * @property int              $id jour de la semaine [0..6]
+ * @property int              $id
  * @property int              $jourSession jour de la semaine [0..6]
  * @property int              $quantiteDispo si recherche dispo alors nombre de produit disponible
  * @property string           $heureDebut heure de debut

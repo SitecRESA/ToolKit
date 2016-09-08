@@ -17,6 +17,7 @@ namespace SitecRESA\Datatype;
  * @property-read int $nbBebe
  * @property-read int $ageMaxEnfant age maximum (inclus) pour considerer la personne comme un enfant
  * @property-read int $ageMaxBebe
+ * @property-read int $quantiteDemandee
  */
 class Tarif extends DatatypeAbstract{
     protected $_id;
@@ -29,4 +30,5 @@ class Tarif extends DatatypeAbstract{
     protected $_nbBebe;
     protected $_ageMaxBebe;
     protected $_ageMaxEnfant;
+    protected $_quantiteDemandee;
 }

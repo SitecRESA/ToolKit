@@ -53,6 +53,10 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_planTarifaire;
     protected $_tarifPlanTarifaire;
     protected $_idEtape = null;
+
+    protected $_nbNuit;
+    protected $_nbJour;
+    protected $_duree;
     /**
      *
      * @param \SitecRESA\WS\Client $apiClient

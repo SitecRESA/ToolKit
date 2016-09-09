@@ -304,6 +304,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         if($this->_client instanceof Client){
             $array["idClient"] = $this->_client->id;
         }
+        if($this->_idPackage !== null){
+            $array["idPackage"] = $this->_idPackage;
+        }
         $aListeProduitsOrganisme = array();
         /* @var $oPrestationPanier PrestationPanier */
         foreach ($this->prestationsPanier as $oPrestationPanier) {

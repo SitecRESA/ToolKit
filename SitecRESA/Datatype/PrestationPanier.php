@@ -54,7 +54,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_prestataire;
     protected $_planTarifaire;
     protected $_garantieDemandee;
-    protected $_conditionAnnulation;
+    protected $_conditionsAnnulation;
     protected $_tarifPlanTarifaire;
     protected $_idEtape = null;
 

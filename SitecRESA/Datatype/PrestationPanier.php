@@ -24,6 +24,8 @@ namespace SitecRESA\Datatype;
  * @property Panier $panier panier depuis lequel la prestation est à réserver
  * @property PlanTarifaire $planTarifaire plan tarifaire choisi pour réserver
  * @property int $idEtape etape d'un package
+ * @property-read array $garantieDemandee liste des règles conditionnant les montants qui peuvent être prélevé à la réservation.
+ * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
  *
  */
 class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
@@ -51,6 +53,8 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_prestation;
     protected $_prestataire;
     protected $_planTarifaire;
+    protected $_garantieDemandee;
+    protected $_conditionAnnulation;
     protected $_tarifPlanTarifaire;
     protected $_idEtape = null;
 

@@ -144,7 +144,12 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             $params['multiPaiement'] = \Zend_Json::encode($aPaiement);
         }
 
-        $location = $this->_apiClient->resaPanier("post",$params);
+        if($this->idPackage !== NULL){
+            $location = $this->_apiClient->resaPanierPackage("post", $params);
+        }else {
+            $location = $this->_apiClient->resaPanier("post", $params);
+        }
+
         if($location instanceof Erreur) {
             return $location;
         }

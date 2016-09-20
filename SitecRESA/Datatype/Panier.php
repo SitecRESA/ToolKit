@@ -144,7 +144,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             $params['multiPaiement'] = \Zend_Json::encode($aPaiement);
         }
 
-        if($this->idPackage !== NULL){
+        if($this->idPackage !== NULL || 1 == 1){
             $location = $this->_apiClient->resaPanierPackage("post", $params);
         }else {
             $location = $this->_apiClient->resaPanier("post", $params);
@@ -172,15 +172,23 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * @return tableau de DataType\Paiement
      */
     public function multiPaiement(){
+        if(1 == 1){
+            $package = Package::fetch($this->_apiClient,1);
+            return $this->multiPaiementPackage($package);
+        }else{
+            return $this->multiPaiementStandard();
+        }
+    }
 
-        $montantPanier = $this->montantTotal;
-        /* @var PrestationPanier $prestationPanier */
-        $aPaiement = array();
-        $aPaiementImmediat = array();
+    private function multiPaiementStandard(){
         foreach($this->prestationsPanier as $prestationPanier){
             $montant = 0;
             $montantPreleve = 0;
             $i=1;
+            $montantPanier = $this->montantTotal;
+            /* @var PrestationPanier $prestationPanier */
+            $aPaiement = array();
+            $aPaiementImmediat = array();
             $dateValidePrecedent = null;
             $garantiePrecedente = null;
             //            $oGarantie = $prestationPanier->planTarifaire->garantieDemandee;
@@ -199,14 +207,14 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                     $condition = $oGarantie->condition;
                 }
                 $dateValide = $debutSejour->subDayOfYear($condition);
-    
+
                 if($dateValide > $now){
-    
+
                     if($i == 1){
                         $dateValidePrecedent = $dateValide;
                         $garantiePrecedente = $oGarantie;
                         $dateValide = $now;
-    
+
                     }elseif($i == sizeof($prestationPanier->planTarifaire->garantieDemandee))
                     {
                         $dateValide = $debutSejour->subDayOfYear($garantiePrecedente->condition);
@@ -216,7 +224,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                         $dateValidePrecedent = $dateValide;
                         $garantiePrecedente = $oGarantie;
                     }
-    
+
                     $i++;
                     if($oGarantie->unite == "%"){
                         $montant = $prestationPanier->quantite * ($prestationPanier->tarif->prix * ($oGarantie->valeur / 100)) - $montantPreleve;
@@ -239,14 +247,99 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                 }
             }
         }
+
         foreach($aPaiementImmediat as $dateValide=>$montant){
             $paiement = new Paiement($montant,$dateValide);
             $this->addPaiement($paiement);
         }
-        foreach($aPaiement as $dateValide => $aMontant){
-            $paiement = new Paiement(current($aMontant),$dateValide);
+        foreach($aPaiement as $dateValide => $montant){
+            $paiement = new Paiement($montant,$dateValide);
             $this->addPaiement($paiement);
         }
+
+        return $this->_paiements;
+    }
+
+    //Calculéé par rapport à la prèmiere prestation du package concernant la date pour le calcul
+    private function multiPaiementPackage(Package $package){
+        $montant = 0;
+        $montantPreleve = 0;
+        $i=1;
+        $montantPanier = $this->montantTotal;
+        /* @var PrestationPanier $prestationPanier */
+        $aPaiement = array();
+        $aPaiementImmediat = array();
+        $dateValidePrecedent = null;
+        $garantiePrecedente = null;
+
+        $startPrestationPanier = $this->prestationsPanier;
+        $prestationPanier = $startPrestationPanier[0];
+        var_dump($prestationPanier);
+        $debut = $prestationPanier->debut;
+
+//        foreach($this->prestationsPanier as $prestationPanier) {
+        foreach ($package->garantieDemandee as $oGarantie) {
+            if ($montantPanier == $montantPreleve) {
+                break;
+            }
+            $debutSejour = new \Zend_Date($debut);
+            $now = new \Zend_Date();
+            $now->set(00, \Zend_Date::HOUR);
+            $now->set(00, \Zend_Date::MINUTE);
+            $now->set(00, \Zend_Date::SECOND);
+            if ($oGarantie->condition == -1) {
+                $condition = 0;
+            } else {
+                $condition = $oGarantie->condition;
+            }
+            $dateValide = $debutSejour->subDayOfYear($condition);
+
+            if ($dateValide > $now) {
+
+                if ($i == 1) {
+                    $dateValidePrecedent = $dateValide;
+                    $garantiePrecedente = $oGarantie;
+                    $dateValide = $now;
+
+                } elseif ($i == sizeof($package->garantieDemandee)) {
+                    $dateValide = $debutSejour->subDayOfYear($garantiePrecedente->condition);
+                } else {
+                    $dateValide = $dateValidePrecedent;
+                    $dateValidePrecedent = $dateValide;
+                    $garantiePrecedente = $oGarantie;
+                }
+
+                $i++;
+                if ($oGarantie->unite == "%") {
+                    $montant = ($montantPanier * ($oGarantie->valeur / 100)) - $montantPreleve;
+                    $montantPreleve += $montant;
+                }
+                if ($dateValide->toString("dd/MM/YYYY") == $now->toString("dd/MM/YYYY")) {
+                    if (!isset($aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")])) {
+                        $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] = $montant;
+                    } else {
+                        $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] += $montant;
+                    }
+                } else {
+                    if (!isset($aPaiement[$dateValide->toString("dd/MM/YYYY")])) {
+                        $aPaiement[$dateValide->toString("dd/MM/YYYY")] = $montant;
+                    } else {
+                        $aPaiement[$dateValide->toString("dd/MM/YYYY")] += $montant;
+                    }
+                }
+            }
+        }
+//        }
+
+        foreach($aPaiementImmediat as $dateValide=>$montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+        foreach($aPaiement as $dateValide => $montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+
         return $this->_paiements;
     }
 

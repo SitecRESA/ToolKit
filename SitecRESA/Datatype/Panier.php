@@ -274,7 +274,6 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
 
         $startPrestationPanier = $this->prestationsPanier;
         $prestationPanier = $startPrestationPanier[0];
-        var_dump($prestationPanier);
         $debut = $prestationPanier->debut;
 
 //        foreach($this->prestationsPanier as $prestationPanier) {

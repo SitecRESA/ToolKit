@@ -2,8 +2,7 @@
 
 
 namespace SitecRESA\Datatype;
-use SitecRESA\WS\Client;
-use SitecRESA\WS\ApiClient;
+
 
 /**
  * Fiche descriptive d'un hôtel ou de tout autre prestataire SitecRESA.
@@ -14,6 +13,7 @@ use SitecRESA\WS\ApiClient;
  * @property-read string $raisonSociale nom commercial du prestataire
  * @property-read string $siteWeb url (avec HTTP) d'accès au site web du prestataire.
  * @property-read string $valueNbEtoile Traduction française du classement du prestaire (s'il existe)
+ * @property-read string $nbEtoileChiffre nombre d'étoile composé comme suit 0|1|2|3|4|5
  * @property-read string $nbEtoile nombre d'étoile composé comme suit STR_nbr
  * @property-read string $description Texte français de description du prestaire
  * @property-read float $taxeSejour Taxe de séjour demandée par nuit et par personne
@@ -31,19 +31,31 @@ use SitecRESA\WS\ApiClient;
  * @property-read string $animaux permet de savoir si le prestataire autorise le animaux ou non avec éventuellemnt un tarif
  * @property-read string $periodeOuverture Ouvert à l'année ou bien du ... au ...
  * @property-read array $modePaiement Tous les modes de paiement acceptés par le prestataire
- * @property-read string $_lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
+ * @property-read \SitecRESA\Datatype\Avis $avis Tous les avis de la fiche
+ * @property-read string $lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
+ * @property-read string $noteMoyenne retourne la note moyenne de l'établissement par rapport aux avis récoltés sur votre canal de vente
+ * @property-read string $noteMoyennePartagee retourne la note moyenne de l'établissement par rapport aux avis récoltés sur les canaux de vente que vous souhaitez aggréger
+ * @property-read string $accommodationRecommended retourne le pourcentage de recommandation de l'établissement par rapport aux recommandations récoltés sur votre canal de vente
+ * @property-read string $accommodationRecommendedPartagee retourne le pourcentage de recommandation de l'établissement par rapport aux recommandations récoltés sur les canaux de vente que vous souhaitez aggréger
+ * @property-read string $nbrAvis retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur votre canal de vente
+ * @property-read string $nbrAvisPartages retourne le nombre d'avis récoltés de l'établissement par rapport aux avis récoltés sur les canaux de vente que vous souhaitez aggréger
+ * @property string $dateSejour
+ * @property array           $repartition
+ * @property-read array $type activite | hebergement
  */
 class FichePrestataire extends DatatypeAbstract implements Fetchable{
     const ORDRE_NBETOILE = "NbEtoile";
     const ORDRE_COMMUNE  = "Commune";
     const ORDRE_NOM      = "Nom";
-    const ORDRE_DISTANCE = "Distance"
+    const ORDRE_DISTANCE = "Distance";
     const REGIONVILLE_WILDCARD = "*";
+    const CLASSEMENT_WILDCARD = "*";
 
     protected $_id;
     protected $_raisonSociale;
     protected $_siteWeb;
     protected $_nbEtoile;
+    protected $_nbEtoileChiffre;
     protected $_valueNbEtoile;
     protected $_description;
     protected $_photo;
@@ -62,6 +74,20 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_periodeOuverture;
     protected $_modePaiement;
     protected $_lastModified;
+    protected $_avis;
+    protected $_noteMoyenne;
+    protected $_noteMoyennePartagee;
+    protected $_accommodationRecommended;
+    protected $_accommodationRecommendedPartagee;
+    protected $_nbrAvis;
+    protected $_nbrAvisPartages;
+    protected $_repartition;
+    /**
+     * Date de fin du séjour
+     * @var string
+     */
+    protected $_dateSejour;
+    protected $_type;
 
     /**
      * @var AccesResolver
@@ -71,6 +97,11 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @var AccesResolver
      */
     protected $_accesPrixPlancher;
+
+    /**
+     * @var AccesResolver
+     */
+    protected $_accesAggregatedFilteredReviews;
 
     /**
      * @var AccesResolver
@@ -120,12 +151,42 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return array liste de FichePrestation
      */
-    public function prestationsDisponibles ($dateArrivee,$dateDepart, $avecTarif = FALSE) {
+    public function prestationsDisponibles ($dateArrivee,$dateDepart, $avecTarif = 0) {
         return $this->_accesPrestations->resolve(
             array(
                 'dateFin' => $dateDepart,
                 'dateDebut' => $dateArrivee,
                 'avecTarif' => $avecTarif
+            )
+        );
+    }
+
+    /**
+     * obtenir uniquement les prestations dispo
+     *
+     * @param string  $dateArrivee
+     * @param string  $dateDepart
+     * @param boolean $avecTarif
+     * @param array $aAdulte
+     * @param array $aEnfant
+     * @param string $themes format json pour récupérer les activités en fonction d'un ou plusieurs themes
+     *
+     * @return array liste de FichePrestation
+     */
+    public function prestationsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant, $themes = null) {
+        $i = 0;
+        foreach($aAdulte as $key=>$adulte){
+            $aRepartition[$i][] = $adulte;
+            $aRepartition[$i][] = $aEnfant[$key];
+            $i++;
+        }
+        return $this->_repartition->resolve(
+            array(
+                'dateFin' => $dateDepart,
+                'dateDebut' => $dateArrivee,
+                'avecTarif' => 1,
+                'repartition' => json_encode($aRepartition),
+                'themes' => $themes
             )
         );
     }
@@ -145,7 +206,6 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             return $apiClient->listeorganismeswithinfo("get",array());
         }
     }
-
 
     /**
      * permet d'obtenir une liste de FichePrestataire à partir d'un tableau id FichePrestataire.
@@ -170,6 +230,35 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     }
 
     /**
+     * Permet d'obtenir la liste des prestataires d'activité disponibles pour une ville donnée aux dates fournies
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
+     * @param  Client        $apiClient
+     * @param  string        $dateArrivee format JJ/MM/AAAA
+     * @param  string        $dateDepart format JJ/MM/AAAA
+     * @param  array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param  string        $theme liste des id de thèmes au format JSON
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function listePrestatairesActivitesDisponibles($apiClient, $dateArrivee , $dateDepart=null,
+                                                          $regionVille = self::REGIONVILLE_WILDCARD,$theme=null)
+    {
+        if(null == $dateDepart){
+            $dateDepart = $dateArrivee;
+        }
+        if($theme=='["0"]'){
+            $theme = null;
+        }
+        $params = array(
+            "dateDebut"   => $dateArrivee,
+            "dateFin"     => $dateDepart,
+            "regionVille" => \Zend_Json::encode($regionVille),
+            "themes"      => $theme
+        );
+
+        return $apiClient->dispoorganismesactivites("get", $params);
+    }
+
+    /**
      *
      * Permet d'obtenir la liste des prestataires disponibles aux dates fournies
      * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
@@ -185,14 +274,25 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri ASC | DESC
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function listePrestatairesDisponibles($apiClient, $dateArrivee = null, $dateDepart = null,
-            $nbChambre = null, $nbPersonne = null, $aRepartition = NULL,
-            $regionVille = self::REGIONVILLE_WILDCARD,
-            $avecTarif = TRUE,
-            $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+    static function listePrestatairesDisponibles(
+        $apiClient,
+        $dateArrivee = null,
+        $dateDepart = null,
+        $nbChambre = null,
+        $nbPersonne = null,
+        $aRepartition = NULL,
+        $regionVille = self::REGIONVILLE_WILDCARD,
+        $avecTarif = 1,
+        $orderBy = NULL,
+        $count = NULL,
+        $offset = NULL,
+        $sort = NULL,
+        $classement = self::CLASSEMENT_WILDCARD ) {
 
         $params = array(
             "dateDebut"   => $dateArrivee,
@@ -205,7 +305,8 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset,
-            "sort"        => $sort
+            "sort"        => $sort,
+            "classement" => \Zend_Json::encode($classement)
         );
 
         if(!$orderBy){
@@ -232,23 +333,29 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @param array         $aIdFichePrestataire tableau contenant l'id des hotels qui doivent être aggrégé
      * @param array         $aRepartition tableau d'entiers. Chaque entier correspond au nombre de personne pour une chambre
      * @param array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param string        $latlongdist latitude et logitude au format WGS84 séparé par le signe '-'
      * @param boolean       $avecTarif permet de préciser si les hôtels doivent être réservable (avec un tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut
+     * @param boolean       $promotion si TRUE retourne uniquement les prestataires en promo ; TRUE par défaut
      * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
      * @param int           $count pour faire une pagination
      * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri ASC | DESC
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
      *
      * @return \SitecRESA\Datatype\AccesResolverList
      */
     static function prestatairesDisponiblesAggregateur($apiClient, $dateArrivee = null, $dateDepart = null,
-                                                 $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
-                                                 $aRepartition = NULL,
-                                                 $regionVille = self::REGIONVILLE_WILDCARD,
-                                                 $avecTarif = TRUE,
-                                                 $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL) {
+                                                       $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
+                                                       $aRepartition = NULL,
+                                                       $regionVille = self::REGIONVILLE_WILDCARD,
+                                                       $latlongdist =NULL,
+                                                       $avecTarif = 1,
+                                                       $promotion = FALSE,
+                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL,$classement = self::CLASSEMENT_WILDCARD) {
 
         if(sizeof($aIdFichePrestataire) > 0){
             $a = '{';
-                    foreach($aIdFichePrestataire as $key=>$idFiche){
+            foreach($aIdFichePrestataire as $key=>$idFiche){
                 $a .= '"'.$key.'":"'.$idFiche.'",';
             }
             $a = substr($a,0,-1);
@@ -262,12 +369,15 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
             "nbPersonne"  => $nbPersonne,
             "repartition" => \Zend_Json::encode($aRepartition),
             "regionVille" => \Zend_Json::encode($regionVille),
+            "latlongdist" => \Zend_Json::encode($latlongdist),
             "avecTarif"   => $avecTarif,
             "orderBy"     => $orderBy,
             "count"       => $count,
             "offset"      => $offset,
             "sort"        => $sort,
-            "idOrganisme" => $a
+            "idOrganisme" => $a,
+            "promotion"   => $promotion,
+            "classement" => \Zend_Json::encode($classement)
         );
 
         if(!$orderBy){
@@ -282,11 +392,88 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     }
 
     /**
+     *
+     * Permet d'obtenir la liste des prestataires disponibles aux dates fournies
+     * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
+     *
+     * @param Client        $apiClient
+     * @param string        $dateArrivee format JJ/MM/AAAA
+     * @param string        $dateDepart format JJ/MM/AAAA
+     * @param array         $aAdulte tableau des adultes (pur la répartition des chambres)
+     * @param array         $aEnfan tableau des enfants (pur la répartition des chambres)
+     * @param array|string  $regionVille liste des villes surlesquelles filtrer.
+     * @param string        $latlongdist latitude et logitude au format WGS84 séparé par le signe '-'
+     * @param boolean       $avecTarif permet de préciser si les hôtels doivent être réservable (avec un tarif et des conditions adéquat : séjour min., etc.) ; TRUE par défaut
+     * @param boolean       $promotion si TRUE retourne uniquement les prestataires en promo ; TRUE par défaut
+     * @param string        $orderBy permet de présiser un ordre : {@see FichePrestataire::ORDRE_COMMUNE}, {@see FichePrestataire::ORDRE_NBETOILE}, {@see FichePrestataire::ORDRE_NOM}
+     * @param int           $count pour faire une pagination
+     * @param int           $offset pour faire une pagination
+     * @param string        $sort sens du tri
+     * @param array         $classement pour filtrer le résultat sur le nombre d'étoile. exemple array(0,3) => 0 pour les non classés ou 3 pour les 3 étoiles.
+     *
+     * @return \SitecRESA\Datatype\AccesResolverList
+     */
+    static function prestatairesDisponiblesAvecRepartition($apiClient, $dateArrivee = null, $dateDepart = null,
+                                                           $aAdulte = array(),
+                                                           $aEnfant = array(),
+                                                           $regionVille = self::REGIONVILLE_WILDCARD,
+                                                           $latlongdist =NULL,
+                                                           $avecTarif = 1,
+                                                           $promotion = FALSE,
+                                                           $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL, $classement = self::CLASSEMENT_WILDCARD) {
+
+        $i = 0;
+        $aRepartition = array();
+        foreach($aAdulte as $key=>$adulte){
+            $aRepartition[$i][] = $adulte;
+            $aRepartition[$i][] = $aEnfant[$key];
+            $i++;
+        }
+
+        $params = array(
+            "dateDebut"   => $dateArrivee,
+            "dateFin"     => $dateDepart,
+            "repartition" => \Zend_Json::encode($aRepartition),
+            "regionVille" => \Zend_Json::encode($regionVille),
+            "latlongdist" => \Zend_Json::encode($latlongdist),
+            "avecTarif"   => $avecTarif,
+            "orderBy"     => $orderBy,
+            "count"       => $count,
+            "offset"      => $offset,
+            "sort"        => $sort,
+            "promotion"   => $promotion,
+            "classement" => \Zend_Json::encode($classement)
+        );
+
+        if(!$orderBy){
+            global $apiConfig;
+            $params["orderBy"] = $apiConfig["triDefault"];
+        }
+        if(!$sort){
+            $params["sort"] = "ASC";
+        }
+
+        return $apiClient->dispoorganismes("get", $params);
+    }
+
+    /**
+     * permet d'obtenir tous les avis.
+     *
+     * @param Client $apiClient
+     *
+     * @return ObjectList
+     */
+    public function getAggregatedFilteredReviews($status = "Active") {
+        return $this->_accesAggregatedFilteredReviews->resolve(array(
+            'status' => $status));
+    }
+
+    /**
      * @param Client $apiClient
      * @param int    $id
      * @return FichePrestataire
      */
-    static function fetch(Client $apiClient, $id) {
+    static function fetch(\SitecRESA\WS\Client $apiClient, $id) {
         return $apiClient->organisme("get",array("idRessource" => $id));
     }
 
@@ -298,7 +485,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      *
      * @return string AAAA-MM-JJTHH:mm:SSZ (format ISO-8601)
      */
-    static public function lastModified(Client $apiClient, $id)
+    static public function lastModified(\SitecRESA\WS\Client $apiClient, $id)
     {
         $fiche = $apiClient->propertylastmodified("get",array("idRessource" => $id));
         return $fiche->lastModified;
@@ -315,7 +502,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return array
      * @throws \SitecRESA\Exception\IO
      */
-    static public function resolve(ApiClient $apiClient, $resolverList, $aDataType = array())
+    static public function resolve(\SitecRESA\WS\ApiClient $apiClient, $resolverList, $aDataType = array())
     {
         $a = $resolverList->accesResolvers;
 
@@ -351,4 +538,3 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
         return $response;
     }
 }
-

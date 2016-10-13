@@ -38,26 +38,9 @@ namespace SitecRESA\Datatype;
  * @property string                 $cons
  * @property array                  $commentaires
  */
-class Avis {
+class Avis extends DatatypeAbstract{
 
     // <editor-fold defaultstate="collapsed" desc="variables d'instance">
-    /**
-     * ID de l'avis
-     * @var int
-     */
-    protected $_idAvis;
-
-    /**
-     * Facture de la réservation liée au commentaire
-     * @var Sitec_Facture
-     */
-    protected $_facture;
-
-    /**
-     * Fiche organisme de la réservation liée au commentaire
-     * @var Sitec_FicheOrganisme
-     */
-    protected $_ficheOrganisme;
 
     /**
      * status de l'avis
@@ -89,18 +72,6 @@ class Avis {
      */
     protected $_accommodationName;
 
-
-    /**
-     * Identifiant unique avis Vinivi
-     * @var int
-     */
-    protected $_intId;
-
-    /**
-     * Identifiant avis interne Vinivi
-     * @var string
-     */
-    protected $_id;
 
     /**
      * année du commentaire
@@ -186,11 +157,6 @@ class Avis {
      */
     protected $_reviewerDisplayName;
 
-    /**
-     * Adresse e-mail du voyageur
-     * @var string
-     */
-    protected $_reviewerEmail;
 
     /**
      * Pays d'origine du client

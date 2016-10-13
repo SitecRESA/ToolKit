@@ -23,6 +23,9 @@ namespace SitecRESA\Datatype;
  * @property FichePrestataire $prestataire prestataire correspondant
  * @property Panier $panier panier depuis lequel la prestation est à réserver
  * @property PlanTarifaire $planTarifaire plan tarifaire choisi pour réserver
+ * @property int $idEtape etape d'un package
+ * @property-read array $garantieDemandee liste des règles conditionnant les montants qui peuvent être prélevé à la réservation.
+ * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
  *
  */
 class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
@@ -50,7 +53,14 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_prestation;
     protected $_prestataire;
     protected $_planTarifaire;
+    protected $_garantieDemandee;
+    protected $_conditionAnnulation;
     protected $_tarifPlanTarifaire;
+    protected $_idEtape = null;
+
+    protected $_nbNuit;
+    protected $_nbJour;
+    protected $_duree;
     /**
      *
      * @param \SitecRESA\WS\Client $apiClient
@@ -75,8 +85,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             $fin = new \Zend_Date($this->_timestampFin);
             $this->_debut = $debut->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
             $this->_fin = $fin->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
-         }
-
+        }
     }
 
     /**
@@ -96,7 +105,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
         if(!$this->_id){
             if(!$this->panier instanceof Panier){
                 throw new Api("Impossible de sauvegarder une nouvelle prestationPanier sans préciser à quel panier il est attaché.");
-        }
+            }
             $location = $this->panier->save();
             if($location instanceof Erreur){
                 return $location;
@@ -128,6 +137,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             "quantite"        => $this->_quantite,
             "dateDebut"       => $this->_debut,
             "dateFin"         => $this->_fin,
+            "idEtape"         => $this->_idEtape
         );
         if($this->_prestation instanceof AccesResolver){
             $array["idProduit"] = $this->_prestation->idRessource;
@@ -143,7 +153,6 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
         $retour = parent::__get($name);
         if(null === $retour && $this->_panier != null && "planTarifaire" == $name && null == $this->_planTarifaire){
             $oDispoProduit = $this->prestation->disponibilites($this->_debut, $this->_fin, $this->_prestataire->resolve());
-<<<<<<< HEAD
             if($oDispoProduit instanceof AccesResolverList)
             {
                 foreach($oDispoProduit as $dispoProduit){
@@ -155,8 +164,6 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
                     }
                 }
             }else{
-=======
->>>>>>> refs/remotes/origin/master
                 foreach ($oDispoProduit->plansTarifaires as /* @var $oPlanTarifaire PlanTarifaire */ $oPlanTarifaire) {
                     if($oPlanTarifaire->id == $this->_idPlanTarifaire){
                         $this->_planTarifaire = $oPlanTarifaire;
@@ -164,8 +171,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
                     }
                 }
             }
-
-            }
+        }
         return $retour;
     }
 

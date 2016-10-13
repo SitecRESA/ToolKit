@@ -29,4 +29,5 @@ class FerryAvailRS {
     public static function FerryAvailRQ(\SitecRESA\WS\Client $apiClient) {
         return $apiClient->FerryavailrqController("get");
     }
+
 }

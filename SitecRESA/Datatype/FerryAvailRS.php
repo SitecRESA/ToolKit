@@ -27,7 +27,7 @@ class FerryAvailRS {
      * @return \SitecRESA\Datatype\Avis
      */
     public static function FerryAvailRQ(\SitecRESA\WS\Client $apiClient) {
-        return $apiClient->Ferryavailrq("get",array());
+        return $apiClient->Ferryavailrq("get",array('format'=>'xml'));
     }
 
 }

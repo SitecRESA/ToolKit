@@ -14,6 +14,7 @@ namespace SitecRESA\Datatype;
  * @property array $prestationsPanier liste des prestations à réserver (ajoutez-en à l'aide de addPrestationPanier)
  * @property float $montantTotal total des prestations dans le panier.
  * @property int $quantite quantité totale de prestations dans le panier.
+ * @property int $idPackage id du package qui a servi à construire le panier.
  */
 class Panier extends SavableDatatypeAbstract implements Fetchable{
     const PANIER_RESERVATION_TPE = "tpe";
@@ -22,6 +23,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     protected $_id;
     protected $_idReservation;
     protected $_client;
+    protected $_nbrJours;
     protected $_prestationsPanier = array();
     protected $_paiements = array();
     protected $_montantTotal;
@@ -30,6 +32,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     protected $_tarifsPerdu;
 //    protected $__problemesValidite;
     protected $_quantite;
+    protected $_idPackage;
 
     public function __construct($apiClient, $array = NULL) {
         parent::__construct($apiClient, $array);
@@ -41,6 +44,31 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             throw new \SitecRESA\Exception\Api("Vous ne pouvez pas setter Panier::prestationsPanier, utilisez Reservation::addPrestationPanier()");
         }
         parent::__set($name, $value);
+    }
+
+    public function __get($name) {
+        if("nbrJours" == $name && null == $this->_nbrJours){
+            $nbJours = 0;
+            if(!empty($this->_prestationsPanier)) {
+                /** @var PrestationPanier $prestationPanier */
+                foreach ($this->_prestationsPanier as $prestationPanier){
+                    $aDateArrivee = explode("/", $prestationPanier->debut);
+                    $sDateArrivee = $aDateArrivee['2'] . "-" . $aDateArrivee['1'] . "-" . $aDateArrivee['0'];
+                    $aDateDepart = explode("/", $prestationPanier->fin);
+                    $sDateDepart = $aDateDepart['2'] . "-" . $aDateDepart['1'] . "-" . $aDateDepart['0'];
+                    $oInterval = date_diff(new \DateTime($sDateArrivee), new \DateTime($sDateDepart));
+                    $nbJours += $oInterval->format('%a');
+                }
+
+                $this->_nbrJours = $nbJours;
+                return $nbJours;
+            }else{
+                throw new \SitecRESA\Exception\Api("Vous n'avez aucune prestationPanier");
+            }
+        }else{
+            return parent::__get($name);
+        }
+
     }
 
     /**
@@ -116,15 +144,27 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             $params['multiPaiement'] = \Zend_Json::encode($aPaiement);
         }
 
-        $location = $this->_apiClient->resaPanier("post",$params);
+        if($this->idPackage !== NULL){
+            $location = $this->_apiClient->resaPanierPackage("post", $params);
+        }else {
+            $location = $this->_apiClient->resaPanier("post", $params);
+        }
+
         if($location instanceof Erreur) {
             return $location;
         }
-        $aPart = explode("/", $location);
-        $indexGet = array_search("get", $aPart);
-        $this->_idReservation = $aPart[$indexGet+1];
+        if($location instanceof AccesResolverList){
+            foreach($location as $res) {
+                $aReservation[] = $res;
+            }
+            return $aReservation;
+        }else {
+            $aPart = explode("/", $location);
+            $indexGet = array_search("get", $aPart);
+            $this->_idReservation = $aPart[$indexGet + 1];
 
-        return $this->_apiClient->resa("get",array("idRessource" => $this->_idReservation));
+            return $this->_apiClient->resa("get", array("idRessource" => $this->_idReservation));
+        }
     }
 
     /**
@@ -132,17 +172,30 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * @return tableau de DataType\Paiement
      */
     public function multiPaiement(){
+        if(1 == 1){
+            $package = Package::fetch($this->_apiClient,1);
+            return $this->multiPaiementPackage($package);
+        }else{
+            return $this->multiPaiementStandard();
+        }
+    }
 
-        $montantPanier = $this->montantTotal;
-        $montant = 0;
-        $montantPreleve = 0;
-        /** @var PrestationPanier $prestationPanier */
+    private function multiPaiementStandard(){
         foreach($this->prestationsPanier as $prestationPanier){
+            $montant = 0;
+            $montantPreleve = 0;
             $i=1;
+            $montantPanier = $this->montantTotal;
+            /* @var PrestationPanier $prestationPanier */
+            $aPaiement = array();
+            $aPaiementImmediat = array();
             $dateValidePrecedent = null;
             $garantiePrecedente = null;
-//            $oGarantie = $prestationPanier->planTarifaire->garantieDemandee;
+            //            $oGarantie = $prestationPanier->planTarifaire->garantieDemandee;
             foreach($prestationPanier->planTarifaire->garantieDemandee as $oGarantie){
+                if($montantPanier == $montantPreleve){
+                    break;
+                }
                 $debutSejour = new \Zend_Date($prestationPanier->debut);
                 $now = new \Zend_Date();
                 $now->set(00, \Zend_Date::HOUR);
@@ -155,7 +208,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                 }
                 $dateValide = $debutSejour->subDayOfYear($condition);
 
-                if($dateValide >= $now){
+                if($dateValide > $now){
 
                     if($i == 1){
                         $dateValidePrecedent = $dateValide;
@@ -163,25 +216,129 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                         $dateValide = $now;
 
                     }elseif($i == sizeof($prestationPanier->planTarifaire->garantieDemandee))
-                        {
+                    {
                         $dateValide = $debutSejour->subDayOfYear($garantiePrecedente->condition);
-                        }
-                        else{
-                            $dateValide = $dateValidePrecedent;
-                            $dateValidePrecedent = $dateValide;
-                            $garantiePrecedente = $oGarantie;
-                        }
+                    }
+                    else{
+                        $dateValide = $dateValidePrecedent;
+                        $dateValidePrecedent = $dateValide;
+                        $garantiePrecedente = $oGarantie;
+                    }
 
                     $i++;
                     if($oGarantie->unite == "%"){
-                        $montant = ($montantPanier * $oGarantie->valeur / 100) - $montantPreleve;
+                        $montant = $prestationPanier->quantite * ($prestationPanier->tarif->prix * ($oGarantie->valeur / 100)) - $montantPreleve;
                         $montantPreleve += $montant;
                     }
-                    $paiement = new Paiement($montant,$dateValide);
-                    $this->addPaiement($paiement);
+                    if($dateValide->toString("dd/MM/YYYY") == $now->toString("dd/MM/YYYY")) {
+                        if(!isset($aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")]))
+                        {
+                            $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] = $montant;
+                        }else{
+                            $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] += $montant;
+                        }
+                    }else{
+                        if(!isset($aPaiement[$dateValide->toString("dd/MM/YYYY")][$prestationPanier->prestataire->id])){
+                            $aPaiement[$dateValide->toString("dd/MM/YYYY")][$prestationPanier->prestataire->id] = $montant;
+                        }else{
+                            $aPaiement[$dateValide->toString("dd/MM/YYYY")][$prestationPanier->prestataire->id] += $montant;
+                        }
+                    }
                 }
             }
         }
+
+        foreach($aPaiementImmediat as $dateValide=>$montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+        foreach($aPaiement as $dateValide => $montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+
+        return $this->_paiements;
+    }
+
+    //Calculéé par rapport à la prèmiere prestation du package concernant la date pour le calcul
+    private function multiPaiementPackage(Package $package){
+        $montant = 0;
+        $montantPreleve = 0;
+        $i=1;
+        $montantPanier = $this->montantTotal;
+        /* @var PrestationPanier $prestationPanier */
+        $aPaiement = array();
+        $aPaiementImmediat = array();
+        $dateValidePrecedent = null;
+        $garantiePrecedente = null;
+
+        $startPrestationPanier = $this->prestationsPanier;
+        $prestationPanier = $startPrestationPanier[0];
+        $debut = $prestationPanier->debut;
+
+//        foreach($this->prestationsPanier as $prestationPanier) {
+        foreach ($package->garantieDemandee as $oGarantie) {
+            if ($montantPanier == $montantPreleve) {
+                break;
+            }
+            $debutSejour = new \Zend_Date($debut);
+            $now = new \Zend_Date();
+            $now->set(00, \Zend_Date::HOUR);
+            $now->set(00, \Zend_Date::MINUTE);
+            $now->set(00, \Zend_Date::SECOND);
+            if ($oGarantie->condition == -1) {
+                $condition = 0;
+            } else {
+                $condition = $oGarantie->condition;
+            }
+            $dateValide = $debutSejour->subDayOfYear($condition);
+
+            if ($dateValide > $now) {
+
+                if ($i == 1) {
+                    $dateValidePrecedent = $dateValide;
+                    $garantiePrecedente = $oGarantie;
+                    $dateValide = $now;
+
+                } elseif ($i == sizeof($package->garantieDemandee)) {
+                    $dateValide = $debutSejour->subDayOfYear($garantiePrecedente->condition);
+                } else {
+                    $dateValide = $dateValidePrecedent;
+                    $dateValidePrecedent = $dateValide;
+                    $garantiePrecedente = $oGarantie;
+                }
+
+                $i++;
+                if ($oGarantie->unite == "%") {
+                    $montant = ($montantPanier * ($oGarantie->valeur / 100)) - $montantPreleve;
+                    $montantPreleve += $montant;
+                }
+                if ($dateValide->toString("dd/MM/YYYY") == $now->toString("dd/MM/YYYY")) {
+                    if (!isset($aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")])) {
+                        $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] = $montant;
+                    } else {
+                        $aPaiementImmediat[$dateValide->toString("dd/MM/YYYY")] += $montant;
+                    }
+                } else {
+                    if (!isset($aPaiement[$dateValide->toString("dd/MM/YYYY")])) {
+                        $aPaiement[$dateValide->toString("dd/MM/YYYY")] = $montant;
+                    } else {
+                        $aPaiement[$dateValide->toString("dd/MM/YYYY")] += $montant;
+                    }
+                }
+            }
+        }
+//        }
+
+        foreach($aPaiementImmediat as $dateValide=>$montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+        foreach($aPaiement as $dateValide => $montant){
+            $paiement = new Paiement($montant,$dateValide);
+            $this->addPaiement($paiement);
+        }
+
         return $this->_paiements;
     }
 
@@ -243,6 +400,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
         );
         if($this->_client instanceof Client){
             $array["idClient"] = $this->_client->id;
+        }
+        if($this->_idPackage !== null){
+            $array["idPackage"] = $this->_idPackage;
         }
         $aListeProduitsOrganisme = array();
         /* @var $oPrestationPanier PrestationPanier */

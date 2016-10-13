@@ -91,6 +91,20 @@ class FichePrestation extends DatatypeAbstract implements Fetchable {
     }
 
     /**
+     * Permet d’obtenir les disponibilités sur plusieurs semaines d'une activité
+     *
+     * @param string $dateArrivee
+     * @param string $dateDepart
+     *
+     * @return array
+     */
+    public function calendrierDispoActivite($dateArrivee,$dateDepart) {
+        return $this->_calendrierDispo->resolve(array(
+            'dateFin' => $dateDepart,
+            'dateDebut' => $dateArrivee));
+    }
+
+    /**
      *
      * @param \SitecRESA\WS\Client $apiClient
      * @param int $id

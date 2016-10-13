@@ -14,7 +14,7 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     protected $_numeroTransaction;
 
     /**
-     * 
+     *
      * @param \SitecRESA\WS\Client $apiClient
      * @param type $id
      */
@@ -26,8 +26,13 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
      * @param int $numeroTransaction
      * @return void|Erreur une erreur si la réservation est expirée.
      */
-    public function confirmer($numeroTransaction) {
+    public function confirmer($numeroTransaction, $aIdPaiementRecord = array()) {
         $this->_numeroTransaction = $numeroTransaction;
+        if(sizeof($aIdPaiementRecord) > 0){
+            $params['multiPaiement'] = \Zend_Json::encode($aIdPaiementRecord);
+            $params['idRessource'] = $this->id;
+            $this->_apiClient->multipaiement("put",$params);
+        }
         return $this->save();
     }
 
@@ -37,7 +42,7 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     public function save() {
         return $this->_apiClient->resa("put",array("idRessource" => $this->id,"numeroTransaction" => $this->numeroTransaction));
     }
-    
+
     /**
      * supprimer la réservation dont le paiement n'a pas été conclu
      */

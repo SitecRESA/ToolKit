@@ -1,3 +1,0 @@
-1424341653
-s:599:"{"datatype":"FichePrestation","id":"4434","libelle":"sdfs","description":"dfsdfsdf","adulteMin":"1","adulteMax":"2","galleriePhoto":{"idRessource":"4434","datatype":"AccesResolver","verbe":"get","methode":"gallerieproduit"},"dispoProduit":{"idRessource":"4434","datatype":"AccesResolver","verbe":"get","methode":"dispoproduit"},"equipementscategorieproduit":{"idRessource":"4434","datatype":"AccesResolver","verbe":"get","methode":"equipementscategorieproduit"},"periodesTarifaires":{"idRessource":"4434","datatype":"AccesResolver","verbe":"get","methode":"periodestarifairesproduit"},"photo":null}
-";

@@ -30,8 +30,8 @@ abstract class DatatypeAbstract {
     public function __construct($apiClient, $array = null) {
         $this->_apiClient = $apiClient;
         if (is_array($array)) {
-          // Initialize the model with the array's contents.
-          $this->mapTypes($array);
+            // Initialize the model with the array's contents.
+            $this->mapTypes($array);
         }
     }
 
@@ -61,19 +61,16 @@ abstract class DatatypeAbstract {
         if (isset($attribut)){
             return true;
         }
-
         return false;
     }
 
 
-
-
     /**
-    * Initialize this object's properties from an array.
-    *
-    * @param array Used to seed this object's properties.
-    * @return void
-    */
+     * Initialize this object's properties from an array.
+     *
+     * @param array Used to seed this object's properties.
+     * @return void
+     */
     private function mapTypes(array $array) {
         foreach ($array as $key => $val) {
             $key = "_".$key;
@@ -94,31 +91,31 @@ abstract class DatatypeAbstract {
         }
     }
 
-   /**
-    * Returns true only if the array is associative.
-    * @param array $array
-    * @return bool True if the array is associative.
-    */
+    /**
+     * Returns true only if the array is associative.
+     * @param array $array
+     * @return bool True if the array is associative.
+     */
     private function isAssociativeArray($array) {
         if (!is_array($array)) {
-          return false;
+            return false;
         }
         $keys = array_keys($array);
         foreach($keys as $key) {
-          if (is_string($key)) {
-            return true;
-          }
+            if (is_string($key)) {
+                return true;
+            }
         }
         return false;
     }
 
-   /**
-    * Given a variable name, discover its type.
-    *
-    * @param $name
-    * @param $item
-    * @return object The object from the item.
-    */
+    /**
+     * Given a variable name, discover its type.
+     *
+     * @param $name
+     * @param $item
+     * @return object The object from the item.
+     */
     public static function createObjectFromArray($apiClient, array $array) {
         if(isset($array["datatype"])){
             $className = "SitecRESA\\Datatype\\".$array["datatype"];
@@ -126,6 +123,20 @@ abstract class DatatypeAbstract {
         }  else {
             throw new Api("impossible de créer une entité à partir d'un tableau qui n'a pas de clé 'datatype'");
         }
+    }
+
+
+    /**
+     * Given a variable name, discover its type.
+     *
+     * @param $item
+     * @return object The object from the item.
+     */
+    public static function createObjectFromFerryXml($sResponse) {
+        $xml = simplexml_load_string($sResponse,NULL,NULL,"http://schemas.xmlsoap.org/soap/envelope/");
+        $response = $xml->children("soap",true)->children("swb",true)->children()->children();
+        $className = "SitecRESA\\Datatype\\".$response->getName();
+        return new $className($response->children());
     }
 
     /**

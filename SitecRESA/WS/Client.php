@@ -1,6 +1,7 @@
 <?php
 namespace SitecRESA\WS;
 use \Sitec_Rest_Client;
+use SitecRESA\Datatype\DatatypeAbstractFerryXML;
 use \Zend_Json;
 use SitecRESA\Datatype\DatatypeAbstract;
 
@@ -149,23 +150,28 @@ class Client {
     public function doResponse($sResponse,$format)
     {
         if('xml' == $format){
-            $xml = simplexml_load_string($sResponse);
-            $sResponse = json_encode($xml);
-        }
-        try {
-            $result = Zend_Json::decode($sResponse);
-            if ($this->isAssociativeArray($result)) {
-                return DatatypeAbstract::createObjectFromArray($this, $result);
-            } else {
-                $aoResults = array();
-                foreach ($result as $resultPiece) {
-                    $aoResults[] = DatatypeAbstract::createObjectFromArray($this, $resultPiece);
-                }
-                return $aoResults;
+            try {
+                return DatatypeAbstractFerryXML::createObjectFromFerryXml($sResponse);
+            } catch (\Zend_Json_Exception $e) {
+                throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
             }
-        } catch (\Zend_Json_Exception $e) {
-            throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
+        }else{
+            try {
+                $result = Zend_Json::decode($sResponse);
+                if ($this->isAssociativeArray($result)) {
+                    return DatatypeAbstract::createObjectFromArray($this, $result);
+                } else {
+                    $aoResults = array();
+                    foreach ($result as $resultPiece) {
+                        $aoResults[] = DatatypeAbstract::createObjectFromArray($this, $resultPiece);
+                    }
+                    return $aoResults;
+                }
+            } catch (\Zend_Json_Exception $e) {
+                throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
+            }
         }
+
     }
 
     /**

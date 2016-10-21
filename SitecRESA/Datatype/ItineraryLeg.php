@@ -18,6 +18,15 @@ namespace SitecRESA\Datatype;
 class ItineraryLeg extends DatatypeAbstractFerryXML{
 
     /**
+     * @param Arrivee $arrivee
+     * @param Depart $depart
+     */
+    public function __construct(\SitecRESA\Datatype\Arrivee $arrivee,\SitecRESA\Datatype\Depart $depart){
+        $this->Arrivee = $arrivee;
+        $this->Depart = $depart;
+    }
+
+    /**
      * id du trajet
      * @var int
      */

@@ -85,7 +85,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
             $fin = new \Zend_Date($this->_timestampFin);
             $this->_debut = $debut->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
             $this->_fin = $fin->get(\Zend_Date::DAY."/".\Zend_Date::MONTH."/".\Zend_Date::YEAR);
-         }
+        }
     }
 
     /**

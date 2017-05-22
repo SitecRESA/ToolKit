@@ -1,6 +1,7 @@
 <?php
 namespace SitecRESA\WS;
 use \Sitec_Rest_Client;
+use SitecRESA\Datatype\DatatypeAbstractFerryXML;
 use \Zend_Json;
 use SitecRESA\Datatype\DatatypeAbstract;
 
@@ -123,7 +124,7 @@ class Client {
         }
 
         if ($response->getStatus() == 412) {
-            return $this->doResponse($response->getBody());//throw new \SitecRESA\Exception\IO($response->getBody(),$response->getStatus() );
+            return $this->doResponse($response->getBody(),$aParams['format']);//throw new \SitecRESA\Exception\IO($response->getBody(),$response->getStatus() );
         }
 
         if ($response->getStatus() == 201) {//créé et l'accès est disponible
@@ -136,33 +137,41 @@ class Client {
         if ($response->getStatus() != 200) {
             throw new \SitecRESA\Exception\Api($response->getBody(), $response->getStatus());
         }
-
-        return $this->doResponse($response->getBody());
-
+        return $this->doResponse($response->getBody(),$aParams['format']);
     }
 
     /**
      *
      * @throws Zend_Json_Exception
      * @param  string  $sResponse
+     * @param  string  $format
      * @return Sitec_Rest_Response
      */
-    public function doResponse($sResponse) {
-        try{
-//            $result = $sResponse;
-            $result = Zend_Json::decode($sResponse);
-            if($this->isAssociativeArray($result)){
-                return DatatypeAbstract::createObjectFromArray($this, $result);
-            }  else {
-                $aoResults = array();
-                foreach ($result as $resultPiece){
-                    $aoResults[] = DatatypeAbstract::createObjectFromArray($this, $resultPiece);
-                }
-                return $aoResults;
+    public function doResponse($sResponse,$format)
+    {
+        if('xml' == $format){
+            try {
+                return DatatypeAbstractFerryXML::createObjectFromFerryXml($sResponse);
+            } catch (\Zend_Json_Exception $e) {
+                throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
             }
-        }catch(\Zend_Json_Exception $e){
-            throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
+        }else{
+            try {
+                $result = Zend_Json::decode($sResponse);
+                if ($this->isAssociativeArray($result)) {
+                    return DatatypeAbstract::createObjectFromArray($this, $result);
+                } else {
+                    $aoResults = array();
+                    foreach ($result as $resultPiece) {
+                        $aoResults[] = DatatypeAbstract::createObjectFromArray($this, $resultPiece);
+                    }
+                    return $aoResults;
+                }
+            } catch (\Zend_Json_Exception $e) {
+                throw new \SitecRESA\Exception\IO("La réponse n'est pas au format attendu : $sResponse");
+            }
         }
+
     }
 
     /**

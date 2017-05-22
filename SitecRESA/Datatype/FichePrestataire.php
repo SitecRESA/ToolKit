@@ -231,7 +231,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
         return $apiClient->listeorganismes("get",$params);
     }
 
- /**
+    /**
      * Permet d'obtenir la liste des prestataires d'activité disponibles pour une ville donnée aux dates fournies
      * Attention !!! la recherche ne doit pas dépasser 30 nuits (entre dateArrivee et dateDepart)
      * @param  Client        $apiClient
@@ -259,7 +259,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
 
         return $apiClient->dispoorganismesactivites("get", $params);
     }
-    
+
     /**
      *
      * Permet d'obtenir la liste des prestataires disponibles aux dates fournies
@@ -282,19 +282,19 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return \SitecRESA\Datatype\AccesResolverList
      */
     static function listePrestatairesDisponibles(
-            $apiClient,
-            $dateArrivee = null,
-            $dateDepart = null,
-            $nbChambre = null,
-            $nbPersonne = null,
-            $aRepartition = NULL,
-            $regionVille = self::REGIONVILLE_WILDCARD,
-            $avecTarif = 1,
-            $orderBy = NULL,
-            $count = NULL,
-            $offset = NULL,
-            $sort = NULL,
-            $classement = self::CLASSEMENT_WILDCARD ) {
+        $apiClient,
+        $dateArrivee = null,
+        $dateDepart = null,
+        $nbChambre = null,
+        $nbPersonne = null,
+        $aRepartition = NULL,
+        $regionVille = self::REGIONVILLE_WILDCARD,
+        $avecTarif = 1,
+        $orderBy = NULL,
+        $count = NULL,
+        $offset = NULL,
+        $sort = NULL,
+        $classement = self::CLASSEMENT_WILDCARD ) {
 
         $params = array(
             "dateDebut"   => $dateArrivee,
@@ -347,17 +347,17 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return \SitecRESA\Datatype\AccesResolverList
      */
     static function prestatairesDisponiblesAggregateur($apiClient, $dateArrivee = null, $dateDepart = null,
-                                                 $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
-                                                 $aRepartition = NULL,
-                                                 $regionVille = self::REGIONVILLE_WILDCARD,
-                                                 $latlongdist =NULL,
-                                                 $avecTarif = 1,
-                                                 $promotion = FALSE,
-                                                 $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL,$classement = self::CLASSEMENT_WILDCARD) {
+                                                       $nbChambre = null, $nbPersonne = null, $aIdFichePrestataire = array(),
+                                                       $aRepartition = NULL,
+                                                       $regionVille = self::REGIONVILLE_WILDCARD,
+                                                       $latlongdist =NULL,
+                                                       $avecTarif = 1,
+                                                       $promotion = FALSE,
+                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL,$classement = self::CLASSEMENT_WILDCARD) {
 
         if(sizeof($aIdFichePrestataire) > 0){
             $a = '{';
-                    foreach($aIdFichePrestataire as $key=>$idFiche){
+            foreach($aIdFichePrestataire as $key=>$idFiche){
                 $a .= '"'.$key.'":"'.$idFiche.'",';
             }
             $a = substr($a,0,-1);
@@ -416,13 +416,13 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * @return \SitecRESA\Datatype\AccesResolverList
      */
     static function prestatairesDisponiblesAvecRepartition($apiClient, $dateArrivee = null, $dateDepart = null,
-                                                       $aAdulte = array(),
-                                                       $aEnfant = array(),
-                                                       $regionVille = self::REGIONVILLE_WILDCARD,
-                                                       $latlongdist =NULL,
-                                                       $avecTarif = 1,
-                                                       $promotion = FALSE,
-                                                       $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL, $classement = self::CLASSEMENT_WILDCARD) {
+                                                           $aAdulte = array(),
+                                                           $aEnfant = array(),
+                                                           $regionVille = self::REGIONVILLE_WILDCARD,
+                                                           $latlongdist =NULL,
+                                                           $avecTarif = 1,
+                                                           $promotion = FALSE,
+                                                           $orderBy = NULL, $count = NULL, $offset = NULL, $sort = NULL, $classement = self::CLASSEMENT_WILDCARD) {
 
         $i = 0;
         $aRepartition = array();
@@ -540,4 +540,3 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
         return $response;
     }
 }
-

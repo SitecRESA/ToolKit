@@ -32,6 +32,7 @@ namespace SitecRESA\Datatype;
  * @property-read string $periodeOuverture Ouvert à l'année ou bien du ... au ...
  * @property-read array $modePaiement Tous les modes de paiement acceptés par le prestataire
  * @property-read \SitecRESA\Datatype\Avis $avis Tous les avis de la fiche
+ * @property-read \SitecRESA\Datatype\Promotion $promotions les promotions en cours
  * @property-read string $lastModified retourne le timestamp de la dernière modification. Permet par exemple de gérer du cache
  * @property-read string $noteMoyenne retourne la note moyenne de l'établissement par rapport aux avis récoltés sur votre canal de vente
  * @property-read string $noteMoyennePartagee retourne la note moyenne de l'établissement par rapport aux avis récoltés sur les canaux de vente que vous souhaitez aggréger
@@ -75,6 +76,7 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
     protected $_modePaiement;
     protected $_lastModified;
     protected $_avis;
+    protected $_promotions;
     protected $_noteMoyenne;
     protected $_noteMoyennePartagee;
     protected $_accommodationRecommended;

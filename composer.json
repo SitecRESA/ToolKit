@@ -25,10 +25,5 @@
         "psr-4": {
             "SitecRESA\\": "SitecRESA"
         }
-    },
-    "extra": {
-      "branch-alias": {
-        "dev-activite": "3.0.x-dev"
-      }
     }
 }

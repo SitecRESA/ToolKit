@@ -13,6 +13,7 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     protected $_client;
     protected $_numeroTransaction;
     protected $_numeroFacture;
+    protected $_idFacture;
 
     /**
      *
@@ -57,7 +58,8 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
             "dateReservation"   => $this->_dateReservation,
             "client"            => $this->client->toArray(),
             "numeroTransaction" => $this->numeroTransaction,
-            "numeroFacture"     => $this->numeroFacture
+            "numeroFacture"     => $this->numeroFacture,
+            "idFacture"         => $this->idFacture
         );
     }
 }

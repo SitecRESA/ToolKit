@@ -1,7 +1,7 @@
 <?php
 namespace SitecRESA\Datatype;
 /**
- * Réservation obtenue à partir du Panier
+ * Facture obtenue à partir du Panier
  *
  * @author Damien CAYZAC <damien.cayzac@sitec.fr>
  */

@@ -7,6 +7,7 @@ namespace SitecRESA\Datatype;
  */
 class Facture extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     protected $_id;
+    protected $_idReservation;
     protected $_numeroFacture;
     /**
      *
@@ -20,6 +21,7 @@ class Facture extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     public function toArray() {
         return array(
             "idRessource"       => $this->_id,
+            "idReservation"       => $this->_idReservation,
             "numeroFacture"     => $this->numeroFacture
         );
     }

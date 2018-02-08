@@ -6,7 +6,7 @@
 //require 'vendor/autoload.php';
 //use SitecRESA\Datatype;
 //$apiClient = new \SitecRESA\WS\Client(array("apiKey" => $api_key, "secretKey" => $secret_keys, "url" => "https://resav2.sitec.fr"));
-//$apiClient->switchVersion('2.1');
+//$apiClient->switchVersion('2.5');
 /*****************************/
 /*   gestion d'un portail    */
 /*****************************/

@@ -197,15 +197,16 @@ class FichePrestataire extends DatatypeAbstract implements Fetchable{
      * permet d'obtenir une liste de FichePrestataire avec lesquels vous avez un contrat.
      *
      * @param Client $apiClient
-     *
+     * @param bool $withInfo
+     * @param string $type hebergement | activite | activite_hebergement
      * @return \SitecRESA\Datatype\AccesResolverList
      */
-    static function listePrestataires($apiClient,$withInfo = false) {
+    static function listePrestataires($apiClient,$withInfo = false, $type=null) {
         if(!$withInfo)
         {
-            return $apiClient->listeorganismes("get",array());
+            return $apiClient->listeorganismes("get",array("type"=>$type));
         }else{
-            return $apiClient->listeorganismeswithinfo("get",array());
+            return $apiClient->listeorganismeswithinfo("get",array("type"=>$type));
         }
     }
 

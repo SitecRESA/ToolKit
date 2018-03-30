@@ -15,6 +15,7 @@ namespace SitecRESA\Datatype;
  * @property string $prenom
  * @property string $telephone
  * @property Adresse $adresse
+ * @property ObjectList $reservations => array de DataType DetailsReservation et/ou DetailsReservationPackage
  */
 class Client extends SavableDatatypeAbstract implements Fetchable{
     protected $_id;
@@ -28,6 +29,12 @@ class Client extends SavableDatatypeAbstract implements Fetchable{
      * @var Adresse
      */
     protected $_adresse;
+
+    /**
+     *
+     * @var ObjectList
+     */
+    protected $_reservations;
     
     
     /**

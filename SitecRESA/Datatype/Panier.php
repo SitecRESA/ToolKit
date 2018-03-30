@@ -171,8 +171,8 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * Uniquement si le revendeur facture et que sa politique de garantie est de type avantSejour et que les regles sont basés sur du pourcentage
      * @return tableau de DataType\Paiement
      */
-    public function multiPaiement(){
-        if(1 == 1){
+    public function multiPaiement($type = "standard"){
+        if($type == "Package"){
             $package = Package::fetch($this->_apiClient,1);
             return $this->multiPaiementPackage($package);
         }else{
@@ -181,14 +181,15 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
     }
 
     private function multiPaiementStandard(){
+        $montantPanier = $this->montantTotal;
+        /* @var PrestationPanier $prestationPanier */
+        $aPaiement = array();
+        $aPaiementImmediat = array();
         foreach($this->prestationsPanier as $prestationPanier){
             $montant = 0;
             $montantPreleve = 0;
             $i=1;
-            $montantPanier = $this->montantTotal;
             /* @var PrestationPanier $prestationPanier */
-            $aPaiement = array();
-            $aPaiementImmediat = array();
             $dateValidePrecedent = null;
             $garantiePrecedente = null;
             //            $oGarantie = $prestationPanier->planTarifaire->garantieDemandee;
@@ -253,7 +254,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             $this->addPaiement($paiement);
         }
         foreach($aPaiement as $dateValide => $montant){
-            $paiement = new Paiement($montant,$dateValide);
+            $paiement = new Paiement(current($montant),$dateValide);
             $this->addPaiement($paiement);
         }
 

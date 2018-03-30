@@ -24,6 +24,7 @@ namespace SitecRESA\Datatype;
  * @property Panier $panier panier depuis lequel la prestation est à réserver
  * @property PlanTarifaire $planTarifaire plan tarifaire choisi pour réserver
  * @property int $idEtape etape d'un package
+ * @property int $idProduitEtape produit etape d'un package
  * @property string $participants liste des noms et prénoms se chaque participant. format=> nom1|prenom1#nom2|prenom2#...#nomX|prenomX
  * @property-read array $garantieDemandee liste des règles conditionnant les montants qui peuvent être prélevé à la réservation.
  * @property-read array $conditionAnnulation liste des règles conditionnant l'annulation de la réservation de ce package.
@@ -58,6 +59,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
     protected $_conditionAnnulation;
     protected $_tarifPlanTarifaire;
     protected $_idEtape = null;
+    protected $_idProduitEtape = null;
 
     protected $_nbNuit;
     protected $_nbJour;
@@ -148,6 +150,7 @@ class PrestationPanier extends SavableDatatypeAbstract implements Fetchable{
         }else{
             throw new \SitecRESA\Exception\Api("PrestationPanier doit avoir une FichePrestation pour son attribut prestation");
         }
+        $array["idProduitEtape"] = $this->_idProduitEtape;
         return $array;
     }
 

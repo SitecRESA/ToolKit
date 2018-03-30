@@ -42,6 +42,11 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
      * @var \SitecRESA\Datatype\AccesResolver
      */
     protected $_dispoSessions;
+
+    /**
+     * @var \SitecRESA\Datatype\AccesResolver
+     */
+    protected $_calendrierDispo;
     /**
      * permet d'obtenir les disponibilités de la prestation
      *
@@ -72,8 +77,9 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
      *
      * @return array liste de Sesssion
      */
-    public function sessionsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte,$aEnfant) {
+    public function sessionsDisponiblesAvecRepartition ($dateArrivee,$dateDepart, $aAdulte = array(),$aEnfant = array()) {
         $i = 0;
+        $aRepartition = array();
         foreach($aAdulte as $key=>$adulte){
             $aRepartition[$i][] = $adulte;
             $aRepartition[$i][] = $aEnfant[$key];
@@ -87,5 +93,19 @@ class FichePrestationActivite extends DatatypeAbstract implements Fetchable {
                 'repartition' => json_encode($aRepartition)
             )
         );
+    }
+
+    /**
+     * Permet d’obtenir les disponibilités sur plusieurs semaines d'une activité
+     *
+     * @param string $dateArrivee
+     * @param string $dateDepart
+     *
+     * @return array
+     */
+    public function calendrierDispoActivite($dateArrivee,$dateDepart) {
+        return $this->_calendrierDispo->resolve(array(
+            'dateFin' => $dateDepart,
+            'dateDebut' => $dateArrivee));
     }
 }

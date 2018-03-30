@@ -17,11 +17,11 @@ if (!ini_get('date.timezone') && function_exists('date_default_timezone_set')) {
 class ApiClient {
     // the version of the discovery mechanism this class is meant to work with
 
-    const VERSION_EXISTE = '1.0/2.0/2.1/2.2';
+    const VERSION_EXISTE = '1.0/2.0/2.1/2.2/2.3/2.4/2.5/2.6';
     const PREFIX_PATH = "/ws/";
     const FORMAT = "json";
 
-    private $version = '2.3';
+    private $version = '2.5';
     private $client = null;
     private $sApiKey = null;
     private $sSecretKey = null;
@@ -243,5 +243,20 @@ class ApiClient {
      */
     public function send($request){
         return $this->client->send($request);
+    }
+
+    /**
+     * Returns true if the version change has been made.
+     * @param String $version
+     * @return bool True if the version change has been made.
+     */
+    public function switchVersion($version) {
+        $aVersion = explode("/", self::VERSION_EXISTE);
+        if (in_array($version,$aVersion)){
+            $this->version = $version;
+            return true;
+        }else{
+            return false;
+        }
     }
 }

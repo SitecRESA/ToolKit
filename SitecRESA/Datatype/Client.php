@@ -101,6 +101,7 @@ class Client extends SavableDatatypeAbstract implements Fetchable{
             $array["adresse"] = $this->_adresse->adresseLigne1;
             $array["zip"]     = $this->_adresse->codePostal;
             $array["city"]    = $this->_adresse->commune;
+            $array["country"]    = $this->_adresse->pays;
         }
         return $array;
     }

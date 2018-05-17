@@ -12,6 +12,7 @@ namespace SitecRESA\Datatype;
  * @property string $commentaire commentaire éventuel de l'internaute
  * @property SitecRESA\Datatype\Client $client
  * @property array $prestationsPanier liste des prestations à réserver (ajoutez-en à l'aide de addPrestationPanier)
+ * @property array $paiements tableau de SitecRESA\Datatype\Paiement Paiement
  * @property float $montantTotal total des prestations dans le panier.
  * @property int $quantite quantité totale de prestations dans le panier.
  * @property int $idPackage id du package qui a servi à construire le panier.
@@ -172,8 +173,9 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
      * @return tableau de DataType\Paiement
      */
     public function multiPaiement($type = "standard"){
+        $this->paiements = array();
         if($type == "Package"){
-            $package = Package::fetch($this->_apiClient,1);
+            $package = Package::fetch($this->_apiClient,$this->idPackage);
             return $this->multiPaiementPackage($package);
         }else{
             return $this->multiPaiementStandard();

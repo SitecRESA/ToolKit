@@ -51,6 +51,15 @@ class Reservation extends \SitecRESA\Datatype\SavableDatatypeAbstract{
     public function delete() {
         $this->_apiClient->resa("delete",array("idRessource" => $this->id));
     }
+    
+    /**
+     * annuler une réservation
+     * Effectue le remboursement automatique si le paiement a été effectué via un module bancaire
+     * @param int $appCond => appliquer les condition d'annulation, defaut 1
+     */
+    public function cancel($appCond = 1){
+        $this->_apiClient->resaclient("delete",array("idRessource" => $this->id,'appCond' => $appCond));
+    }
 
     public function toArray() {
         return array(

@@ -211,7 +211,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
                 }
                 $dateValide = $debutSejour->subDayOfYear($condition);
 
-                if($dateValide > $now){
+                if($dateValide >= $now){
 
                     if($i == 1){
                         $dateValidePrecedent = $dateValide;
@@ -296,7 +296,7 @@ class Panier extends SavableDatatypeAbstract implements Fetchable{
             }
             $dateValide = $debutSejour->subDayOfYear($condition);
 
-            if ($dateValide > $now) {
+            if ($dateValide >= $now) {
 
                 if ($i == 1) {
                     $dateValidePrecedent = $dateValide;

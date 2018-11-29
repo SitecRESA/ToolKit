@@ -11,6 +11,11 @@ namespace SitecRESA\Datatype;
  * @property-read string $numeroFacture nom français
  * @property-read string $dateReservation français
  * @property-read string $heureReservation  => du d/m/Y au d/m/Y
+ * @property-read string $montantTotal => le montant total de la réservation
+ * @property-read string montantTotalRetenuSiAnnulation => le montant total retenu de l'annulation calculé par rapport au jour courant
+ * @property-read string montantTotalRetenuAnnulation => le montant total de l'annulation une fois la réservation annulée
+ * @property-read string montantRembourse => le montant total à rembourser suite à une annulation
+ * @property-read string $idReservation=> id servant à annuler une réservation
  * @property-read string $montantTotal => d/m/Y
  * @property-read string $devise => d/m/Y => uniquement si la prestation reserve est un hébergement
  * @property-read string $prestataireReserve duréé de la prestation uniquement si la prestation reserve est une activite
@@ -28,6 +33,10 @@ class DetailsReservation extends DatatypeAbstract {
     protected $_dateReservation;
     protected $_heureReservation;
     protected $_montantTotal;
+    protected $_montantTotalRetenuSiAnnulation = null;
+    protected $_montantTotalRetenuAnnulation = null;
+    protected $_montantRembourse = null;
+    protected $_idReservation;
     protected $_devise;
     protected $_prestataireReserve;
     protected $_detailPrestataireReserve;

@@ -15,9 +15,13 @@ namespace SitecRESA\Datatype;
  * @property-read string $dateReservation => la date de la réservation
  * @property-read string $heureReservation  => l'heur de la réservation
  * @property-read string $montantTotal => le montant total du package réservé
+ * @property-read string montantTotalRetenuSiAnnulation => le montant total retenu de l'annulation calculé par rapport au jour courant
+ * @property-read string montantTotalRetenuAnnulation => le montant total de l'annulation une fois la réservation annulée
+ * @property-read string montantRembourse => le montant total à rembourser suite à une annulation
  * @property-read string $devise => EUR
  * @property-read string $CGV => url vers le pdf si le revendeur facture directement
  * @property-read string $facture => url vers la facture i le revendeur facture directement
+ * @property-read string $idReservation=> id servant à annuler une réservation
  * @property-read string $debutSejour => date de début du séjour du package réservé
  * @property-read string $finSejour => date de fin du séjour du package réservé
  * @property-read string $type => circuit | sejour
@@ -36,9 +40,13 @@ class DetailsReservationPackage extends DatatypeAbstract {
     protected $_dateReservation;
     protected $_heureReservation;
     protected $_montantTotal;
+    protected $_montantTotalRetenuSiAnnulation = null;
+    protected $_montantTotalRetenuAnnulation = null;
+    protected $_montantRembourse = null;
     protected $_devise;
     protected $_CGV;
     protected $_facture;
+    protected $_idReservation;
     protected $_debutSejour;
     protected $_finSejour;
     protected $_type;

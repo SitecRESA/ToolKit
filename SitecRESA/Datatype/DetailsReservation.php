@@ -16,12 +16,11 @@ namespace SitecRESA\Datatype;
  * @property-read string montantTotalRetenuAnnulation => le montant total de l'annulation une fois la réservation annulée
  * @property-read string montantRembourse => le montant total à rembourser suite à une annulation
  * @property-read string $idReservation=> id servant à annuler une réservation
- * @property-read string $montantTotal => d/m/Y
- * @property-read string $devise => d/m/Y => uniquement si la prestation reserve est un hébergement
- * @property-read string $prestataireReserve duréé de la prestation uniquement si la prestation reserve est une activite
- * @property-read string $detailPrestataireReserve => le nom du tarif réservé
- * @property-read string $demandeParticuliere => le nom du type de tarif réservé (2 adultes et 1 enfant)
- * @property-read string $prestationsReserves => le nombre d'adulte
+ * @property-read string $devise
+ * @property-read string $prestataireReserve la raison sociale
+ * @property-read string $detailPrestataireReserve => les informations prestataire
+ * @property-read string $demandeParticuliere
+ * @property-read string $prestationsReserves => tableau de FichePrestationReservee
  * @property-read string $nbEnfant => le nombre d'enfant
  * @property-read string $nbBebe => le nombre de bébé
  * @property-read string $estAnnule => 0 ou 1

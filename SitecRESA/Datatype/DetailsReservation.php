@@ -24,6 +24,11 @@ namespace SitecRESA\Datatype;
  * @property-read string $nbEnfant => le nombre d'enfant
  * @property-read string $nbBebe => le nombre de bébé
  * @property-read string $estAnnule => 0 ou 1
+ * @property-read string $CGV => chemin vers les CGV pdf
+ * @property-read string $facture => chemin vers la facture pdf
+ * @property-read string $voucher => chemin vers le voucher pdf
+ * @property-read string $bulletinInscription => 0 ou 1
+ * @property-read string $avoir => chemin vers l'avoir pdf
  *
  */
 class DetailsReservation extends DatatypeAbstract {
@@ -42,6 +47,10 @@ class DetailsReservation extends DatatypeAbstract {
     protected $_demandeParticuliere = null;
     protected $_prestationsReserves;
     protected $_estAnnulee;
-
+    protected $_CGV;
+    protected $_facture;
+    protected $_voucher;
+    protected $_bulletinInscription;
+    protected $_avoir;
 }
 
